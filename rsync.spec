@@ -1,6 +1,6 @@
 Summary:     Program for efficient remote updates of files.
 Name:        rsync
-Version:     2.1.1
+Version:     2.2.0
 Release:     1
 Copyright:   GPL
 Group:       Applications/Networking
@@ -24,8 +24,8 @@ this package.
 %setup -q
 
 %build
-./configure --prefix=/usr
-make CFLAGS="$RPM_OPT_FLAGS"
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure --prefix=/usr
+make
 strip rsync
 latex tech_report
 dvips tech_report -o
