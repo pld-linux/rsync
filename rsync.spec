@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files.
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
 Name:		rsync
 Version:	2.3.1
-Release:	1
+Release:	2
 Copyright:	GPL
 Group:		Applications/Networking
 Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
@@ -55,6 +55,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/man/man[15]/*
 
 %changelog
+* Sun Apr 25 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [2.3.1-2]
+- recompiled on new rpm.
+
 * Fri Mar 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [2.3.0-1]
 - added gzipping man pages,
