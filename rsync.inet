@@ -5,5 +5,5 @@ PORT=873
 FLAGS=nowait
 USER=nobody
 SERVER=tcpd
-DAEMON=/usr/sbin/rsync
+DAEMON=/usr/bin/rsync
 DAEMONARGS="--daemon"
