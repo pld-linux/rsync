@@ -1,4 +1,4 @@
-
+#
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
 #
@@ -30,6 +30,8 @@ BuildRequires:	automake
 BuildRequires:	popt-devel
 URL:		http://rsync.samba.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_sysconfdir	/etc/rsyncd
 
 %description
 rsync is a replacement for rcp that has many more features.
@@ -148,8 +150,6 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-
-%define		_sysconfdir	/etc/rsyncd
 
 %build
 cp -f %{_datadir}/automake/config.sub .
