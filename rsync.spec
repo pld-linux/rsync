@@ -1,5 +1,6 @@
 Summary:	Program for efficient remote updates of files
 Summary(es):	Programa para actualizar archivos remotos de forma eficiente
+Summary(ko):	³×Æ®¿öÅ©¸¦ ÅëÇÑ ÆÄÀÏµ¿±âÈ­¸¦ À§ÇÑ ÇÁ·Î±×·¥
 Summary(pl):	Program do wydajnego zdalnego uaktualniania plików
 Summary(pt_BR):	Programa para atualizar arquivos remotos de forma eficiente
 Summary(ru):	ğÒÏÇÒÁÍÍÁ ÄÌÑ ÜÆÆÅËÔÉ×ÎÏÇÏ ÕÄÁÌÅÎÎÏÇÏ ÏÂÎÏ×ÌÅÎÉÑ ÆÁÊÌÏ×
@@ -17,6 +18,7 @@ Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
+Patch2:		%{name}-segv.patch
 BuildRequires:	autoconf
 BuildRequires:	popt-devel
 URL:		http://samba.anu.edu.au/rsync/
@@ -43,6 +45,13 @@ diferencias entre estos directorios de forma compactada. No necesita
 que ninguna de las máquinas tengan una copia de lo que está en la
 otra. Está disponible en este paquete, una relación técnica
 describiendo el algoritmo usado por el rsync.
+
+%description -l ko
+Rsync´Â ¿ø°İ È£½ºÆ® ÆÄÀÏÀ» ¸Å¿ì »¡¸® µ¿±âÈ­ÇÏ´Âµ¥ ½Å·ÚÇÒ¸¸ÇÑ
+¾Ë°í¸®ÁòÀ» »ç¿ëÇÑ´Ù. Rsync´Â ÆÄÀÏÀÇ ÀüÃ¼¸¦ º¸³»´Â °Í ´ë½Å¿¡ ³×Æ®¿÷À»
+ÅëÇØ ÆÄÀÏÀÇ ´Ù¸¥ ºÎºĞ¸¸À» Àü¼ÛÇÏ±â ¶§¹®¿¡ ºü¸£´Ù. Rsync´Â °­·ÂÇÑ ¹Ì·¯
+ÇÁ·Î¼¼½º È¤Àº rcp Ä¿¸àµå¸¦ ÅëÇÑ ´õ ¿ì¼öÇÑ ´ëÃ¼¿ëÀ¸·Î½á »ç¿ëµÈ´Ù. rsync
+¾Ë°í¸®ÁòÀ» ¹¦»çÇÏ´Â ±â¼úÀûÀÎ ³»¿ëÀº ÀÌ ²Ù·¯¹Ì¿¡ Æ÷ÇÔµÇ¾î ÀÖ´Ù.
 
 %description -l pl
 Rsync jest zamiennikiem programu rcp z bardziej rozbudowan± sk³adni±
@@ -106,7 +115,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
-Requires(post,preun):	/sbin/chkconfig
+Requires(post,preun):/sbin/chkconfig
 Requires:	%{name}
 Provides:	rsyncd
 Obsoletes:	rsyncd
@@ -133,6 +142,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__autoconf}
