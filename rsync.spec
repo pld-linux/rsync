@@ -36,13 +36,14 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
+# We don't use it because it's buggy ;(
+#%patch2 -p1
 
 %build
 autoconf 
 LDFLAGS="-s"; export LDFLAGS
 %configure \
-	--enable-ipv6
+#	--enable-ipv6
 
 make 
 
