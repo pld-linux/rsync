@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze
 Name:		rsync
 Version:	2.4.6
-Release:	3
+Release:	4
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -12,7 +12,8 @@ Source1:	%{name}.inet
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 Patch2:		%{name}-configure.patch
-Patch3:		http://www.misiek.eu.org/ipv6/%{name}-2.4.5-ipv6-20000821.patch.gz
+#Patch3:	http://www.misiek.eu.org/ipv6/%{name}-2.4.6-ipv6-20010418.patch.gz
+Patch3:		%{name}-2.4.6-ipv6-20010418.patch.gz
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
