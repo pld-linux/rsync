@@ -79,8 +79,8 @@ rsync - ÃÅ Û×ÉÄÛÁ ÔÁ ÇÎÕÞË¦ÛÁ ÁÌØÔÅÒÎÁÔÉ×Á rcp, ÑËÁ ÚÁÂÅÚÐÅÞÕ¤ Û×ÉÄËÕ
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
+PreReq:		rc-inetd
 Requires:	%{name}
-Requires:	rc-inetd
 Provides:	rsyncd
 Obsoletes:	rsyncd
 Obsoletes:	rsyncd-standalone
@@ -106,6 +106,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}
 Provides:	rsyncd
 Obsoletes:	rsyncd
@@ -157,6 +158,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post -n rsyncd-inetd
 if [ -f /var/lock/subsys/rc-inetd ]; then
         /etc/rc.d/init.d/rc-inetd restart 1>&2
@@ -177,16 +181,13 @@ else
 	echo "Type \"/etc/rc.d/init.d/rsyncd start\" to start rsync server" 1>&2
 fi
 
-%postun -n rsyncd-standalone
+%preun -n rsyncd-standalone
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/rsyncd ]; then
 		/etc/rc.d/init.d/rsyncd stop 1>&2
 	fi
 	/sbin/chkconfig --del rsyncd
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
