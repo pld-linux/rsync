@@ -1,0 +1,3 @@
+/var/log/rsyncd.log {
+	create 640 root root
+}
