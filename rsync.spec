@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze
 Name:		rsync
 Version:	2.4.6
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -16,7 +16,7 @@ Patch3:		http://www.misiek.eu.org/ipv6/%{name}-2.4.5-ipv6-20000821.patch.gz
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define _sysconfdir /etc/rsyncd
+%define		_sysconfdir	/etc/rsyncd
 
 %description
 rsync is a replacement for rcp that has many more features.
