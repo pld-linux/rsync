@@ -1,5 +1,9 @@
 Summary:	Program for efficient remote updates of files
+Summary(es):	Programa para actualizar archivos remotos de forma eficiente
 Summary(pl):	Program efektywnego modyfikowania plikСw na zdalnym komputerze
+Summary(pt_BR):	Programa para atualizar arquivos remotos de forma eficiente
+Summary(ru):	Программа для эффективного удаленного обновления файлов
+Summary(uk):	Програма для ефективного в╕ддаленого оновлення файл╕в
 Name:		rsync
 Version:	2.5.3
 Release:	1
@@ -27,12 +31,46 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package.
 
+%description -l es
+rsync es un substituto mАs rАpido y flexible para rcp que permite la
+sincronizaciСn de archivos o directorios, vМa red, de forma rАpida y
+eficiente, entre diferentes mАquinas transfiriendo solamente las
+diferencias entre estos directorios de forma compactada. No necesita
+que ninguna de las mАquinas tengan una copia de lo que estА en la
+otra. EstА disponible en este paquete, una relaciСn tИcnica
+describiendo el algoritmo usado por el rsync.
+
 %description -l pl
 Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan╠
 skЁadniЙ poleceЯ. Program ten u©ywa efektywnego algorytmu "rsync" w
 czasie komunikacji i transportu plikСw do systemu zdalnego.
 Dokumentacja techniczna nowego algorytmu zostaЁa rСwnie© doЁ╠czona do
 pakietu.
+
+%description -l pt_BR
+O rsync И um substituto mais rАpido e flexМvel para o rcp permitindo
+sincronizaГЦo de arquivos ou diretСrios via rede de forma rАpida e
+eficiente entre diferentes mАquinas transferindo somente as diferenГas
+entre estes diretСrios de forma compactada. Ele nЦo precisa que
+nenhuma das mАquinas tenha uma cСpia do que estА na outra.
+
+Um relatСrio tИcnico descrevendo o algoritmo usado pelo rsync estА
+disponМvel neste pacote.
+
+%description -l ru
+rsync - это более быстрая и гибкая альтернатива rcp, позволяющая
+быструю и эффективную по отношению к ресурсам сети синхронизацию
+файлов или каталогов на различных машинах путем передачи только
+различий между ними в компрессированном виде. При этом совершенно не
+обязательно, чтобы одна машина имела у себя копию того, что есть на
+другой машине.
+
+%description -l uk
+rsync - це швидша та гнучк╕ша альтернатива rcp, яка забезпечу╓ швидку
+та ефективну по в╕дношенню до ресурс╕в мереж╕ синхрон╕зац╕ю файл╕в чи
+каталог╕в на р╕зних машинах шляхом передач╕ лише в╕дм╕нностей м╕ж ними
+в компресованому вид╕. При цьому зовс╕м не обов'язково, щоб одна
+машина мала в себе коп╕ю того, що ╓ на ╕нш╕й машин╕.
 
 %package -n rsyncd
 Summary:	Files necessary to run rsync in daemon mode
