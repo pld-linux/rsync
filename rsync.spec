@@ -41,7 +41,7 @@ rm -rf $RPM_BUILD_ROOT
 
 make install prefix=$RPM_BUILD_ROOT/usr
 
-strip $RPM_BUILD_ROOT/usr/bin/rsync
+strip $RPM_BUILD_ROOT%{_bindir}/rsync
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	README
@@ -52,7 +52,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(755,root,root) /usr/bin/rsync
+%attr(755,root,root) %{_bindir}/rsync
 %{_mandir}/man[15]/*
 
 %changelog
