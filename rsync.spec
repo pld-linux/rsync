@@ -165,6 +165,7 @@ cp -f /usr/share/automake/config.sub .
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/etc/env.d
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -178,6 +179,19 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,l
 
 cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.conf
 log file = /var/log/rsyncd.log
+EOF
+
+cat << EOF > $RPM_BUILD_ROOT/etc/env.d/CVSIGNORE
+#CVSIGNORE=
+EOF
+cat << EOF > $RPM_BUILD_ROOT/etc/env.d/RSYNC_RSH
+#RSYNC_RSH=
+EOF
+cat << EOF > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PROXY
+#RSYNC_PROXY=
+EOF
+cat << EOF > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PASSWORD
+#RSYNC_PASSWORD=
 EOF
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
@@ -219,6 +233,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README
+%attr(644,root,root) %config(noreplace,missingok) %verify(not md5 size mtime) /etc/env.d/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
