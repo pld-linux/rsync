@@ -13,9 +13,8 @@ diff -ruN rsync-2.3.2/rsync.h rsync-2.3.2-new/rsync.h
  #define URL_PREFIX "rsync://"
  
  #define BACKUP_SUFFIX "~"
-diff -ruN rsync-2.3.2/rsync.yo rsync-2.3.2-new/rsync.yo
---- rsync-2.3.2/rsync.yo	Mon Nov  8 14:15:02 1999
-+++ rsync-2.3.2-new/rsync.yo	Fri Nov 19 17:51:35 1999
+--- rsync-2.5.2/rsync.yo.orig	Fri Jan 25 11:42:23 2002
++++ rsync-2.5.2/rsync.yo	Sat Jan 26 07:10:18 2002
 @@ -173,7 +173,7 @@
  manpagesection(RUNNING AN RSYNC SERVER)
  
@@ -25,17 +24,17 @@ diff -ruN rsync-2.3.2/rsync.yo rsync-2.3.2-new/rsync.yo
  information. 
  
  manpagesection(EXAMPLES)
-@@ -591,7 +591,7 @@
- daemon. If standard input is a socket then rsync will assume that it
- is being run via inetd, otherwise it will detach from the current
- terminal and become a background daemon. The daemon will read the
--config file (/etc/rsyncd.conf) on each connect made by a client and
-+config file (/etc/rsyncd/rsyncd.conf) on each connect made by a client and
- respond to requests accordingly. See the rsyncd.conf(5) man page for more
- details. 
+@@ -628,7 +628,7 @@
+ If standard input is a socket then rsync will assume that it is being
+ run via inetd, otherwise it will detach from the current terminal and
+ become a background daemon.  The daemon will read the config file
+-(/etc/rsyncd.conf) on each connect made by a client and respond to
++(/etc/rsyncd/rsyncd.conf) on each connect made by a client and respond to
+ requests accordingly.  See the rsyncd.conf(5) man page for more
+ details.
  
-@@ -602,7 +602,7 @@
- --config option.
+@@ -648,7 +648,7 @@
+ in conjunction with the --config option.
  
  dit(bf(--config=FILE)) This specifies an alternate config file than
 -the default /etc/rsyncd.conf. This is only relevant when --daemon is
@@ -43,7 +42,7 @@ diff -ruN rsync-2.3.2/rsync.yo rsync-2.3.2-new/rsync.yo
  specified. 
  
  dit(bf(--port=PORT)) This specifies an alternate TCP port number to use
-@@ -768,7 +768,7 @@
+@@ -926,7 +926,7 @@
  
  manpagefiles()
  
@@ -52,10 +51,9 @@ diff -ruN rsync-2.3.2/rsync.yo rsync-2.3.2-new/rsync.yo
  
  manpageseealso()
  
-diff -ruN rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2-new/rsyncd.conf.5
---- rsync-2.3.2/rsyncd.conf.5	Mon Nov  8 14:15:02 1999
-+++ rsync-2.3.2-new/rsyncd.conf.5	Fri Nov 19 17:51:35 1999
-@@ -59,7 +59,7 @@
+--- rsync-2.5.2/rsyncd.conf.5.orig	Fri Aug 31 10:12:35 2001
++++ rsync-2.5.2/rsyncd.conf.5	Sat Jan 26 07:13:23 2002
+@@ -64,7 +64,7 @@
  and a single line something like this to /etc/inetd\&.conf:
  .PP 
  .RS 
@@ -64,7 +62,7 @@ diff -ruN rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2-new/rsyncd.conf.5
  .RE 
  .PP 
  Replace "/usr/bin/rsync" with the path to where you have rsync installed on
-@@ -67,7 +67,7 @@
+@@ -72,7 +72,7 @@
  reread its config file\&.
  .PP 
  Note that you should not send the rsync server a HUP signal to force
@@ -73,7 +71,7 @@ diff -ruN rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2-new/rsyncd.conf.5
  connection\&. 
  .PP 
  .SH "GLOBAL OPTIONS" 
-@@ -129,7 +129,7 @@
+@@ -134,7 +134,7 @@
  .IP "\fBpath\fP" 
  The "path" option specifies the directory in the servers
  filesystem to make available in this module\&.  You must specify this option
@@ -82,32 +80,23 @@ diff -ruN rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2-new/rsyncd.conf.5
  .IP 
  .IP "\fBuse chroot\fP" 
  If "use chroot" is true, the rsync server will chroot
-@@ -240,7 +240,7 @@
+@@ -250,7 +250,7 @@
  you may find that passwords longer than 8 characters don\'t work\&. 
  .IP 
  There is no default for the "secrets file" option, you must choose a name
--(such as \f(CW/etc/rsyncd\&.secrets\fP)\&.
-+(such as \f(CW/etc/rsyncd/rsyncd\&.secrets\fP)\&.
+-(such as \f(CW/etc/rsyncd\&.secrets\fP)\&.  The file must normally not be readable
++(such as \f(CW/etc/rsyncd/rsyncd\&.secrets\fP)\&.  The file must normally not be readable
+ by "other"; see "strict modes"\&.
  .IP 
  .IP "\fBstrict modes\fP" 
- The "strict modes" option determines whether or not 
-@@ -439,7 +439,7 @@
- .br 
- syslog facility = local5 
- .br 
--pid file = /etc/rsyncd\&.pid
-+pid file = /var/run/rsyncd\&.pid
- .PP 
- 
- .DS 
-@@ -464,13 +464,13 @@
+@@ -481,13 +481,13 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
 -        secrets file = /etc/rsyncd\&.secrets
 +        secrets file = /etc/rsyncd/rsyncd\&.secrets
  
- .DE 
+ .fi 
   
  
  .PP 
@@ -116,7 +105,7 @@ diff -ruN rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2-new/rsyncd.conf.5
  .PP 
  tridge:mypass 
  .br 
-@@ -478,7 +478,7 @@
+@@ -495,7 +495,7 @@
  .PP 
  .SH "FILES" 
  .PP 
@@ -125,10 +114,9 @@ diff -ruN rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2-new/rsyncd.conf.5
  .PP 
  .SH "SEE ALSO" 
  .PP 
-diff -ruN rsync-2.3.2/rsyncd.conf.yo rsync-2.3.2-new/rsyncd.conf.yo
---- rsync-2.3.2/rsyncd.conf.yo	Mon Nov  8 14:15:02 1999
-+++ rsync-2.3.2-new/rsyncd.conf.yo	Fri Nov 19 17:51:35 1999
-@@ -56,14 +56,14 @@
+--- rsync-2.5.2/rsyncd.conf.yo.orig	Fri Aug 31 10:12:35 2001
++++ rsync-2.5.2/rsyncd.conf.yo	Sat Jan 26 07:14:48 2002
+@@ -61,14 +61,14 @@
  
  and a single line something like this to /etc/inetd.conf:
      
@@ -145,7 +133,7 @@ diff -ruN rsync-2.3.2/rsyncd.conf.yo rsync-2.3.2-new/rsyncd.conf.yo
  connection. 
  
  manpagesection(GLOBAL OPTIONS)
-@@ -122,7 +122,7 @@
+@@ -127,7 +127,7 @@
  
  dit(bf(path)) The "path" option specifies the directory in the servers
  filesystem to make available in this module.  You must specify this option
@@ -154,25 +142,16 @@ diff -ruN rsync-2.3.2/rsyncd.conf.yo rsync-2.3.2-new/rsyncd.conf.yo
  
  dit(bf(use chroot)) If "use chroot" is true, the rsync server will chroot
  to the "path" before starting the file transfer with the client.  This has
-@@ -220,7 +220,7 @@
+@@ -230,7 +230,7 @@
  you may find that passwords longer than 8 characters don't work. 
  
  There is no default for the "secrets file" option, you must choose a name
--(such as tt(/etc/rsyncd.secrets)).
-+(such as tt(/etc/rsyncd/rsyncd.secrets)).
+-(such as tt(/etc/rsyncd.secrets)).  The file must normally not be readable
++(such as tt(/etc/rsyncd/rsyncd.secrets)).  The file must normally not be readable
+ by "other"; see "strict modes".
  
  dit(bf(strict modes)) The "strict modes" option determines whether or not 
- the permissions on the secrets file will be checked.  If "strict modes" is
-@@ -382,7 +382,7 @@
- use chroot = no nl()
- max connections = 4 nl()
- syslog facility = local5 nl()
--pid file = /etc/rsyncd.pid
-+pid file = /var/run/rsyncd.pid
- 
- verb([ftp]
-         path = /var/ftp/pub
-@@ -404,17 +404,17 @@
+@@ -420,17 +420,17 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan

@@ -1,6 +1,5 @@
-diff -ruN rsync-2.3.2.orig/rsync.1 rsync-2.3.2/rsync.1
---- rsync-2.3.2.orig/rsync.1	Mon Nov  8 14:15:01 1999
-+++ rsync-2.3.2/rsync.1	Fri Nov 19 17:41:57 1999
+--- rsync-2.5.2/rsync.1.orig	Wed Jan 23 06:59:10 2002
++++ rsync-2.5.2/rsync.1	Sat Jan 26 07:17:23 2002
 @@ -191,7 +191,7 @@
  .SH "RUNNING AN RSYNC SERVER" 
  .PP 
@@ -10,16 +9,16 @@ diff -ruN rsync-2.3.2.orig/rsync.1 rsync-2.3.2/rsync.1
  information\&. 
  .PP 
  .SH "EXAMPLES" 
-@@ -682,7 +682,7 @@
- daemon\&. If standard input is a socket then rsync will assume that it
- is being run via inetd, otherwise it will detach from the current
- terminal and become a background daemon\&. The daemon will read the
--config file (/etc/rsyncd\&.conf) on each connect made by a client and
-+config file (/etc/rsyncd/rsyncd\&.conf) on each connect made by a client and
- respond to requests accordingly\&. See the rsyncd\&.conf(5) man page for more
- details\&. 
+@@ -719,7 +719,7 @@
+ If standard input is a socket then rsync will assume that it is being
+ run via inetd, otherwise it will detach from the current terminal and
+ become a background daemon\&.  The daemon will read the config file
+-(/etc/rsyncd\&.conf) on each connect made by a client and respond to
++(/etc/rsyncd/rsyncd\&.conf) on each connect made by a client and respond to
+ requests accordingly\&.  See the rsyncd\&.conf(5) man page for more
+ details\&.
  .IP 
-@@ -695,7 +695,7 @@
+@@ -742,7 +742,7 @@
  .IP 
  .IP "\fB--config=FILE\fP" 
  This specifies an alternate config file than
@@ -28,7 +27,7 @@ diff -ruN rsync-2.3.2.orig/rsync.1 rsync-2.3.2/rsync.1
  specified\&. 
  .IP 
  .IP "\fB--port=PORT\fP" 
-@@ -887,7 +887,7 @@
+@@ -1065,7 +1065,7 @@
  .PP 
  .SH "FILES" 
  .PP 
