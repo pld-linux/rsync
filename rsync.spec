@@ -231,5 +231,5 @@ fi
 %attr(640,root,root) %config(noreplace) /etc/sysconfig/rsyncd
 %attr(640,root,root) %config(noreplace) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
-%attr(755,root,root) /etc/rc.d/init.d/rsyncd
+%attr(754,root,root) /etc/rc.d/init.d/rsyncd
 %{_mandir}/man5/*
