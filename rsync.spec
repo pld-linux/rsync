@@ -5,8 +5,6 @@ Version:	2.5.2
 Release:	1
 License:	GPL
 Group:		Daemons
-Group(de):	Server
-Group(pl):	Serwery
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
 Source1:	%{name}.inet
 Patch0:		%{name}-config.patch
@@ -40,8 +38,6 @@ pakietu.
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
-Group(de):	Server
-Group(pl):	Serwery
 Requires:	%{name}
 Requires:	rc-inetd
 
