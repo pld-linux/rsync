@@ -3,10 +3,10 @@ Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
 Name:		rsync
 Version:	2.4.3
 Release:	1
-Copyright:	GPL
+License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
-Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
+Source0:	ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
 Patch0:		rsync-config.patch
 Patch1:		rsync-man.patch
 Patch2:		rsync-configure.patch
@@ -25,13 +25,14 @@ differences in the files across the link, without requiring that both
 sets of files are present at one of the ends of the link beforehand.
 
 A technical report describing the rsync algorithm is included with
-this package. 
+this package.
 
 %description -l pl
-Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan± sk³adniê
-poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w czasie komunikacji 
-i transportu plików do systemu zdalnego. Dokumentacja techniczna nowego 
-algorytmu zosta³a równie¿ do³±czona do pakietu.
+Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan±
+sk³adniê poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
+czasie komunikacji i transportu plików do systemu zdalnego.
+Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
+pakietu.
 
 %prep
 %setup  -q
@@ -57,10 +58,10 @@ make install \
 	mandir=$RPM_BUILD_ROOT%{_mandir} \
 	bindir=$RPM_BUILD_ROOT%{_sbindir}
 
-install -d $RPM_BUILD_ROOT/etc/rsyncd
+install -d $RPM_BUILD_ROOT%{_sysconfdir}
 
-:> $RPM_BUILD_ROOT/etc/rsyncd/rsyncd.conf
-:> $RPM_BUILD_ROOT/etc/rsyncd/rsyncd.secrets
+:> $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.conf
+:> $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.secrets
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* README 
 
@@ -70,9 +71,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.gz 
-%dir /etc/rsyncd
-%attr(640,root,root) %config /etc/rsyncd/rsyncd.conf
-%attr(640,root,root) %config /etc/rsyncd/rsyncd.secrets
+%dir %{_sysconfdir}
+%attr(640,root,root) %config %{_sysconfdir}/rsyncd.conf
+%attr(640,root,root) %config %{_sysconfdir}/rsyncd.secrets
 
 %attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[15]/*
