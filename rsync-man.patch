@@ -1,5 +1,5 @@
---- rsync-2.5.2/rsync.1.orig	Wed Jan 23 06:59:10 2002
-+++ rsync-2.5.2/rsync.1	Sat Jan 26 07:17:23 2002
+--- rsync-2.5.3/rsync.1.orig	Wed Jan 23 06:59:10 2002
++++ rsync-2.5.3/rsync.1	Sat Jan 26 07:17:23 2002
 @@ -191,7 +191,7 @@
  .SH "RUNNING AN RSYNC SERVER" 
  .PP 
