@@ -43,7 +43,7 @@ make install prefix=$RPM_BUILD_ROOT/usr
 
 strip $RPM_BUILD_ROOT/usr/bin/rsync
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	README
 
 %clean
@@ -53,7 +53,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) /usr/bin/rsync
-/usr/man/man[15]/*
+%{_mandir}/man[15]/*
 
 %changelog
 * Sun Apr 25 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
