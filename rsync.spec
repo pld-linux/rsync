@@ -13,7 +13,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.6.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -153,6 +153,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %patch3 -p1
 
 %build
+cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	%{?with_rsh:--with-rsh=rsh} \
