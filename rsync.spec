@@ -14,6 +14,7 @@ Patch1:		%{name}-man.patch
 Patch2:		%{name}-configure.patch
 #Patch3:	http://www.misiek.eu.org/ipv6/%{name}-2.4.5-ipv6-20000821.patch.gz
 Patch3:		%{name}-2.4.6-ipv6-20010419.patch.gz
+BuildRequires:	autoconf
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
