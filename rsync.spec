@@ -7,8 +7,8 @@ Summary(uk):	Програма для ефективного в╕ддаленого оновлення файл╕в
 Summary(zh_CN):	[м╗я╤]╢╚йД╧╓╬ъ
 Summary(zh_TW):	[ЁЯ╟т]$(B6G?i╓У(c(B
 Name:		rsync
-Version:	2.5.5
-Release:	3
+Version:	2.5.6
+Release:	1
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz

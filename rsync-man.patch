@@ -1,50 +1,42 @@
---- rsync-2.5.3/rsync.1.orig	Wed Jan 23 06:59:10 2002
-+++ rsync-2.5.3/rsync.1	Sat Jan 26 07:17:23 2002
-@@ -191,7 +191,7 @@
- .SH "RUNNING AN RSYNC SERVER" 
+diff -Naur rsync-2.5.6-orig/rsync.1 rsync-2.5.6/rsync.1
+--- rsync-2.5.6-orig/rsync.1	Tue Jan 28 04:11:57 2003
++++ rsync-2.5.6/rsync.1	Thu Jan 30 18:11:11 2003
+@@ -236,7 +236,7 @@
  .PP 
- An rsync server is configured using a config file which by default is
--called /etc/rsyncd\&.conf\&. Please see the rsyncd\&.conf(5) man page for more
-+called /etc/rsyncd/rsyncd\&.conf\&. Please see the rsyncd\&.conf(5) man page for more
- information\&. 
- .PP 
- .SH "EXAMPLES" 
-@@ -719,7 +719,7 @@
- If standard input is a socket then rsync will assume that it is being
- run via inetd, otherwise it will detach from the current terminal and
- become a background daemon\&.  The daemon will read the config file
--(/etc/rsyncd\&.conf) on each connect made by a client and respond to
-+(/etc/rsyncd/rsyncd\&.conf) on each connect made by a client and respond to
- requests accordingly\&.  See the rsyncd\&.conf(5) man page for more
- details\&.
- .IP 
-@@ -742,7 +742,7 @@
- .IP 
+ An rsync server is configured using a config file\&.  Please see the 
+ rsyncd\&.conf(5) man page for more information\&.  By default the configuration
+-file is called /etc/rsyncd\&.conf, unless rsync is running over a remote
++file is called /etc/rsyncd/rsyncd\&.conf, unless rsync is running over a remote
+ shell program and is not running as root; in that case, the default name
+ is rsyncd\&.conf in the current directory on the remote computer 
+ (typically $HOME)\&.
+@@ -860,7 +860,7 @@
  .IP "\fB--config=FILE\fP" 
  This specifies an alternate config file than
--the default /etc/rsyncd\&.conf\&. This is only relevant when --daemon is
-+the default /etc/rsyncd/rsyncd\&.conf\&. This is only relevant when --daemon is
- specified\&. 
+ the default\&.  This is only relevant when --daemon is specified\&. 
+-The default is /etc/rsyncd\&.conf unless the daemon is running over
++The default is /etc/rsyncd/rsyncd\&.conf unless the daemon is running over
+ a remote shell program and the remote user is not root; in that case
+ the default is rsyncd\&.conf in the current directory (typically $HOME)\&.
  .IP 
- .IP "\fB--port=PORT\fP" 
-@@ -1065,7 +1065,7 @@
+@@ -1258,7 +1258,7 @@
  .PP 
  .SH "FILES" 
  .PP 
--/etc/rsyncd\&.conf
-+/etc/rsyncd/rsyncd\&.conf
+-/etc/rsyncd\&.conf or rsyncd\&.conf
++/etc/rsyncd/rsyncd\&.conf or rsyncd\&.conf
  .PP 
  .SH "SEE ALSO" 
  .PP 
-diff -ruN rsync-2.3.2.orig/rsyncd.conf.5 rsync-2.3.2/rsyncd.conf.5
---- rsync-2.3.2.orig/rsyncd.conf.5	Mon Nov  8 14:15:02 1999
-+++ rsync-2.3.2/rsyncd.conf.5	Fri Nov 19 17:36:27 1999
-@@ -150,7 +150,7 @@
- The "lock file" option specifies the file to use to
+diff -Naur rsync-2.5.6-orig/rsyncd.conf.5 rsync-2.5.6/rsyncd.conf.5
+--- rsync-2.5.6-orig/rsyncd.conf.5	Thu Jan 30 17:52:53 2003
++++ rsync-2.5.6/rsyncd.conf.5	Thu Jan 30 18:11:58 2003
+@@ -161,7 +161,7 @@
  support the "max connections" option\&. The rsync server uses record
  locking on this file to ensure that the max connections limit is not
--exceeded\&. The default is \f(CW/var/run/rsyncd\&.lock\fP\&.
-+exceeded\&. The default is \f(CW/var/lock/rsyncd\&.lock\fP\&.
+ exceeded for the modules sharing the lock file\&. 
+-The default is \f(CW/var/run/rsyncd\&.lock\fP\&.
++The default is \f(CW/var/lock/rsyncd\&.lock\fP\&.
  .IP 
  .IP "\fBread only\fP" 
  The "read only" option determines whether clients

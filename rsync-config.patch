@@ -1,86 +1,62 @@
-diff -ruN rsync-2.3.2/rsync.h rsync-2.3.2-new/rsync.h
---- rsync-2.3.2/rsync.h	Mon Nov  8 14:15:02 1999
-+++ rsync-2.3.2-new/rsync.h	Fri Nov 19 17:51:35 1999
-@@ -24,9 +24,9 @@
+diff -Naur rsync-2.5.6-orig/rsync.h rsync-2.5.6/rsync.h
+--- rsync-2.5.6-orig/rsync.h	Sun Jan 26 21:11:16 2003
++++ rsync-2.5.6/rsync.h	Thu Jan 30 17:39:51 2003
+@@ -26,10 +26,10 @@
  #define RSYNC_RSH_ENV "RSYNC_RSH"
  
  #define RSYNC_NAME "rsync"
--#define RSYNCD_CONF "/etc/rsyncd.conf"
-+#define RSYNCD_CONF "/etc/rsyncd/rsyncd.conf"
+-#define RSYNCD_SYSCONF "/etc/rsyncd.conf"
++#define RSYNCD_SYSCONF "/etc/rsyncd/rsyncd.conf"
+ #define RSYNCD_USERCONF "rsyncd.conf"
  
 -#define DEFAULT_LOCK_FILE "/var/run/rsyncd.lock"
 +#define DEFAULT_LOCK_FILE "/var/lock/rsyncd.lock"
  #define URL_PREFIX "rsync://"
  
  #define BACKUP_SUFFIX "~"
---- rsync-2.5.3/rsync.yo.orig	Fri Jan 25 11:42:23 2002
-+++ rsync-2.5.3/rsync.yo	Sat Jan 26 07:10:18 2002
-@@ -173,7 +173,7 @@
- manpagesection(RUNNING AN RSYNC SERVER)
+diff -Naur rsync-2.5.6-orig/rsync.yo rsync-2.5.6/rsync.yo
+--- rsync-2.5.6-orig/rsync.yo	Tue Jan 28 04:11:57 2003
++++ rsync-2.5.6/rsync.yo	Thu Jan 30 17:42:31 2003
+@@ -214,7 +214,7 @@
  
- An rsync server is configured using a config file which by default is
--called /etc/rsyncd.conf. Please see the rsyncd.conf(5) man page for more
-+called /etc/rsyncd/rsyncd.conf. Please see the rsyncd.conf(5) man page for more
- information. 
- 
- manpagesection(EXAMPLES)
-@@ -628,7 +628,7 @@
+ An rsync server is configured using a config file.  Please see the 
+ rsyncd.conf(5) man page for more information.  By default the configuration
+-file is called /etc/rsyncd.conf, unless rsync is running over a remote
++file is called /etc/rsyncd/rsyncd.conf, unless rsync is running over a remote
+ shell program and is not running as root; in that case, the default name
+ is rsyncd.conf in the current directory on the remote computer 
+ (typically $HOME).
+@@ -730,7 +730,7 @@
  If standard input is a socket then rsync will assume that it is being
  run via inetd, otherwise it will detach from the current terminal and
  become a background daemon.  The daemon will read the config file
--(/etc/rsyncd.conf) on each connect made by a client and respond to
+-(rsyncd.conf) on each connect made by a client and respond to
 +(/etc/rsyncd/rsyncd.conf) on each connect made by a client and respond to
  requests accordingly.  See the rsyncd.conf(5) man page for more
  details.
  
-@@ -648,7 +648,7 @@
- in conjunction with the --config option.
+@@ -751,7 +751,7 @@
  
  dit(bf(--config=FILE)) This specifies an alternate config file than
--the default /etc/rsyncd.conf. This is only relevant when --daemon is
-+the default /etc/rsyncd/rsyncd.conf. This is only relevant when --daemon is
- specified. 
+ the default.  This is only relevant when --daemon is specified. 
+-The default is /etc/rsyncd.conf unless the daemon is running over
++The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
+ a remote shell program and the remote user is not root; in that case
+ the default is rsyncd.conf in the current directory (typically $HOME).
  
- dit(bf(--port=PORT)) This specifies an alternate TCP port number to use
-@@ -926,7 +926,7 @@
+@@ -1098,7 +1098,7 @@
  
  manpagefiles()
  
--/etc/rsyncd.conf
-+/etc/rsyncd/rsyncd.conf
+-/etc/rsyncd.conf or rsyncd.conf
++/etc/rsyncd/rsyncd.conf or rsyncd.conf
  
  manpageseealso()
  
---- rsync-2.5.3/rsyncd.conf.5.orig	Fri Aug 31 10:12:35 2001
-+++ rsync-2.5.3/rsyncd.conf.5	Sat Jan 26 07:13:23 2002
-@@ -64,7 +64,7 @@
- and a single line something like this to /etc/inetd\&.conf:
- .PP 
- .RS 
--rsync   stream  tcp     nowait  root   /usr/bin/rsync rsyncd --daemon
-+rsync   stream  tcp     nowait  root   /usr/sbin/rsync rsyncd --daemon
- .RE 
- .PP 
- Replace "/usr/bin/rsync" with the path to where you have rsync installed on
-@@ -72,7 +72,7 @@
- reread its config file\&.
- .PP 
- Note that you should not send the rsync server a HUP signal to force
--it to reread the \f(CW/etc/rsyncd\&.conf\fP\&. The file is re-read on each client
-+it to reread the \f(CW/etc/rsyncd/rsyncd\etc/rsyncd\&.conf.conf\fP\&. The file is re-read on each client
- connection\&. 
- .PP 
- .SH "GLOBAL OPTIONS" 
-@@ -134,7 +134,7 @@
- .IP "\fBpath\fP" 
- The "path" option specifies the directory in the servers
- filesystem to make available in this module\&.  You must specify this option
--for each module in \f(CW/etc/rsyncd\&.conf\fP\&.
-+for each module in \f(CW/etc/rsyncd/rsyncd\&.conf\fP\&.
- .IP 
- .IP "\fBuse chroot\fP" 
- If "use chroot" is true, the rsync server will chroot
-@@ -250,7 +250,7 @@
+diff -Naur rsync-2.5.6-orig/rsyncd.conf.5 rsync-2.5.6/rsyncd.conf.5
+--- rsync-2.5.6-orig/rsyncd.conf.5	Mon Jan 27 04:07:18 2003
++++ rsync-2.5.6/rsyncd.conf.5	Thu Jan 30 17:46:11 2003
+@@ -259,7 +259,7 @@
  you may find that passwords longer than 8 characters don\'t work\&. 
  .IP 
  There is no default for the "secrets file" option, you must choose a name
@@ -89,7 +65,7 @@ diff -ruN rsync-2.3.2/rsync.h rsync-2.3.2-new/rsync.h
  by "other"; see "strict modes"\&.
  .IP 
  .IP "\fBstrict modes\fP" 
-@@ -481,13 +481,13 @@
+@@ -504,13 +504,13 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -105,44 +81,37 @@ diff -ruN rsync-2.3.2/rsync.h rsync-2.3.2-new/rsync.h
  .PP 
  tridge:mypass 
  .br 
-@@ -495,7 +495,7 @@
+@@ -518,7 +518,7 @@
  .PP 
  .SH "FILES" 
  .PP 
--/etc/rsyncd\&.conf
-+/etc/rsyncd/rsyncd\&.conf
+-/etc/rsyncd\&.conf or rsyncd\&.conf
++/etc/rsyncd/rsyncd\&.conf or rsyncd\&.conf
  .PP 
  .SH "SEE ALSO" 
  .PP 
---- rsync-2.5.3/rsyncd.conf.yo.orig	Fri Aug 31 10:12:35 2001
-+++ rsync-2.5.3/rsyncd.conf.yo	Sat Jan 26 07:14:48 2002
-@@ -61,14 +61,14 @@
- 
- and a single line something like this to /etc/inetd.conf:
-     
--quote(rsync   stream  tcp     nowait  root   /usr/bin/rsync rsyncd --daemon)
-+quote(rsync   stream  tcp     nowait  root   /usr/sbin/rsync rsyncd --daemon)
- 
- Replace "/usr/bin/rsync" with the path to where you have rsync installed on
- your system.  You will then need to send inetd a HUP signal to tell it to
+diff -Naur rsync-2.5.6-orig/rsyncd.conf.yo rsync-2.5.6/rsyncd.conf.yo
+--- rsync-2.5.6-orig/rsyncd.conf.yo	Mon Jan 27 04:07:18 2003
++++ rsync-2.5.6/rsyncd.conf.yo	Thu Jan 30 17:48:52 2003
+@@ -69,7 +69,7 @@
  reread its config file.
  
  Note that you should not send the rsync server a HUP signal to force
--it to reread the tt(/etc/rsyncd.conf). The file is re-read on each client
-+it to reread the tt(/etc/rsyncd/rsyncd.conf). The file is re-read on each client
+-it to reread the tt(rsyncd.conf) file. The file is re-read on each client
++it to reread the tt(/etc/rsyncd/rsyncd.conf) file. The file is re-read on each client
  connection. 
  
  manpagesection(GLOBAL OPTIONS)
-@@ -127,7 +127,7 @@
+@@ -128,7 +128,7 @@
  
  dit(bf(path)) The "path" option specifies the directory in the servers
  filesystem to make available in this module.  You must specify this option
--for each module in tt(/etc/rsyncd.conf).
+-for each module in tt(rsyncd.conf).
 +for each module in tt(/etc/rsyncd/rsyncd.conf).
  
  dit(bf(use chroot)) If "use chroot" is true, the rsync server will chroot
  to the "path" before starting the file transfer with the client.  This has
-@@ -230,7 +230,7 @@
+@@ -239,7 +239,7 @@
  you may find that passwords longer than 8 characters don't work. 
  
  There is no default for the "secrets file" option, you must choose a name
@@ -151,7 +120,7 @@ diff -ruN rsync-2.3.2/rsync.h rsync-2.3.2-new/rsync.h
  by "other"; see "strict modes".
  
  dit(bf(strict modes)) The "strict modes" option determines whether or not 
-@@ -420,17 +420,17 @@
+@@ -437,17 +437,17 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -167,14 +136,14 @@ diff -ruN rsync-2.3.2/rsync.h rsync-2.3.2-new/rsync.h
  
  manpagefiles()
  
--/etc/rsyncd.conf
-+/etc/rsyncd/rsyncd.conf
+-/etc/rsyncd.conf or rsyncd.conf
++/etc/rsyncd/rsyncd.conf or rsyncd.conf
  
  manpageseealso()
  
-diff -ruN rsync-2.3.2/rsyncstats rsync-2.3.2-new/rsyncstats
---- rsync-2.3.2/rsyncstats	Wed Nov 25 17:24:40 1998
-+++ rsync-2.3.2-new/rsyncstats	Fri Nov 19 17:51:35 1999
+diff -Naur rsync-2.5.6-orig/rsyncstats rsync-2.5.6/rsyncstats
+--- rsync-2.5.6-orig/rsyncstats	Mon Nov 23 01:30:27 1998
++++ rsync-2.5.6/rsyncstats	Thu Jan 30 17:50:17 2003
 @@ -23,7 +23,7 @@
  # ---------------------------------------------------------------------------
  
