@@ -1,0 +1,13 @@
+--- rsync-2.6.2/socket.c.orig	2004-05-08 23:25:11.979473336 +0200
++++ rsync-2.6.2/socket.c	2004-05-08 23:27:13.255036648 +0200
+@@ -379,8 +379,8 @@
+ 
+ #ifdef IPV6_V6ONLY
+ 		if (resp->ai_family == AF_INET6) {
+-			setsockopt(s, IPPROTO_IPV6, IPV6_V6ONLY,
+-				   (char *)&one, sizeof one);
++		    if(setsockopt(s, IPPROTO_IPV6, IPV6_V6ONLY, (char *)&one, sizeof one) < 0)
++			continue;
+ 		}
+ #endif
+ 
