@@ -10,8 +10,7 @@ Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
 Patch0:		rsync-config.patch
 Patch1:		rsync-man.patch
 Patch2:		rsync-configure.patch
-# commented out since there's not rsync-2.3.2 patch available yet (19991119)
-# Patch2:		ftp://ftp.kame.net/pub/kame/misc/rsync-231-v6-19990902a.diff.gz
+Patch3:		http://www.misiek.eu.org/ipv6/rsync-2.3.2-ipv6-13121999.patch.gz
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	/tmp/%{name}-%{version}-root
 
@@ -39,16 +38,14 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch2 -p1
+%patch3 -p1
 
 %build
 autoconf 
 LDFLAGS="-s"; export LDFLAGS
 
-#%configure \
-#	--enable-ipv6
-
-%configure
+%configure \
+	--enable-ipv6
 
 make 
 
