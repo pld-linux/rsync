@@ -21,7 +21,8 @@ Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 Patch2:		%{name}-segv.patch
-BuildRequires:	autoconf
+Patch3:		%{name}-acfix.patch
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	popt-devel
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -141,10 +142,11 @@ komunikacji i transportu plików do systemu zdalnego. Dokumentacja
 techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %prep
-%setup  -q
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %{__autoconf}
