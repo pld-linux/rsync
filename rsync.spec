@@ -50,6 +50,7 @@ rm -rf $RPM_BUILD_ROOT
 * Fri Sep 18 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [2.1.1-1]
 - added -q %setup parameter,
+- added Group(pl),
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
 - added using $RPM_OPT_FLAGS during compile,
