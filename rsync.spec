@@ -13,6 +13,7 @@ Release:	2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
+# Source0-md5:	ec39fcea433df4d6a3a4e0896c655535
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
