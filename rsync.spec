@@ -1,6 +1,6 @@
 Summary:     Program for efficient remote updates of files.
 Name:        rsync
-Version:     2.2.0
+Version:     2.2.1
 Release:     1
 Copyright:   GPL
 Group:       Applications/Networking
