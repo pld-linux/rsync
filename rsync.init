@@ -51,7 +51,7 @@ case "$1" in
 	$0 start
 	;;
   status)
-	status rsyncd
+	status rsync
 	;;
   *)
 	msg_usage "$0 {start|stop|restart|status}"
