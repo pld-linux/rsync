@@ -1,0 +1,5 @@
+# Rsync startup configuration file
+
+# Try to define nice-level for running rsyncd
+SERVICE_RUN_NICE_LEVEL="+5"
+
