@@ -7,11 +7,13 @@ Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
 Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
-Patch0:		rsync-pld.patch
+Patch0:		rsync-config.patch
 Patch1:		rsync-man.patch
 Patch2:		rsync-231-v6-19990520-PLD.patch
-URL:		http://samba.anu.edu.au/rsync
+URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	/tmp/%{name}-%{version}-root
+
+%define _sysconfdir /etc/rsyncd
 
 %description
 rsync is a replacement for rcp that has many more features.
@@ -37,24 +39,20 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 %patch2 -p1
 
 %build
-aclocal && autoconf 
-
-%define _sysconfdir /etc/rsyncd
-
-%configure --enable-ipv6
+autoconf 
+LDFLAGS="-s"; export LDFLAGS
+%configure \
+	--enable-ipv6
 
 make 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-make \
-    prefix=$RPM_BUILD_ROOT%{_prefix} \
-    mandir=$RPM_BUILD_ROOT%{_mandir} \
-    bindir=$RPM_BUILD_ROOT%{_sbindir} \
-    install 
-
-strip $RPM_BUILD_ROOT%{_sbindir}/rsync
+make install \
+	prefix=$RPM_BUILD_ROOT%{_prefix} \
+	mandir=$RPM_BUILD_ROOT%{_mandir} \
+	bindir=$RPM_BUILD_ROOT%{_sbindir}
 
 install -d $RPM_BUILD_ROOT/etc/rsyncd
 
@@ -69,13 +67,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.gz 
+%dir /etc/rsyncd
+%attr(640,root,root) %config /etc/rsyncd/rsyncd.conf
+%attr(640,root,root) %config /etc/rsyncd/rsyncd.secrets
 
-%attr(750,root,root) %dir /etc/rsyncd
-%attr(640,root,root) %ghost /etc/rsyncd/rsyncd.conf
-%attr(600,root,root) %ghost /etc/rsyncd/rsyncd.secrets
-
-%attr(755,root,root) %{_sbindir}/rsync
-
+%attr(755,root,root) %{_sbindir}/*
 %{_mandir}/man[15]/*
 
 %changelog
