@@ -3,3 +3,6 @@
 # Try to define nice-level for running rsyncd
 SERVICE_RUN_NICE_LEVEL="+5"
 
+# Additional options to rsyncd
+# see: man rsync
+#RSYNC_OPTIONS=""

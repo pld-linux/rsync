@@ -24,7 +24,8 @@ else
 	exit 0
 fi
 
-. /etc/sysconfig/rsyncd
+# Get service configuration
+[ -f /etc/sysconfig/rsyncd ] && . /etc/sysconfig/rsyncd
 
 RETVAL=0
 # See how we were called.
@@ -33,7 +34,7 @@ case "$1" in
 	# Start daemons.
 	if [ ! -f /var/lock/subsys/rsyncd ]; then
 		msg_starting rsyncd
-		daemon rsync --daemon
+		daemon rsync --daemon ${RSYNC_OPTIONS}
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rsyncd
 	else
@@ -50,7 +51,7 @@ case "$1" in
 		msg_not_running rsyncd
 	fi
 	;;
-  restart|force-reload)
+  restart|reload|force-restart|force-reload)
 	$0 stop
 	$0 start
 	exit $?
@@ -60,7 +61,7 @@ case "$1" in
 	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|reload|force-restart|force-reload|status}"
 	exit 3
 esac
 
