@@ -1,8 +1,8 @@
 Summary:	Program for efficient remote updates of files.
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
 Name:		rsync
-Version:	2.4.5
-Release:	2
+Version:	2.4.6
+Release:	1
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
