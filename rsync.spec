@@ -24,7 +24,7 @@ this package.
 
 %build
 ./configure --prefix=/usr
-make CFLAGS=$RPM_OPT_FLAGS
+make CFLAGS="$RPM_OPT_FLAGS"
 strip rsync
 latex tech_report
 dvips tech_report -o
