@@ -243,7 +243,7 @@ fi
 %dir %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
-%attr(640,root,root) %config(noreplace) /etc/logrotate.d/rsyncd
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logrotate.d/rsyncd
 %attr(640,root,root) /etc/sysconfig/rc-inetd/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %{_mandir}/man5/*
@@ -254,7 +254,7 @@ fi
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
 %attr(640,root,root) %config(noreplace) /etc/sysconfig/rsyncd
-%attr(640,root,root) %config(noreplace) /etc/logrotate.d/rsyncd
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %attr(754,root,root) /etc/rc.d/init.d/rsyncd
 %{_mandir}/man5/*
