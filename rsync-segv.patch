@@ -1,10 +1,12 @@
---- rsync-2.4.6/main.c.foo	Fri Aug 17 11:46:03 2001
-+++ rsync-2.4.6/main.c	Fri Aug 17 11:45:37 2001
-@@ -534,6 +534,7 @@
+diff -burN rsync-2.6.2.orig/options.c rsync-2.6.2/options.c
+--- rsync-2.6.2.orig/options.c	2004-05-02 10:20:23.177074368 +0200
++++ rsync-2.6.2/options.c	2004-05-02 10:22:33.403276976 +0200
+@@ -980,6 +980,8 @@
  {
  	char *p, *p2;
  
-+	if (!s || !*s) return NULL;
++	if (!s || !*s) 
++		return NULL;
  	p = strchr(s,':');
- 	if (!p) return NULL;
- 	
+ 	if (!p)
+ 		return NULL;
