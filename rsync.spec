@@ -137,7 +137,8 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %build
 %{__autoconf}
 %configure \
-	--enable-ipv6
+	--enable-ipv6 \
+	--disable-debug
 
 %{__make}
 
