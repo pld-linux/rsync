@@ -4,6 +4,7 @@ Version:     2.1.1
 Release:     1
 Copyright:   GPL
 Group:       Applications/Networking
+Group(pl):   Aplikacje/Sieæ
 Source:	     ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
 URL:         http://samba.anu.edu.au/rsync
 BuildRoot:   /tmp/%{name}-%{version}-root
