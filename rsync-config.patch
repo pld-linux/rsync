@@ -1,6 +1,6 @@
-diff -Nur rsync-2.3.1/rsync.h rsync-2.3.1.pld/rsync.h
---- rsync-2.3.1/rsync.h	Mon Mar 15 22:23:12 1999
-+++ rsync-2.3.1.pld/rsync.h	Thu Jun 17 09:27:07 1999
+diff -Nur rsync-2.3.2/rsync.h rsync-2.3.2.pld/rsync.h
+--- rsync-2.3.2/rsync.h	Mon Mar 15 22:23:12 1999
++++ rsync-2.3.2.pld/rsync.h	Thu Jun 17 09:27:07 1999
 @@ -24,9 +24,9 @@
  #define RSYNC_RSH_ENV "RSYNC_RSH"
  
@@ -13,9 +13,9 @@ diff -Nur rsync-2.3.1/rsync.h rsync-2.3.1.pld/rsync.h
  #define URL_PREFIX "rsync://"
  
  #define BACKUP_SUFFIX "~"
-diff -Nur rsync-2.3.1/rsync.yo rsync-2.3.1.pld/rsync.yo
---- rsync-2.3.1/rsync.yo	Tue Apr  6 17:04:17 1999
-+++ rsync-2.3.1.pld/rsync.yo	Thu Jun 17 09:33:26 1999
+diff -Nur rsync-2.3.2/rsync.yo rsync-2.3.2.pld/rsync.yo
+--- rsync-2.3.2/rsync.yo	Tue Apr  6 17:04:17 1999
++++ rsync-2.3.2.pld/rsync.yo	Thu Jun 17 09:33:26 1999
 @@ -168,7 +168,7 @@
  manpagesection(RUNNING AN RSYNC SERVER)
  
@@ -49,9 +49,9 @@ diff -Nur rsync-2.3.1/rsync.yo rsync-2.3.1.pld/rsync.yo
  
  manpageseealso()
  
-diff -Nur rsync-2.3.1/rsyncd.conf.5 rsync-2.3.1.pld/rsyncd.conf.5
---- rsync-2.3.1/rsyncd.conf.5	Tue Apr  6 17:04:17 1999
-+++ rsync-2.3.1.pld/rsyncd.conf.5	Thu Jun 17 09:35:51 1999
+diff -Nur rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2.pld/rsyncd.conf.5
+--- rsync-2.3.2/rsyncd.conf.5	Tue Apr  6 17:04:17 1999
++++ rsync-2.3.2.pld/rsyncd.conf.5	Thu Jun 17 09:35:51 1999
 @@ -59,14 +59,14 @@
  and a single line something like this to /etc/inetd\&.conf:
  .PP 
@@ -121,9 +121,9 @@ diff -Nur rsync-2.3.1/rsyncd.conf.5 rsync-2.3.1.pld/rsyncd.conf.5
  .PP 
  .SH "SEE ALSO" 
  .PP 
-diff -Nur rsync-2.3.1/rsyncd.conf.yo rsync-2.3.1.pld/rsyncd.conf.yo
---- rsync-2.3.1/rsyncd.conf.yo	Tue Apr  6 17:04:17 1999
-+++ rsync-2.3.1.pld/rsyncd.conf.yo	Thu Jun 17 09:44:41 1999
+diff -Nur rsync-2.3.2/rsyncd.conf.yo rsync-2.3.2.pld/rsyncd.conf.yo
+--- rsync-2.3.2/rsyncd.conf.yo	Tue Apr  6 17:04:17 1999
++++ rsync-2.3.2.pld/rsyncd.conf.yo	Thu Jun 17 09:44:41 1999
 @@ -56,13 +56,13 @@
  
  and a single line something like this to /etc/inetd.conf:
@@ -188,9 +188,9 @@ diff -Nur rsync-2.3.1/rsyncd.conf.yo rsync-2.3.1.pld/rsyncd.conf.yo
  
  manpageseealso()
  
-diff -Nur rsync-2.3.1/rsyncstats rsync-2.3.1.pld/rsyncstats
---- rsync-2.3.1/rsyncstats	Wed Nov 25 17:24:40 1998
-+++ rsync-2.3.1.pld/rsyncstats	Thu Jun 17 09:29:14 1999
+diff -Nur rsync-2.3.2/rsyncstats rsync-2.3.2.pld/rsyncstats
+--- rsync-2.3.2/rsyncstats	Wed Nov 25 17:24:40 1998
++++ rsync-2.3.2.pld/rsyncstats	Thu Jun 17 09:29:14 1999
 @@ -23,7 +23,7 @@
  # ---------------------------------------------------------------------------
  

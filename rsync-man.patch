@@ -1,6 +1,6 @@
-diff -Nur rsync-2.3.1/rsync.1 rsync-2.3.1.pld/rsync.1
---- rsync-2.3.1/rsync.1	Tue Apr  6 17:04:16 1999
-+++ rsync-2.3.1.pld/rsync.1	Thu Jun 17 09:56:27 1999
+diff -Nur rsync-2.3.2/rsync.1 rsync-2.3.2.pld/rsync.1
+--- rsync-2.3.2/rsync.1	Tue Apr  6 17:04:16 1999
++++ rsync-2.3.2.pld/rsync.1	Thu Jun 17 09:56:27 1999
 @@ -186,7 +186,7 @@
  .SH "RUNNING AN RSYNC SERVER" 
  .PP 
@@ -35,9 +35,9 @@ diff -Nur rsync-2.3.1/rsync.1 rsync-2.3.1.pld/rsync.1
  .PP 
  .SH "SEE ALSO" 
  .PP 
-diff -Nur rsync-2.3.1/rsyncd.conf.5 rsync-2.3.1.pld/rsyncd.conf.5
---- rsync-2.3.1/rsyncd.conf.5	Thu Jun 17 10:00:42 1999
-+++ rsync-2.3.1.pld/rsyncd.conf.5	Thu Jun 17 09:57:18 1999
+diff -Nur rsync-2.3.2/rsyncd.conf.5 rsync-2.3.2.pld/rsyncd.conf.5
+--- rsync-2.3.2/rsyncd.conf.5	Thu Jun 17 10:00:42 1999
++++ rsync-2.3.2.pld/rsyncd.conf.5	Thu Jun 17 09:57:18 1999
 @@ -149,7 +149,7 @@
  The "lock file" option specifies the file to use to
  support the "max connections" option\&. The rsync server uses record
