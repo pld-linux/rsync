@@ -1,11 +1,12 @@
---- rsync-2.6.0/options.c~	2003-12-30 19:16:25.000000000 +0100
-+++ rsync-2.6.0/options.c	2004-01-01 22:37:26.920536232 +0100
-@@ -913,7 +913,8 @@
- char *find_colon(char *s)
+diff -burN rsync-2.6.2.orig/options.c rsync-2.6.2/options.c
+--- rsync-2.6.2.orig/options.c	2004-05-02 10:20:23.177074368 +0200
++++ rsync-2.6.2/options.c	2004-05-02 10:22:33.403276976 +0200
+@@ -980,6 +980,8 @@
  {
  	char *p, *p2;
-
-+	if (!s || !*s) return NULL;
- 	p = strchr(s,':');
- 	if (!p) return NULL;
  
++	if (!s || !*s) 
++		return NULL;
+ 	p = strchr(s,':');
+ 	if (!p)
+ 		return NULL;
