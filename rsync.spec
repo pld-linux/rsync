@@ -9,7 +9,7 @@ Group(pl):	Serwery
 Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
 Patch0:		rsync-config.patch
 Patch1:		rsync-man.patch
-Patch2:		rsync-231-v6-19990520-PLD.patch
+Patch2:		ftp://ftp.kame.net/pub/kame/misc/rsync-231-v6-19990902a.diff.gz
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	/tmp/%{name}-%{version}-root
 
@@ -36,14 +36,13 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 %setup  -q
 %patch0 -p1
 %patch1 -p1
-# We don't use it because it's buggy ;(
-#%patch2 -p1
+%patch2 -p1
 
 %build
 autoconf 
 LDFLAGS="-s"; export LDFLAGS
 %configure \
-#	--enable-ipv6
+	--enable-ipv6
 
 make 
 
