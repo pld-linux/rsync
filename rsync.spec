@@ -1,13 +1,13 @@
-Summary:     Program for efficient remote updates of files.
-Name:        rsync
-Version:     2.2.1
-Release:     1
-Copyright:   GPL
-Group:       Applications/Networking
-Group(pl):   Aplikacje/Sieæ
-Source:	     ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
-URL:         http://samba.anu.edu.au/rsync
-BuildRoot:   /tmp/%{name}-%{version}-root
+Summary:	Program for efficient remote updates of files.
+Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
+Name:		rsync
+Version:	2.3.0
+Release:	1
+Copyright:	GPL
+Group:		Applications/Networking
+Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
+URL:		http://samba.anu.edu.au/rsync/
+BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
 rsync is a replacement for rcp that has many more features.
@@ -20,37 +20,56 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package. 
 
+%description -l pl
+Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan± sk³adniê
+poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w czasie komunikacji 
+i transportu plików do systemu zdalnego. Dokumentacja techniczna nowego 
+algorytmu zosta³a równie¿ do³±czona do pakietu.
+
 %prep
 %setup -q
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" ./configure --prefix=/usr
-make
-strip rsync
-latex tech_report
-dvips tech_report -o
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
+./configure \
+	--prefix=/usr
+make 
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{bin,man/man{1,5}}
-install rsync $RPM_BUILD_ROOT/usr/bin
-install rsync.1 $RPM_BUILD_ROOT/usr/man/man1
-install rsyncd.conf.5 $RPM_BUILD_ROOT/usr/man/man5
+
+make install prefix=$RPM_BUILD_ROOT/usr
+#install -d $RPM_BUILD_ROOT/usr/{bin,man/man{1,5}}
+#install -s rsync $RPM_BUILD_ROOT/usr/bin
+#install rsync.1 $RPM_BUILD_ROOT/usr/man/man1
+#install rsyncd.conf.5 $RPM_BUILD_ROOT/usr/man/man5
+
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+	README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-
-%attr(644, root, root, 755) %doc tech_report.ps README
-%attr(755, root, root) /usr/bin/rsync
-%attr(644, root, root) /usr/man/man[15]/*
+%defattr(644,root,root,755)
+%doc README
+%attr(755,root,root) /usr/bin/rsync
+/usr/man/man[15]/*
 
 %changelog
+* Fri Mar 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [2.3.0-1]
+- added gzipping man pages,
+- removed man group from man pages.
+
+* Sat Nov 08 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [2.2.0-1d]
+- translation modified for pl,
+- minor changes.
+
 * Fri Sep 18 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [2.1.1-1]
 - added -q %setup parameter,
-- added Group(pl),
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
 - added using %%{name} and %%{version} in Source,
 - added using $RPM_OPT_FLAGS during compile,
