@@ -7,6 +7,7 @@ Copyright:	GPL
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
 Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
+Patch:		rsync-231-v6-19990520-PLD.patch
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	/tmp/%{name}-%{version}-root
 
@@ -29,12 +30,14 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target_platform} \
-	--prefix=%{_prefix}
+	--prefix=%{_prefix} \
+	--enable-ipv6
 make 
 
 %install
