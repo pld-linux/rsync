@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
+#
 Summary:	Program for efficient remote updates of files
 Summary(es):	Programa para actualizar archivos remotos de forma eficiente
 Summary(ko):	Ёвф╝©Же╘╦╕ еКгя фдюо╣©╠Бх╜╦╕ ю╖гя га╥н╠в╥╔
@@ -8,12 +12,12 @@ Summary(uk):	Програма для ефективного в╕ддаленого оновлення файл╕в
 Summary(zh_CN):	[м╗я╤]╢╚йД╧╓╬ъ
 Summary(zh_TW):	[ЁЯ╟т]$(B6G?i╓У(c(B
 Name:		rsync
-Version:	2.5.7
-Release:	2
+Version:	2.6.0
+Release:	1
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	9b3ec929091d7849f42b973247918a55
+# Source0-md5:	3f24bf31aec0a657eb3b6844c3f09f21
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
@@ -151,6 +155,7 @@ techniczna nowego algorytmu zostaЁa rСwnie© doЁ╠czona do pakietu.
 %build
 %{__autoconf}
 %configure \
+	%{?with_rsh:--with-rsh=rsh} \
 	--enable-ipv6 \
 	--disable-debug
 
