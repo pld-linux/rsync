@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze
 Name:		rsync
 Version:	2.4.6
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -90,7 +90,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/sysconfig/rc-inetd}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* README 
+gzip -9nf README 
 
 %post -n rsyncd
 if [ -f /var/lock/subsys/rc-inetd ]; then
