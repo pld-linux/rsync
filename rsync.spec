@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files.
 Summary(pl):	Program efektywnego modyfikowania plik闚 na zdalnym komputerze.
 Name:		rsync
 Version:	2.3.1
-Release:	2
+Release:	3
 Copyright:	GPL
 Group:		Applications/Networking
 Group(pl):	Aplikacje/Sieciowe
@@ -56,52 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man[15]/*
 
 %changelog
-* Sun Apr 25 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [2.3.1-2]
-- recompiled on new rpm.
-
-* Fri Mar 19 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [2.3.0-1]
-- added gzipping man pages,
-- removed man group from man pages.
-
-* Sat Nov 08 1998 Wojtek 奸usarczyk <wojtek@shadow.eu.org>
-  [2.2.0-1d]
-- translation modified for pl,
-- minor changes.
-
-* Fri Sep 18 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
-  [2.1.1-1]
-- added -q %setup parameter,
-- changed Buildroot to /tmp/%%{name}-%%{version}-root,
-- added using %%{name} and %%{version} in Source,
-- added using $RPM_OPT_FLAGS during compile,
-- added full %attr description in %files.
-
-* Thu Jun 18 1998 Douglas N. Arnold <dna@math.psu.edu>
-Upgrade to rsync version 2.0.18
-
-* Sat May 16 1998 John H Terpstra <jht@aquasoft.com.au>
-  Upgraded to Rsync 2.0.6
-    -new feature anonymous rsync
-
-* Mon Apr  6 1998 Douglas N. Arnold <dna@math.psu.edu>
-Upgrade to rsync version 1.7.2.
-
-* Sun Mar  1 1998 Douglas N. Arnold <dna@math.psu.edu>
-Built 1.6.9-1 based on the 1.6.3-2 spec file of John A. Martin.
-Changes from 1.6.3-2 packaging: added latex and dvips commands
-to create tech_report.ps.
-
-* Mon Aug 25 1997 John A. Martin <jam@jamux.com>
-Built 1.6.3-2 after finding no rsync-1.6.3-1.src.rpm although there
-was an ftp://ftp.redhat.com/pub/contrib/alpha/rsync-1.6.3-1.alpha.rpm
-showing no packager nor signature but giving 
-"Source RPM: rsync-1.6.3-1.src.rpm".
-
-Changes from 1.6.2-1 packaging: added '$RPM_OPT_FLAGS' to make, strip
-to '%build', removed '%prefix'.
-
-* Thu Apr 10 1997 Michael De La Rue <miked@ed.ac.uk>
-rsync-1.6.2-1 packaged.  (This entry by jam to credit Michael for the
-previous package(s).)
+* Wed Jun  9 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [2.3.1-3]
+- based on spec from RH contrib (witten by Douglas N. Arnold
+  <dna@math.psu.edu>),
+- pl translation by Wojtek 奸usarczyk <wojtek@shadow.eu.org>,
+- spec rewrited by PLD team.
