@@ -103,7 +103,7 @@ pakietu.
 %patch1 -p1
 
 %build
-autoconf
+%{__autoconf}
 %configure \
 	--enable-ipv6
 
