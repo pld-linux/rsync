@@ -5,7 +5,7 @@ Summary(pt_BR):	Programa para atualizar arquivos remotos de forma eficiente
 Summary(ru):	Программа для эффективного удаленного обновления файлов
 Summary(uk):	Програма для ефективного в╕ддаленого оновлення файл╕в
 Name:		rsync
-Version:	2.5.4
+Version:	2.5.5
 Release:	1
 License:	GPL
 Group:		Daemons
