@@ -3,6 +3,8 @@
 # Try to define nice-level for running rsyncd
 SERVICE_RUN_NICE_LEVEL="+5"
 
-# Additional options to rsyncd
-# see: man rsync
-#RSYNC_OPTIONS=""
+# Additional options to rsyncd (see: man rsync)
+# Not in manual:
+# -4	- use only IPv4 address
+# -6	- use only IPv6 address
+#RSYNC_OPTIONS="-4"
