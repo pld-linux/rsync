@@ -1,10 +1,11 @@
---- rsync-2.4.6/main.c.foo	Fri Aug 17 11:46:03 2001
-+++ rsync-2.4.6/main.c	Fri Aug 17 11:45:37 2001
-@@ -534,6 +534,7 @@
+--- rsync-2.6.0/options.c~	2003-12-30 19:16:25.000000000 +0100
++++ rsync-2.6.0/options.c	2004-01-01 22:37:26.920536232 +0100
+@@ -913,7 +913,8 @@
+ char *find_colon(char *s)
  {
  	char *p, *p2;
- 
+
 +	if (!s || !*s) return NULL;
  	p = strchr(s,':');
  	if (!p) return NULL;
- 	
+ 
