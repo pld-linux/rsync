@@ -5,6 +5,7 @@ Version:	2.3.1
 Release:	2
 Copyright:	GPL
 Group:		Applications/Networking
+Group(pl):	Aplikacje/Sieciowe
 Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -31,7 +32,7 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr
 make 
 
