@@ -8,7 +8,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.5.5
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -17,6 +17,7 @@ Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 BuildRequires:	autoconf
 BuildRequires:	popt-devel
+Requires:	rsh
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
