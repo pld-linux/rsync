@@ -9,13 +9,14 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.5.6
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
+Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 Patch2:		%{name}-segv.patch
@@ -160,14 +161,19 @@ rm -rf $RPM_BUILD_ROOT
 	mandir=$RPM_BUILD_ROOT%{_mandir} \
 	bindir=$RPM_BUILD_ROOT%{_bindir}
 
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d},/var/log}
 
-:> $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.conf
+:> $RPM_BUILD_ROOT/var/log/rsyncd.log
 :> $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.secrets
+
+cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.conf
+log file = /var/log/rsyncd.log
+EOF
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -211,7 +217,9 @@ fi
 %dir %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
+%attr(640,root,root) %config(noreplace) /etc/logrotate.d/rsyncd
 %attr(640,root,root) /etc/sysconfig/rc-inetd/rsyncd
+%attr(640,root,root) %ghost /var/log/rsyncd.log
 %{_mandir}/man5/*
 
 %files -n rsyncd-standalone
@@ -220,5 +228,7 @@ fi
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
 %attr(640,root,root) %config(noreplace) /etc/sysconfig/rsyncd
+%attr(640,root,root) %config(noreplace) /etc/logrotate.d/rsyncd
+%attr(640,root,root) %ghost /var/log/rsyncd.log
 %attr(755,root,root) /etc/rc.d/init.d/rsyncd
 %{_mandir}/man5/*
