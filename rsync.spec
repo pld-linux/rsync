@@ -1,10 +1,11 @@
-Summary:	Program for efficient remote updates of files.
-Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
+Summary:	Program for efficient remote updates of files
+Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze
 Name:		rsync
 Version:	2.4.6
 Release:	1
 License:	GPL
 Group:		Daemons
+Group(de):	Server
 Group(pl):	Serwery
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
 Source1:	%{name}.inet
@@ -39,6 +40,7 @@ pakietu.
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
+Group(de):	Server
 Group(pl):	Serwery
 Requires:	%{name}
 Requires:	rc-inetd
@@ -70,8 +72,6 @@ pakietu.
 
 %build
 autoconf 
-LDFLAGS="-s"; export LDFLAGS
-
 %configure
 %{__make} 
 
