@@ -1,9 +1,0 @@
-SERVICE_NAME=rsync
-SOCK_TYPE=stream
-PROTOCOL=tcp
-PORT=873
-FLAGS=nowait
-USER=nobody
-SERVER=tcpd
-DAEMON=/usr/bin/rsync
-DAEMONARGS="--daemon"
