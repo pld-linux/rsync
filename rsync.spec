@@ -1,11 +1,11 @@
 Summary:	Program for efficient remote updates of files
 Summary(es):	Programa para actualizar archivos remotos de forma eficiente
-Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze
+Summary(pl):	Program do wydajnego zdalnego uaktualniania plików
 Summary(pt_BR):	Programa para atualizar arquivos remotos de forma eficiente
 Summary(ru):	ğÒÏÇÒÁÍÍÁ ÄÌÑ ÜÆÆÅËÔÉ×ÎÏÇÏ ÕÄÁÌÅÎÎÏÇÏ ÏÂÎÏ×ÌÅÎÉÑ ÆÁÊÌÏ×
 Summary(uk):	ğÒÏÇÒÁÍÁ ÄÌÑ ÅÆÅËÔÉ×ÎÏÇÏ ×¦ÄÄÁÌÅÎÏÇÏ ÏÎÏ×ÌÅÎÎÑ ÆÁÊÌ¦×
 Name:		rsync
-Version:	2.5.3
+Version:	2.5.4
 Release:	1
 License:	GPL
 Group:		Daemons
@@ -41,8 +41,8 @@ otra. Está disponible en este paquete, una relación técnica
 describiendo el algoritmo usado por el rsync.
 
 %description -l pl
-Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan±
-sk³adniê poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowan±
+sk³adni± poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
 czasie komunikacji i transportu plików do systemu zdalnego.
 Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
 pakietu.
@@ -91,8 +91,8 @@ A technical report describing the rsync algorithm is included with
 this package.
 
 %description -n rsyncd -l pl
-Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan±
-sk³adniê poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowan±
+sk³adni± poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
 czasie komunikacji i transportu plików do systemu zdalnego.
 Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
 pakietu.
