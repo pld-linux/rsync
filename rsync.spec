@@ -13,7 +13,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.6.2
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -157,7 +157,7 @@ cp -f /usr/share/automake/config.sub .
 	%{?with_rsh:--with-rsh=rsh} \
 	--enable-ipv6 \
 	--disable-debug \
-	--with-rsyncd-conf=%{_sysconfdir}/rsyncd/rsyncd.conf
+	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
 
 %{__make}
 
