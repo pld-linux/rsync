@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files.
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
 Name:		rsync
 Version:	2.4.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -81,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	mandir=$RPM_BUILD_ROOT%{_mandir} \
-	bindir=$RPM_BUILD_ROOT%{_sbindir}
+	bindir=$RPM_BUILD_ROOT%{_bindir}
 
 install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/sysconfig/rc-inetd}
 
@@ -110,7 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.gz 
-%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
 %files -n rsyncd
