@@ -4,9 +4,11 @@ Summary(pl):	Program do wydajnego zdalnego uaktualniania plików
 Summary(pt_BR):	Programa para atualizar arquivos remotos de forma eficiente
 Summary(ru):	ðÒÏÇÒÁÍÍÁ ÄÌÑ ÜÆÆÅËÔÉ×ÎÏÇÏ ÕÄÁÌÅÎÎÏÇÏ ÏÂÎÏ×ÌÅÎÉÑ ÆÁÊÌÏ×
 Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÅÆÅËÔÉ×ÎÏÇÏ ×¦ÄÄÁÌÅÎÏÇÏ ÏÎÏ×ÌÅÎÎÑ ÆÁÊÌ¦×
+Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
+Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.5.5
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -41,11 +43,10 @@ otra. Está disponible en este paquete, una relación técnica
 describiendo el algoritmo usado por el rsync.
 
 %description -l pl
-Rsync jest zamiennikiem programu rcp z bardziej rozbudowan±
-sk³adni± poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
-czasie komunikacji i transportu plików do systemu zdalnego.
-Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
-pakietu.
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowan± sk³adni±
+poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w czasie
+komunikacji i transportu plików do systemu zdalnego. Dokumentacja
+techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %description -l pt_BR
 O rsync é um substituto mais rápido e flexível para o rcp permitindo
@@ -91,11 +92,10 @@ A technical report describing the rsync algorithm is included with
 this package.
 
 %description -n rsyncd -l pl
-Rsync jest zamiennikiem programu rcp z bardziej rozbudowan±
-sk³adni± poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
-czasie komunikacji i transportu plików do systemu zdalnego.
-Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
-pakietu.
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowan± sk³adni±
+poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w czasie
+komunikacji i transportu plików do systemu zdalnego. Dokumentacja
+techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %prep
 %setup  -q
@@ -124,8 +124,6 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/sysconfig/rc-inetd}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
 
-gzip -9nf README
-
 %post -n rsyncd
 if [ -f /var/lock/subsys/rc-inetd ]; then
         /etc/rc.d/init.d/rc-inetd restart 1>&2
@@ -143,7 +141,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz
+%doc README
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
