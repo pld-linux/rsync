@@ -108,6 +108,7 @@ Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
 Requires:	%{name}
 Provides:	rsyncd
+Obsoletes:	rsyncd
 Obsoletes:	rsyncd-inetd
 
 %description -n rsyncd-standalone
