@@ -1,6 +1,4 @@
-# TODO:
-# - SECURITY: http://securitytracker.com/alerts/2004/Aug/1010940.html
-#
+
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
 #
@@ -15,7 +13,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.6.2
-Release:	3.1
+Release:	3.2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -28,13 +26,12 @@ Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 Patch2:		%{name}-segv.patch
 Patch3:		%{name}-ipv6_socket.patch
+Patch4:		%{name}-sec.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	popt-devel
 URL:		http://rsync.samba.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_sysconfdir	/etc/rsyncd
 
 %description
 rsync is a replacement for rcp that has many more features.
@@ -154,6 +151,9 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+
+%define		_sysconfdir	/etc/rsyncd
 
 %build
 cp -f /usr/share/automake/config.sub .
