@@ -65,11 +65,11 @@ pakietu.
 %patch1 -p1
 
 %build
-autoconf 
+autoconf
 %configure \
 	--enable-ipv6
 
-%{__make} 
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -86,7 +86,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/sysconfig/rc-inetd}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
 
-gzip -9nf README 
+gzip -9nf README
 
 %post -n rsyncd
 if [ -f /var/lock/subsys/rc-inetd ]; then
@@ -105,7 +105,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz 
+%doc README.gz
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
