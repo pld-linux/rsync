@@ -9,7 +9,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.5.7
-Release:	1
+Release:	2
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
