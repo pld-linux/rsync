@@ -156,7 +156,8 @@ cp -f /usr/share/automake/config.sub .
 %configure \
 	%{?with_rsh:--with-rsh=rsh} \
 	--enable-ipv6 \
-	--disable-debug
+	--disable-debug \
+	--with-rsyncd-conf=%{_sysconfdir}/rsyncd/rsyncd.conf
 
 %{__make}
 
