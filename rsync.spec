@@ -32,7 +32,7 @@ algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+./configure %{_target_platform} \
 	--prefix=/usr
 make 
 
