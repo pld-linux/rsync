@@ -1,3 +1,5 @@
+# TODO:
+# - SECURITY: http://securitytracker.com/alerts/2004/Aug/1010940.html
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
