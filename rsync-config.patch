@@ -1,0 +1,202 @@
+diff -Nur rsync-2.3.1/rsync.h rsync-2.3.1.pld/rsync.h
+--- rsync-2.3.1/rsync.h	Mon Mar 15 22:23:12 1999
++++ rsync-2.3.1.pld/rsync.h	Thu Jun 17 09:27:07 1999
+@@ -24,9 +24,9 @@
+ #define RSYNC_RSH_ENV "RSYNC_RSH"
+ 
+ #define RSYNC_NAME "rsync"
+-#define RSYNCD_CONF "/etc/rsyncd.conf"
++#define RSYNCD_CONF "/etc/rsyncd/rsyncd.conf"
+ 
+-#define DEFAULT_LOCK_FILE "/var/run/rsyncd.lock"
++#define DEFAULT_LOCK_FILE "/var/lock/rsyncd.lock"
+ #define URL_PREFIX "rsync://"
+ 
+ #define BACKUP_SUFFIX "~"
+diff -Nur rsync-2.3.1/rsync.yo rsync-2.3.1.pld/rsync.yo
+--- rsync-2.3.1/rsync.yo	Tue Apr  6 17:04:17 1999
++++ rsync-2.3.1.pld/rsync.yo	Thu Jun 17 09:33:26 1999
+@@ -168,7 +168,7 @@
+ manpagesection(RUNNING AN RSYNC SERVER)
+ 
+ An rsync server is configured using a config file which by default is
+-called /etc/rsyncd.conf. Please see the rsyncd.conf(5) man page for more
++called /etc/rsyncd/rsyncd.conf. Please see the rsyncd.conf(5) man page for more
+ information. 
+ 
+ manpagesection(EXAMPLES)
+@@ -592,12 +592,12 @@
+ daemon. If standard input is a socket then rsync will assume that it
+ is being run via inetd, otherwise it will detach from the current
+ terminal and become a background daemon. The daemon will read the
+-config file (/etc/rsyncd.conf) on each connect made by a client and
++config file (/etc/rsyncd/rsyncd.conf) on each connect made by a client and
+ respond to requests accordingly. See the rsyncd.conf(5) man page for more
+ details. 
+ 
+ dit(bf(--config=FILE)) This specifies an alternate config file than
+-the default /etc/rsyncd.conf. This is only relevant when --daemon is
++the default /etc/rsyncd/rsyncd.conf. This is only relevant when --daemon is
+ specified. 
+ 
+ dit(bf(--port=PORT)) This specifies an alternate TCP port number to use
+@@ -742,7 +742,7 @@
+ 
+ manpagefiles()
+ 
+-/etc/rsyncd.conf
++/etc/rsyncd/rsyncd.conf
+ 
+ manpageseealso()
+ 
+diff -Nur rsync-2.3.1/rsyncd.conf.5 rsync-2.3.1.pld/rsyncd.conf.5
+--- rsync-2.3.1/rsyncd.conf.5	Tue Apr  6 17:04:17 1999
++++ rsync-2.3.1.pld/rsyncd.conf.5	Thu Jun 17 09:35:51 1999
+@@ -59,14 +59,14 @@
+ and a single line something like this to /etc/inetd\&.conf:
+ .PP 
+ .RS 
+-rsync   stream  tcp     nowait  root   /usr/bin/rsync rsyncd --daemon
++rsync   stream  tcp     nowait  root   /usr/sbin/rsync rsyncd --daemon
+ .RE 
+ .PP 
+ You will then need to send inetd a HUP signal to tell it to reread its
+ config file\&.
+ .PP 
+ Note that you should not send the rsync server a HUP signal to force
+-it to reread the \f(CW/etc/rsyncd\&.conf\fP\&. The file is re-read on each client
++it to reread the \f(CW/etc/rsyncd/rsyncd\&.conf\fP\&. The file is re-read on each client
+ connection\&. 
+ .PP 
+ .SH "GLOBAL OPTIONS" 
+@@ -128,7 +128,7 @@
+ .IP "\fBpath\fP" 
+ The "path" option specifies the directory in the servers
+ filesystem to make available in this module\&.  You must specify this option
+-for each module in \f(CW/etc/rsyncd\&.conf\fP\&.
++for each module in \f(CW/etc/rsyncd/rsyncd\&.conf\fP\&.
+ .IP 
+ .IP "\fBuse chroot\fP" 
+ If "use chroot" is true, the rsync server will chroot
+@@ -239,7 +239,7 @@
+ you may find that passwords longer than 8 characters don\'t work\&. 
+ .IP 
+ There is no default for the "secrets file" option, you must choose a name
+-(such as \f(CW/etc/rsyncd\&.secrets\fP)\&.
++(such as \f(CW/etc/rsyncd/rsyncd\&.secrets\fP)\&.
+ .IP 
+ .IP "\fBstrict modes\fP" 
+ The "strict modes" option determines whether or not 
+@@ -429,7 +429,7 @@
+ .br 
+ syslog facility = local5 
+ .br 
+-pid file = /etc/rsyncd\&.pid
++pid file = /var/run/rsyncd\&.pid
+ .PP 
+ 
+ .DS 
+@@ -454,13 +454,13 @@
+         path = /data/cvs
+         comment = CVS repository (requires authentication)
+         auth users = tridge, susan
+-        secrets file = /etc/rsyncd\&.secrets
++        secrets file = /etc/rsyncd/rsyncd\&.secrets
+ 
+ .DE 
+  
+ 
+ .PP 
+-The /etc/rsyncd\&.secrets file would look something like this:
++The /etc/rsyncd/rsyncd\&.secrets file would look something like this:
+ .PP 
+ tridge:mypass 
+ .br 
+@@ -468,7 +468,7 @@
+ .PP 
+ .SH "FILES" 
+ .PP 
+-/etc/rsyncd\&.conf
++/etc/rsyncd/rsyncd\&.conf
+ .PP 
+ .SH "SEE ALSO" 
+ .PP 
+diff -Nur rsync-2.3.1/rsyncd.conf.yo rsync-2.3.1.pld/rsyncd.conf.yo
+--- rsync-2.3.1/rsyncd.conf.yo	Tue Apr  6 17:04:17 1999
++++ rsync-2.3.1.pld/rsyncd.conf.yo	Thu Jun 17 09:44:41 1999
+@@ -56,13 +56,13 @@
+ 
+ and a single line something like this to /etc/inetd.conf:
+     
+-quote(rsync   stream  tcp     nowait  root   /usr/bin/rsync rsyncd --daemon)
++quote(rsync   stream  tcp     nowait  root   /usr/sbin/rsync rsyncd --daemon)
+ 
+ You will then need to send inetd a HUP signal to tell it to reread its
+ config file.
+ 
+ Note that you should not send the rsync server a HUP signal to force
+-it to reread the tt(/etc/rsyncd.conf). The file is re-read on each client
++it to reread the tt(/etc/rsyncd/rsyncd.conf). The file is re-read on each client
+ connection. 
+ 
+ manpagesection(GLOBAL OPTIONS)
+@@ -121,7 +121,7 @@
+ 
+ dit(bf(path)) The "path" option specifies the directory in the servers
+ filesystem to make available in this module.  You must specify this option
+-for each module in tt(/etc/rsyncd.conf).
++for each module in tt(/etc/rsyncd/rsyncd.conf).
+ 
+ dit(bf(use chroot)) If "use chroot" is true, the rsync server will chroot
+ to the "path" before starting the file transfer with the client.  This has
+@@ -219,7 +219,7 @@
+ you may find that passwords longer than 8 characters don't work. 
+ 
+ There is no default for the "secrets file" option, you must choose a name
+-(such as tt(/etc/rsyncd.secrets)).
++(such as tt(/etc/rsyncd/rsyncd.secrets)).
+ 
+ dit(bf(strict modes)) The "strict modes" option determines whether or not 
+ the permissions on the secrets file will be checked.  If "strict modes" is
+@@ -373,7 +373,7 @@
+ use chroot = no nl()
+ max connections = 4 nl()
+ syslog facility = local5 nl()
+-pid file = /etc/rsyncd.pid
++pid file = /var/run/rsyncd.pid
+ 
+ verb([ftp]
+         path = /var/ftp/pub
+@@ -395,17 +395,17 @@
+         path = /data/cvs
+         comment = CVS repository (requires authentication)
+         auth users = tridge, susan
+-        secrets file = /etc/rsyncd.secrets
++        secrets file = /etc/rsyncd/rsyncd.secrets
+ )
+ 
+-The /etc/rsyncd.secrets file would look something like this:
++The /etc/rsyncd/rsyncd.secrets file would look something like this:
+ 
+ tridge:mypass nl()
+ susan:herpass
+ 
+ manpagefiles()
+ 
+-/etc/rsyncd.conf
++/etc/rsyncd/rsyncd.conf
+ 
+ manpageseealso()
+ 
+diff -Nur rsync-2.3.1/rsyncstats rsync-2.3.1.pld/rsyncstats
+--- rsync-2.3.1/rsyncstats	Wed Nov 25 17:24:40 1998
++++ rsync-2.3.1.pld/rsyncstats	Thu Jun 17 09:29:14 1999
+@@ -23,7 +23,7 @@
+ # ---------------------------------------------------------------------------
+ 
+ # edit the next line to customize for your default log file
+-$usage_file = "/var/adm/rsyncd.log";
++$usage_file = "/var/log/rsyncd";
+ 
+ # Edit the following lines for default report settings.
+ # Entries defined here will be over-ridden by the command line.
