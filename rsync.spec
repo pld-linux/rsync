@@ -2,7 +2,7 @@ Summary:	Program for efficient remote updates of files.
 Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze.
 Name:		rsync
 Version:	2.3.0
-Release:	1
+Release:	2
 Copyright:	GPL
 Group:		Applications/Networking
 Source:		ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
@@ -39,10 +39,8 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 make install prefix=$RPM_BUILD_ROOT/usr
-#install -d $RPM_BUILD_ROOT/usr/{bin,man/man{1,5}}
-#install -s rsync $RPM_BUILD_ROOT/usr/bin
-#install rsync.1 $RPM_BUILD_ROOT/usr/man/man1
-#install rsyncd.conf.5 $RPM_BUILD_ROOT/usr/man/man5
+
+strip $RPM_BUILD_ROOT/usr/bin/rsync
 
 gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
 	README
