@@ -10,7 +10,7 @@ Source0:	ftp://samba.anu.edu.au/pub/rsync/%{name}-%{version}.tar.gz
 Patch0:		rsync-config.patch
 Patch1:		rsync-man.patch
 Patch2:		rsync-configure.patch
-Patch3:		http://www.misiek.eu.org/ipv6/rsync-2.3.2-ipv6-13121999.patch.gz
+Patch3:		http://www.misiek.eu.org/ipv6/rsync-2.4.3-ipv6-20000523.patch.gz
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -39,15 +39,13 @@ pakietu.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-# %patch3 -p1
+%patch3 -p1
 
 %build
 autoconf 
 LDFLAGS="-s"; export LDFLAGS
 
 %configure
-#	--enable-ipv6
-
 make 
 
 %install
