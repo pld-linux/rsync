@@ -27,6 +27,7 @@ Patch1:		%{name}-man.patch
 Patch2:		%{name}-segv.patch
 Patch3:		%{name}-ipv6_socket.patch
 BuildRequires:	autoconf >= 2.52
+BuildRequires:	automake
 BuildRequires:	popt-devel
 URL:		http://samba.anu.edu.au/rsync/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
