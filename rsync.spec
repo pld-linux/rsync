@@ -12,7 +12,7 @@ Patch1:		rsync-man.patch
 Patch2:		rsync-configure.patch
 Patch3:		http://www.misiek.eu.org/ipv6/rsync-2.3.2-ipv6-13121999.patch.gz
 URL:		http://samba.anu.edu.au/rsync/
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define _sysconfdir /etc/rsyncd
 
