@@ -205,9 +205,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %post -n rsyncd-inetd
 if [ -f /var/lock/subsys/rc-inetd ]; then
-        /etc/rc.d/init.d/rc-inetd restart 1>&2
+	/etc/rc.d/init.d/rc-inetd restart 1>&2
 else
-        echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
+	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
 fi
 
 %postun -n rsyncd-inetd
