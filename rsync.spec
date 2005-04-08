@@ -12,19 +12,18 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÅÆÅËÔÉ×ÎÏÇÏ ×¦ÄÄÁÌÅÎÏÇÏ ÏÎÏ×ÌÅÎÎÑ ÆÁÊÌ¦×
 Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
-Version:	2.6.3
-Release:	0.1	
+Version:	2.6.4
+Release:	0.1
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	2beb30caafa69a01182e71c528fb0393
+# Source0-md5:	a26c454a36148e0e873bedf3c0cc955d
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
-Patch2:		%{name}-segv.patch
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	popt-devel
@@ -122,7 +121,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
-Requires(post,preun):/sbin/chkconfig
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}
 Provides:	rsyncd
 Obsoletes:	rsyncd
@@ -149,7 +148,6 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 cp -f %{_datadir}/automake/config.sub .
@@ -232,7 +230,7 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README
-%attr(644,root,root) %config(noreplace,missingok) %verify(not md5 size mtime) /etc/env.d/*
+%attr(644,root,root) %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
@@ -241,8 +239,8 @@ fi
 %dir %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logrotate.d/rsyncd
-%attr(640,root,root) /etc/sysconfig/rc-inetd/rsyncd
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %{_mandir}/man5/*
 
@@ -251,8 +249,8 @@ fi
 %dir %{_sysconfdir}
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
 %attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
-%attr(640,root,root) %config(noreplace) /etc/sysconfig/rsyncd
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/logrotate.d/rsyncd
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rsyncd
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %attr(754,root,root) /etc/rc.d/init.d/rsyncd
 %{_mandir}/man5/*
