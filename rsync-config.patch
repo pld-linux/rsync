@@ -65,7 +65,7 @@ diff -burN rsync-2.6.2.orig/rsyncd.conf.yo rsync-2.6.2/rsyncd.conf.yo
  by "other"; see "strict modes".
  
  dit(bf(strict modes)) The "strict modes" option determines whether or not 
-@@ -486,17 +486,17 @@
+@@ -540,10 +540,10 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -99,12 +99,12 @@ diff -burN rsync-2.6.2.orig/rsync.h rsync-2.6.2/rsync.h
  
  #define BACKUP_SUFFIX "~"
 diff -burN rsync-2.6.2.orig/rsyncstats rsync-2.6.2/rsyncstats
---- rsync-2.6.2.orig/rsyncstats	2004-05-02 10:20:23.170075432 +0200
-+++ rsync-2.6.2/rsyncstats	2004-05-02 11:13:25.761248032 +0200
-@@ -23,7 +23,7 @@
- # ---------------------------------------------------------------------------
+--- rsync-2.6.2.orig/support/rsyncstats	2004-05-02 10:20:23.170075432 +0200
++++ rsync-2.6.2/support/rsyncstats	2004-05-02 11:13:25.761248032 +0200
+@@ -12,7 +12,7 @@
+ use Getopt::Long;
  
- # edit the next line to customize for your default log file
+ # You may wish to edit the next line to customize for your default log file.
 -$usage_file = "/var/adm/rsyncd.log";
 +$usage_file = "/var/log/rsyncd.log";
  
@@ -131,16 +131,16 @@ diff -burN rsync-2.6.2.orig/rsync.yo rsync-2.6.2/rsync.yo
  requests accordingly.  See the rsyncd.conf(5) man page for more
  details.
  
-@@ -811,7 +811,7 @@
+@@ -1331,7 +1331,7 @@
  
  dit(bf(--config=FILE)) This specifies an alternate config file than
- the default.  This is only relevant when --daemon is specified. 
+ the default.  This is only relevant when bf(--daemon) is specified.
 -The default is /etc/rsyncd.conf unless the daemon is running over
 +The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
  a remote shell program and the remote user is not root; in that case
  the default is rsyncd.conf in the current directory (typically $HOME).
  
-@@ -1258,7 +1258,7 @@
+@@ -2005,7 +2005,7 @@
  
  manpagefiles()
  

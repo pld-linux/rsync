@@ -1,25 +1,25 @@
 diff -Naur rsync-2.5.6-orig/rsync.1 rsync-2.5.6/rsync.1
 --- rsync-2.5.6-orig/rsync.1	Tue Jan 28 04:11:57 2003
 +++ rsync-2.5.6/rsync.1	Thu Jan 30 18:11:11 2003
-@@ -236,7 +236,7 @@
+@@ -276,7 +276,7 @@
  .PP 
- An rsync server is configured using a config file\&.  Please see the 
+ An rsync server is configured using a configuration file\&.  Please see the
  rsyncd\&.conf(5) man page for more information\&.  By default the configuration
 -file is called /etc/rsyncd\&.conf, unless rsync is running over a remote
 +file is called /etc/rsyncd/rsyncd\&.conf, unless rsync is running over a remote
  shell program and is not running as root; in that case, the default name
- is rsyncd\&.conf in the current directory on the remote computer 
+ is rsyncd\&.conf in the current directory on the remote computer
  (typically $HOME)\&.
-@@ -860,7 +860,7 @@
+@@ -1524,7 +1524,7 @@
  .IP "\fB--config=FILE\fP" 
  This specifies an alternate config file than
- the default\&.  This is only relevant when --daemon is specified\&. 
+ the default\&.  This is only relevant when \fB--daemon\fP is specified\&.
 -The default is /etc/rsyncd\&.conf unless the daemon is running over
 +The default is /etc/rsyncd/rsyncd\&.conf unless the daemon is running over
  a remote shell program and the remote user is not root; in that case
  the default is rsyncd\&.conf in the current directory (typically $HOME)\&.
  .IP 
-@@ -1258,7 +1258,7 @@
+@@ -2323,7 +2323,7 @@
  .PP 
  .SH "FILES" 
  .PP 
