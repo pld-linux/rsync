@@ -57,7 +57,7 @@ case "$1" in
 	exit $?
 	;;
   status)
-	status rsyncd rsync
+	status rsync
 	exit $?
 	;;
   *)
