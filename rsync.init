@@ -1,0 +1,68 @@
+#!/bin/sh
+#
+# rsyncd	This shell script takes care of starting and stopping rsyncd
+#
+# chkconfig:	345 90 25
+# description:	rsync daemon
+# processname:	rsync
+#
+# pidfile:	/var/run/rsyncd.pid
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+if is_yes "${NETWORKING}"; then
+	if [ ! -f /var/lock/subsys/network -a "$1" != stop -a "$1" != status ]; then
+		msg_network_down rsyncd
+		exit 1
+	fi
+else
+	exit 0
+fi
+
+# Get service configuration
+[ -f /etc/sysconfig/rsyncd ] && . /etc/sysconfig/rsyncd
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+	# Start daemons.
+	if [ ! -f /var/lock/subsys/rsyncd ]; then
+		msg_starting rsyncd
+		daemon rsync --daemon ${RSYNC_OPTIONS}
+		RETVAL=$?
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rsyncd
+	else
+		msg_already_running rsyncd
+	fi
+	;;
+  stop)
+	# Stop daemons.
+	if [ -f /var/lock/subsys/rsyncd ]; then
+		msg_stopping rsyncd
+		killproc rsync
+		rm -f /var/lock/subsys/rsyncd >/dev/null 2>&1
+	else
+		msg_not_running rsyncd
+	fi
+	;;
+  restart|reload|force-restart|force-reload)
+	$0 stop
+	$0 start
+	exit $?
+	;;
+  status)
+	status rsyncd rsync
+	exit $?
+	;;
+  *)
+	msg_usage "$0 {start|stop|restart|reload|force-restart|force-reload|status}"
+	exit 3
+esac
+
+exit $RETVAL
