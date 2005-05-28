@@ -1,0 +1,14 @@
+diff -ruN rsync-2.3.2.orig/configure.in rsync-2.3.2/configure.in
+--- rsync-2.3.2.orig/configure.in	Mon Nov  8 14:15:00 1999
++++ rsync-2.3.2/configure.in	Fri Nov 19 19:01:43 1999
+@@ -5,8 +5,8 @@
+ # compile with optimisation and without debugging by default
+ CFLAGS=${CFLAGS-"-O"}
+ 
+-AC_CANONICAL_SYSTEM
+-AC_VALIDATE_CACHE_SYSTEM_TYPE
++#AC_CANONICAL_SYSTEM
++#AC_VALIDATE_CACHE_SYSTEM_TYPE
+ 
+ dnl Checks for programs.
+ AC_PROG_CC
