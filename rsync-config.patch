@@ -41,22 +41,22 @@ diff -burN rsync-2.6.2.orig/rsyncd.conf.yo rsync-2.6.2/rsyncd.conf.yo
 @@ -69,7 +69,7 @@
  reread its config file.
  
- Note that you should not send the rsync server a HUP signal to force
+ Note that you should bf(not) send the rsync daemon a HUP signal to force
 -it to reread the tt(rsyncd.conf) file. The file is re-read on each client
 +it to reread the tt(/etc/rsyncd/rsyncd.conf) file. The file is re-read on each client
  connection. 
  
  manpagesection(GLOBAL OPTIONS)
-@@ -128,7 +128,7 @@
+@@ -139,7 +139,7 @@
  
- dit(bf(path)) The "path" option specifies the directory in the servers
+ dit(bf(path)) The "path" option specifies the directory in the daemon's
  filesystem to make available in this module.  You must specify this option
 -for each module in tt(rsyncd.conf).
 +for each module in tt(/etc/rsyncd/rsyncd.conf).
  
- dit(bf(use chroot)) If "use chroot" is true, the rsync server will chroot
+ dit(bf(use chroot)) If "use chroot" is true, the rsync daemon will chroot
  to the "path" before starting the file transfer with the client.  This has
-@@ -262,7 +262,7 @@
+@@ -292,7 +292,7 @@
  you may find that passwords longer than 8 characters don't work. 
  
  There is no default for the "secrets file" option, you must choose a name
@@ -65,7 +65,7 @@ diff -burN rsync-2.6.2.orig/rsyncd.conf.yo rsync-2.6.2/rsyncd.conf.yo
  by "other"; see "strict modes".
  
  dit(bf(strict modes)) The "strict modes" option determines whether or not 
-@@ -540,10 +540,10 @@
+@@ -543,10 +543,10 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -76,16 +76,8 @@ diff -burN rsync-2.6.2.orig/rsyncd.conf.yo rsync-2.6.2/rsyncd.conf.yo
 -The /etc/rsyncd.secrets file would look something like this:
 +The /etc/rsyncd/rsyncd.secrets file would look something like this:
  
- tridge:mypass nl()
- susan:herpass
- 
- manpagefiles()
- 
--/etc/rsyncd.conf or rsyncd.conf
-+/etc/rsyncd/rsyncd.conf or rsyncd.conf
- 
- manpageseealso()
- 
+ quote(
+ tt(tridge:mypass)nl()
 diff -burN rsync-2.6.2.orig/rsync.h rsync-2.6.2/rsync.h
 --- rsync-2.6.2.orig/rsync.h	2004-05-02 10:20:23.165076192 +0200
 +++ rsync-2.6.2/rsync.h	2004-05-02 10:29:51.993601112 +0200
