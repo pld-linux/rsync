@@ -229,7 +229,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc README NEWS OLDNEWS TODO
 %attr(644,root,root) %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/*
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
