@@ -24,10 +24,10 @@ Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
+URL:		http://rsync.samba.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	popt-devel
-URL:		http://rsync.samba.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/rsyncd
@@ -150,7 +150,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %patch1 -p1
 
 %build
-cp -f %{_datadir}/automake/config.sub .
+cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	%{?with_rsh:--with-rsh=rsh} \
