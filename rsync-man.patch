@@ -1,16 +1,16 @@
-diff -Naur rsync-2.5.6-orig/rsync.1 rsync-2.5.6/rsync.1
---- rsync-2.5.6-orig/rsync.1	Tue Jan 28 04:11:57 2003
-+++ rsync-2.5.6/rsync.1	Thu Jan 30 18:11:11 2003
-@@ -276,7 +276,7 @@
+diff -urBb rsync-2.6.5.org/rsync.1 rsync-2.6.5/rsync.1
+--- rsync-2.6.5.org/rsync.1	2005-07-23 16:01:33.133107000 +0200
++++ rsync-2.6.5/rsync.1	2005-07-23 16:04:22.057426704 +0200
+@@ -264,7 +264,7 @@
  .PP 
- An rsync server is configured using a configuration file\&.  Please see the
+ An rsync daemon is configured using a configuration file\&.  Please see the
  rsyncd\&.conf(5) man page for more information\&.  By default the configuration
--file is called /etc/rsyncd\&.conf, unless rsync is running over a remote
-+file is called /etc/rsyncd/rsyncd\&.conf, unless rsync is running over a remote
- shell program and is not running as root; in that case, the default name
- is rsyncd\&.conf in the current directory on the remote computer
- (typically $HOME)\&.
-@@ -1524,7 +1524,7 @@
+-file is called /etc/rsyncd\&.conf (unless the daemon is spawned via a remote
++file is called /etc/rsyncd/rsyncd\&.conf (unless the daemon is spawned via a remote
+ shell--see below)\&.
+ .PP 
+ .SH "RUNNING AN RSYNC DAEMON OVER A REMOTE SHELL PROGRAM" 
+@@ -1543,7 +1543,7 @@
  .IP "\fB--config=FILE\fP" 
  This specifies an alternate config file than
  the default\&.  This is only relevant when \fB--daemon\fP is specified\&.
@@ -19,7 +19,7 @@ diff -Naur rsync-2.5.6-orig/rsync.1 rsync-2.5.6/rsync.1
  a remote shell program and the remote user is not root; in that case
  the default is rsyncd\&.conf in the current directory (typically $HOME)\&.
  .IP 
-@@ -2323,7 +2323,7 @@
+@@ -2366,7 +2366,7 @@
  .PP 
  .SH "FILES" 
  .PP 
@@ -28,11 +28,11 @@ diff -Naur rsync-2.5.6-orig/rsync.1 rsync-2.5.6/rsync.1
  .PP 
  .SH "SEE ALSO" 
  .PP 
-diff -Naur rsync-2.5.6-orig/rsyncd.conf.5 rsync-2.5.6/rsyncd.conf.5
---- rsync-2.5.6-orig/rsyncd.conf.5	Thu Jan 30 17:52:53 2003
-+++ rsync-2.5.6/rsyncd.conf.5	Thu Jan 30 18:11:58 2003
-@@ -161,7 +161,7 @@
- support the "max connections" option\&. The rsync server uses record
+diff -urBb rsync-2.6.5.org/rsyncd.conf.5 rsync-2.6.5/rsyncd.conf.5
+--- rsync-2.6.5.org/rsyncd.conf.5	2005-07-23 16:01:58.800205000 +0200
++++ rsync-2.6.5/rsyncd.conf.5	2005-07-23 16:03:21.122690192 +0200
+@@ -212,7 +212,7 @@
+ support the "max connections" option\&. The rsync daemon uses record
  locking on this file to ensure that the max connections limit is not
  exceeded for the modules sharing the lock file\&. 
 -The default is \f(CW/var/run/rsyncd\&.lock\fP\&.
