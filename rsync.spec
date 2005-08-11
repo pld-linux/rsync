@@ -12,19 +12,18 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÅÆÅËÔÉ×ÎÏÇÏ ×¦ÄÄÁÌÅÎÏÇÏ ÏÎÏ×ÌÅÎÎÑ ÆÁÊÌ¦×
 Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
-Version:	2.6.5
-Release:	2
+Version:	2.6.6
+Release:	1
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	3691cdf1540d0649ba679edce6bae8fc
+# Source0-md5:	30c4e2849cbeae93f55548453865c2f2
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
-Patch0:		%{name}-2.6.5-2.6.6pre1.diffs.gz
-Patch1:		%{name}-config.patch
-Patch2:		%{name}-man.patch
+Patch0:		%{name}-config.patch
+Patch1:		%{name}-man.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -96,7 +95,7 @@ Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
 PreReq:		rc-inetd
-Requires:	%{name}
+Requires:	%{name} = %{version}-%{release}
 Provides:	rsyncd
 Obsoletes:	rsyncd
 Obsoletes:	rsyncd-standalone
@@ -123,7 +122,7 @@ Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
 Requires(post,preun):	/sbin/chkconfig
-Requires:	%{name}
+Requires:	%{name} = %{version}-%{release}
 Provides:	rsyncd
 Obsoletes:	rsyncd
 Obsoletes:	rsyncd-inetd
@@ -149,7 +148,6 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
