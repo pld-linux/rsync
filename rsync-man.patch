@@ -1,15 +1,6 @@
 diff -urBb rsync-2.6.5.org/rsync.1 rsync-2.6.5/rsync.1
 --- rsync-2.6.5.org/rsync.1	2005-07-23 16:01:33.133107000 +0200
 +++ rsync-2.6.5/rsync.1	2005-07-23 16:04:22.057426704 +0200
-@@ -264,7 +264,7 @@
- .PP 
- An rsync daemon is configured using a configuration file\&.  Please see the
- rsyncd\&.conf(5) man page for more information\&.  By default the configuration
--file is called /etc/rsyncd\&.conf (unless the daemon is spawned via a remote
-+file is called /etc/rsyncd/rsyncd\&.conf (unless the daemon is spawned via a remote
- shell--see below)\&.
- .PP 
- .SH "RUNNING AN RSYNC DAEMON OVER A REMOTE SHELL PROGRAM" 
 @@ -1543,7 +1543,7 @@
  .IP "\fB--config=FILE\fP" 
  This specifies an alternate config file than

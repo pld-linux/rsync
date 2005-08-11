@@ -93,15 +93,6 @@ diff -urBb rsync-2.6.5.org/rsync.h rsync-2.6.5/rsync.h
 diff -urBb rsync-2.6.5.org/rsync.yo rsync-2.6.5/rsync.yo
 --- rsync-2.6.5.org/rsync.yo	2005-07-23 16:01:33.135106000 +0200
 +++ rsync-2.6.5/rsync.yo	2005-07-23 16:02:35.743588864 +0200
-@@ -233,7 +233,7 @@
- 
- An rsync daemon is configured using a configuration file.  Please see the
- rsyncd.conf(5) man page for more information.  By default the configuration
--file is called /etc/rsyncd.conf (unless the daemon is spawned via a remote
-+file is called /etc/rsyncd/rsyncd.conf (unless the daemon is spawned via a remote
- shell--see below).
- 
- manpagesection(RUNNING AN RSYNC DAEMON OVER A REMOTE SHELL PROGRAM)
 @@ -1334,7 +1334,7 @@
  If standard input is a socket then rsync will assume that it is being
  run via inetd, otherwise it will detach from the current terminal and
