@@ -13,7 +13,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.6.6
-Release:	3
+Release:	4
 License:	GPL
 Group:		Daemons
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -26,6 +26,7 @@ Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 # from FC
 Patch2:		%{name}-xattr.patch
+Patch3:		%{name}-ssl.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -154,7 +155,7 @@ patch -p0 < patches/acls.diff || exit 1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-patch -p0 < patches/openssl-support.diff || exit 1
+%patch3 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
@@ -168,7 +169,7 @@ cp -f /usr/share/automake/config.sub .
 	--with-xattr-support \
 	--disable-debug \
 	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
-
+%{__make} proto
 %{__make}
 
 %install
