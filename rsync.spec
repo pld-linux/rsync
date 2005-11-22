@@ -15,7 +15,7 @@ Name:		rsync
 Version:	2.6.6
 Release:	4.1
 License:	GPL
-Group:		Daemons
+Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
 # Source0-md5:	30c4e2849cbeae93f55548453865c2f2
 Source1:	%{name}.inet
@@ -98,7 +98,7 @@ rsync - ÃÅ Û×ÉÄÛÁ ÔÁ ÇÎÕŞË¦ÛÁ ÁÌØÔÅÒÎÁÔÉ×Á rcp, ÑËÁ ÚÁÂÅÚĞÅŞÕ¤ Û×ÉÄËÕ
 %package -n rsyncd-inetd
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
-Group:		Daemons
+Group:		Networking/Daemons
 PreReq:		rc-inetd
 Requires:	%{name} = %{version}-%{release}
 Provides:	rsyncd
@@ -125,7 +125,7 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 %package -n rsyncd-standalone
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
-Group:		Daemons
+Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
 Provides:	rsyncd
