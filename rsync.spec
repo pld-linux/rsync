@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
+%bcond_without	tests
 #
 Summary:	Program for efficient remote updates of files
 Summary(es):	Programa para actualizar archivos remotos de forma eficiente
@@ -12,21 +13,18 @@ Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÅÆÅËÔÉ×ÎÏÇÏ ×¦ÄÄÁÌÅÎÏÇÏ ÏÎÏ×ÌÅÎÎÑ ÆÁÊÌ¦×
 Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
-Version:	2.6.6
-Release:	4.1
+Version:	2.6.7
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	30c4e2849cbeae93f55548453865c2f2
+# Source0-md5:	fb51636c719e789244d5d4423cf157ac
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
-# from FC
-Patch2:		%{name}-xattr.patch
-Patch3:		%{name}-ssl.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
@@ -151,11 +149,11 @@ techniczna nowego algorytmu zosta³a równie¿ do³±czona do pakietu.
 
 %prep
 %setup -q
-patch -p0 < patches/acls.diff || exit 1
+patch -s -p1 < patches/acls.diff || exit 1
+patch -s -p1 < patches/xattrs.diff || exit 1
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
+
 
 %build
 cp -f /usr/share/automake/config.sub .
@@ -164,13 +162,14 @@ cp -f /usr/share/automake/config.sub .
 %configure \
 	%{?with_rsh:--with-rsh=rsh} \
 	--enable-ipv6 \
-	--enable-openssl \
-	--with-acl-support \
-	--with-xattr-support \
+	--enable-acl-support \
+	--enable-xattr-support \
 	--disable-debug \
 	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
 %{__make} proto
 %{__make}
+
+%{?with_tests:%{__make} test}
 
 %install
 rm -rf $RPM_BUILD_ROOT
