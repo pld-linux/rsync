@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
-%bcond_without	tests
+%bcond_without	tests	# do not perform "make test"
 #
 Summary:	Program for efficient remote updates of files
 Summary(es):	Programa para actualizar archivos remotos de forma eficiente
