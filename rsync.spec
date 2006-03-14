@@ -26,11 +26,12 @@ Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 URL:		http://rsync.samba.org/
+BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
-BuildRequires:	acl-devel
 BuildRequires:	openssl-devel
 BuildRequires:	popt-devel
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/rsyncd
@@ -97,8 +98,8 @@ rsync - це швидша та гнучк╕ша альтернатива rcp, яка забезпечу╓ швидку
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl):	Pliki niezbЙdne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
-PreReq:		rc-inetd
 Requires:	%{name} = %{version}-%{release}
+Requires:	rc-inetd
 Provides:	rsyncd
 Obsoletes:	rsyncd
 Obsoletes:	rsyncd-standalone
@@ -211,30 +212,20 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
 rm -rf $RPM_BUILD_ROOT
 
 %post -n rsyncd-inetd
-if [ -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rc-inetd start\" to start inet server" 1>&2
-fi
+%service -q rc-inetd reload
 
 %postun -n rsyncd-inetd
-if [ "$1" = "0" -a -f /var/lock/subsys/rc-inetd ]; then
-	/etc/rc.d/init.d/rc-inetd reload 1>&2
+if [ "$1" = "0" ]; then
+	%service -q rc-inetd reload
 fi
 
 %post -n rsyncd-standalone
 /sbin/chkconfig --add rsyncd
-if [ -f /var/lock/subsys/rsyncd ]; then
-	/etc/rc.d/init.d/rsyncd restart 1>&2
-else
-	echo "Type \"/etc/rc.d/init.d/rsyncd start\" to start rsync server" 1>&2
-fi
+%service rsyncd restart "rsync server"
 
 %preun -n rsyncd-standalone
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/rsyncd ]; then
-		/etc/rc.d/init.d/rsyncd stop 1>&2
-	fi
+	%service rsyncd stop
 	/sbin/chkconfig --del rsyncd
 fi
 
