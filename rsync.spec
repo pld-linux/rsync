@@ -14,7 +14,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.6.7
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -25,6 +25,7 @@ Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
+Patch2:		%{name}-exclude.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -154,7 +155,7 @@ patch -s -p1 < patches/acls.diff || exit 1
 patch -s -p1 < patches/xattrs.diff || exit 1
 %patch0 -p1
 %patch1 -p1
-
+%patch2 -p0
 
 %build
 cp -f /usr/share/automake/config.sub .
