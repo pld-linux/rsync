@@ -13,19 +13,18 @@ Summary(uk):	Програма для ефективного в╕ддаленого оновлення файл╕в
 Summary(zh_CN):	[м╗я╤]╢╚йД╧╓╬ъ
 Summary(zh_TW):	[ЁЯ╟т]$(B6G?i╓У(c(B
 Name:		rsync
-Version:	2.6.7
-Release:	2
+Version:	2.6.8
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	fb51636c719e789244d5d4423cf157ac
+# Source0-md5:	082a9dba1f741e6591e5cd748a1233de
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
-Patch2:		%{name}-exclude.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -155,7 +154,6 @@ patch -s -p1 < patches/acls.diff || exit 1
 patch -s -p1 < patches/xattrs.diff || exit 1
 %patch0 -p1
 %patch1 -p1
-%patch2 -p0
 
 %build
 cp -f /usr/share/automake/config.sub .
