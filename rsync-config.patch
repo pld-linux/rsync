@@ -1,6 +1,6 @@
-diff -ur rsync-2.6.7.org/rsyncd.conf.5 rsync-2.6.7/rsyncd.conf.5
---- rsync-2.6.7.org/rsyncd.conf.5	2006-03-11 19:25:08.000000000 +0100
-+++ rsync-2.6.7/rsyncd.conf.5	2006-03-11 21:37:33.616778500 +0100
+diff -urN rsync-2.6.8.org/rsyncd.conf.5 rsync-2.6.8/rsyncd.conf.5
+--- rsync-2.6.8.org/rsyncd.conf.5	2006-04-22 17:38:38.000000000 +0200
++++ rsync-2.6.8/rsyncd.conf.5	2006-04-22 18:45:54.300539750 +0200
 @@ -344,7 +344,7 @@
  you may find that passwords longer than 8 characters don\&'t work\&. 
  .IP 
@@ -35,9 +35,9 @@ diff -ur rsync-2.6.7.org/rsyncd.conf.5 rsync-2.6.7/rsyncd.conf.5
  .PP 
  .SH "SEE ALSO" 
  .PP 
-diff -ur rsync-2.6.7.org/rsyncd.conf.yo rsync-2.6.7/rsyncd.conf.yo
---- rsync-2.6.7.org/rsyncd.conf.yo	2006-03-11 19:25:04.000000000 +0100
-+++ rsync-2.6.7/rsyncd.conf.yo	2006-03-11 21:37:33.616778500 +0100
+diff -urN rsync-2.6.8.org/rsyncd.conf.yo rsync-2.6.8/rsyncd.conf.yo
+--- rsync-2.6.8.org/rsyncd.conf.yo	2006-04-22 17:38:34.000000000 +0200
++++ rsync-2.6.8/rsyncd.conf.yo	2006-04-22 18:45:54.300539750 +0200
 @@ -66,7 +66,7 @@
  reread its config file.
  
@@ -78,9 +78,9 @@ diff -ur rsync-2.6.7.org/rsyncd.conf.yo rsync-2.6.7/rsyncd.conf.yo
  
  quote(
  tt(tridge:mypass)nl()
-diff -ur rsync-2.6.7.org/rsync.h rsync-2.6.7/rsync.h
---- rsync-2.6.7.org/rsync.h	2006-03-11 21:37:15.251630000 +0100
-+++ rsync-2.6.7/rsync.h	2006-03-11 21:37:33.616778500 +0100
+diff -urN rsync-2.6.8.org/rsync.h rsync-2.6.8/rsync.h
+--- rsync-2.6.8.org/rsync.h	2006-04-13 18:53:15.000000000 +0200
++++ rsync-2.6.8/rsync.h	2006-04-22 18:45:54.300539750 +0200
 @@ -30,7 +30,7 @@
  /* RSYNCD_SYSCONF is now set in config.h */
  #define RSYNCD_USERCONF "rsyncd.conf"
@@ -90,19 +90,28 @@ diff -ur rsync-2.6.7.org/rsync.h rsync-2.6.7/rsync.h
  #define URL_PREFIX "rsync://"
  
  #define BACKUP_SUFFIX "~"
-diff -ur rsync-2.6.7.org/rsync.yo rsync-2.6.7/rsync.yo
---- rsync-2.6.7.org/rsync.yo	2006-03-11 21:37:15.267631000 +0100
-+++ rsync-2.6.7/rsync.yo	2006-03-11 21:37:33.616778500 +0100
-@@ -1749,7 +1749,7 @@
+diff -urN rsync-2.6.8.org/rsync.yo rsync-2.6.8/rsync.yo
+--- rsync-2.6.8.org/rsync.yo	2006-04-22 17:38:34.000000000 +0200
++++ rsync-2.6.8/rsync.yo	2006-04-22 18:47:01.752755250 +0200
+@@ -1747,7 +1747,7 @@
  If standard input is a socket then rsync will assume that it is being
  run via inetd, otherwise it will detach from the current terminal and
  become a background daemon.  The daemon will read the config file
 -(rsyncd.conf) on each connect made by a client and respond to
 +(/etc/rsyncd/rsyncd.conf) on each connect made by a client and respond to
- requests accordingly.  See the rsyncd.conf(5) man page for more
+ requests accordingly.  See the bf(rsyncd.conf)(5) man page for more
  details.
  
-@@ -2477,7 +2477,7 @@
+@@ -1765,7 +1765,7 @@
+ 
+ dit(bf(--config=FILE)) This specifies an alternate config file than
+ the default.  This is only relevant when bf(--daemon) is specified.
+-The default is /etc/rsyncd.conf unless the daemon is running over
++The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
+ a remote shell program and the remote user is not the super-user; in that case
+ the default is rsyncd.conf in the current directory (typically $HOME).
+ 
+@@ -2475,7 +2475,7 @@
  
  manpagefiles()
  
