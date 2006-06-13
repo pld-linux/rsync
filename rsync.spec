@@ -173,14 +173,12 @@ cp -f /usr/share/automake/config.sub .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/env.d
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d,env.d},/var/log}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
 	mandir=$RPM_BUILD_ROOT%{_mandir} \
 	bindir=$RPM_BUILD_ROOT%{_bindir}
-
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d},/var/log}
 
 :> $RPM_BUILD_ROOT/var/log/rsyncd.log
 :> $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.secrets
