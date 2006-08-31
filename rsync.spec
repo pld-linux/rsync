@@ -14,7 +14,7 @@ Summary(zh_CN):	[Í¨Ñ¶]´«Êä¹¤¾ß
 Summary(zh_TW):	[³ñ°Ô]$(B6G?i¤õ(c(B
 Name:		rsync
 Version:	2.6.8
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -31,7 +31,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	openssl-devel
 BuildRequires:	popt-devel
-BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	rpmbuild(macros) >= 1.316
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc/rsyncd
@@ -187,16 +187,16 @@ cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.conf
 log file = /var/log/rsyncd.log
 EOF
 
-cat << EOF > $RPM_BUILD_ROOT/etc/env.d/CVSIGNORE
+cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/CVSIGNORE
 #CVSIGNORE=
 EOF
-cat << EOF > $RPM_BUILD_ROOT/etc/env.d/RSYNC_RSH
+cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/RSYNC_RSH
 #RSYNC_RSH=
 EOF
-cat << EOF > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PROXY
+cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PROXY
 #RSYNC_PROXY=
 EOF
-cat << EOF > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PASSWORD
+cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PASSWORD
 #RSYNC_PASSWORD=
 EOF
 
@@ -207,6 +207,12 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+%env_update
+
+%postun
+%env_update
 
 %post -n rsyncd-inetd
 %service -q rc-inetd reload
