@@ -3,6 +3,9 @@
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
 %bcond_without	tests	# do not perform "make test"
 #
+%ifarch alpha
+%undefine	with_tests
+%endif
 Summary:	Program for efficient remote updates of files
 Summary(es):	Programa para actualizar archivos remotos de forma eficiente
 Summary(ko):	네트워크를 통한 파일동기화를 위한 프로그램
