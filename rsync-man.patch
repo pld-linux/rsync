@@ -4,7 +4,7 @@ diff -ur rsync-2.6.7.org/rsync.1 rsync-2.6.7/rsync.1
 @@ -2019,7 +2019,7 @@
  .IP "\fB--config=FILE\fP" 
  This specifies an alternate config file than
- the default\&.  This is only relevant when \fB--daemon\fP is specified\&.
+ the default\&.  This is only relevant when \fB\-\-daemon\fP is specified\&.
 -The default is /etc/rsyncd\&.conf unless the daemon is running over
 +The default is /etc/rsyncd/rsyncd\&.conf unless the daemon is running over
  a remote shell program and the remote user is not the super-user; in that case
@@ -22,12 +22,13 @@ diff -ur rsync-2.6.7.org/rsync.1 rsync-2.6.7/rsync.1
 diff -ur rsync-2.6.7.org/rsyncd.conf.5 rsync-2.6.7/rsyncd.conf.5
 --- rsync-2.6.7.org/rsyncd.conf.5	2006-03-11 21:38:50.437579500 +0100
 +++ rsync-2.6.7/rsyncd.conf.5	2006-03-11 21:39:02.086307500 +0100
-@@ -210,7 +210,7 @@
+@@ -228,7 +228,7 @@
  support the "max connections" option\&. The rsync daemon uses record
  locking on this file to ensure that the max connections limit is not
- exceeded for the modules sharing the lock file\&. 
+ exceeded for the modules sharing the lock file\&.
 -The default is \f(CW/var/run/rsyncd\&.lock\fP\&.
 +The default is \f(CW/var/lock/rsyncd\&.lock\fP\&.
  .IP 
- .IP "\fBread only\fP" 
+ .IP "\fBread only\fP"
  The "read only" option determines whether clients
+

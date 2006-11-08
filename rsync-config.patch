@@ -11,6 +11,7 @@ diff -urN rsync-2.6.8.org/rsyncd.conf.5 rsync-2.6.8/rsyncd.conf.5
  .IP 
  .IP "\fBstrict modes\fP" 
 @@ -656,13 +656,13 @@
+ [cvs]
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -18,7 +19,6 @@ diff -urN rsync-2.6.8.org/rsyncd.conf.5 rsync-2.6.8/rsyncd.conf.5
 +        secrets file = /etc/rsyncd/rsyncd\&.secrets
  
  .fi 
-  
  
  .PP 
 -The /etc/rsyncd\&.secrets file would look something like this:
@@ -44,7 +44,7 @@ diff -urN rsync-2.6.8.org/rsyncd.conf.yo rsync-2.6.8/rsyncd.conf.yo
  Note that you should bf(not) send the rsync daemon a HUP signal to force
 -it to reread the tt(rsyncd.conf) file. The file is re-read on each client
 +it to reread the tt(/etc/rsyncd/rsyncd.conf) file. The file is re-read on each client
- connection. 
+ connection.
  
  manpagesection(GLOBAL OPTIONS)
 @@ -137,7 +137,7 @@
