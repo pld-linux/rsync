@@ -7,14 +7,14 @@
 %undefine	with_tests
 %endif
 Summary:	Program for efficient remote updates of files
-Summary(es):	Programa para actualizar archivos remotos de forma eficiente
-Summary(ko):	Ёвф╝©Же╘╦╕ еКгя фдюо╣©╠Бх╜╦╕ ю╖гя га╥н╠в╥╔
-Summary(pl):	Program do wydajnego zdalnego uaktualniania plikСw
-Summary(pt_BR):	Programa para atualizar arquivos remotos de forma eficiente
-Summary(ru):	Программа для эффективного удаленного обновления файлов
-Summary(uk):	Програма для ефективного в╕ддаленого оновлення файл╕в
-Summary(zh_CN):	[м╗я╤]╢╚йД╧╓╬ъ
-Summary(zh_TW):	[ЁЯ╟т]$(B6G?i╓У(c(B
+Summary(es.UTF-8):   Programa para actualizar archivos remotos de forma eficiente
+Summary(ko.UTF-8):   К└╓М┼╦Л⌡▄М│╛К╔╪ М├╣М∙° М▄▄Л²╪К▐≥Й╦╟М≥■К╔╪ Л°└М∙° М■└К║°Й╥╦К·╗
+Summary(pl.UTF-8):   Program do wydajnego zdalnego uaktualniania plikцЁw
+Summary(pt_BR.UTF-8):   Programa para atualizar arquivos remotos de forma eficiente
+Summary(ru.UTF-8):   п÷я─п╬пЁя─п╟п╪п╪п╟ п╢п╩я▐ я█я└я└п╣п╨я┌п╦п╡п╫п╬пЁп╬ я┐п╢п╟п╩п╣п╫п╫п╬пЁп╬ п╬п╠п╫п╬п╡п╩п╣п╫п╦я▐ я└п╟п╧п╩п╬п╡
+Summary(uk.UTF-8):   п÷я─п╬пЁя─п╟п╪п╟ п╢п╩я▐ п╣я└п╣п╨я┌п╦п╡п╫п╬пЁп╬ п╡я√п╢п╢п╟п╩п╣п╫п╬пЁп╬ п╬п╫п╬п╡п╩п╣п╫п╫я▐ я└п╟п╧п╩я√п╡
+Summary(zh_CN.UTF-8):   [И─ Х╝╞]Д╪═Х╬⌠Е╥╔Е┘╥
+Summary(zh_TW.UTF-8):   [Е√≥Е∙╙]$(B6G?iГ│╚(c(B
 Name:		rsync
 Version:	2.6.9
 Release:	1
@@ -50,56 +50,56 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package.
 
-%description -l es
-rsync es un substituto mАs rАpido y flexible para rcp que permite la
-sincronizaciСn de archivos o directorios, vМa red, de forma rАpida y
-eficiente, entre diferentes mАquinas transfiriendo solamente las
+%description -l es.UTF-8
+rsync es un substituto mц║s rц║pido y flexible para rcp que permite la
+sincronizaciцЁn de archivos o directorios, vц╜a red, de forma rц║pida y
+eficiente, entre diferentes mц║quinas transfiriendo solamente las
 diferencias entre estos directorios de forma compactada. No necesita
-que ninguna de las mАquinas tengan una copia de lo que estА en la
-otra. EstА disponible en este paquete, una relaciСn tИcnica
+que ninguna de las mц║quinas tengan una copia de lo que estц║ en la
+otra. Estц║ disponible en este paquete, una relaciцЁn tц╘cnica
 describiendo el algoritmo usado por el rsync.
 
-%description -l ko
-Rsync╢б ©Ь╟щ хё╫╨ф╝ фдюою╩ ╦е©Л ╩║╦╝ ╣©╠Бх╜го╢б╣╔ ╫е╥згр╦╦гя
-╬к╟М╦╝аРю╩ ╩Г©Кгя╢ы. Rsync╢б фдюоюг юЭц╪╦╕ ╨╦Ё╩╢б ╟м ╢К╫е©║ Ёвф╝©Вю╩
-еКгь фдюоюг ╢ы╦╔ ╨н╨п╦╦ю╩ юЭ╪шго╠Б ╤╖╧╝©║ ╨Э╦ё╢ы. Rsync╢б ╟╜╥бгя ╧л╥╞
-га╥н╪╪╫╨ х╓ю╨ rcp д©╦Ю╣Е╦╕ еКгя ╢У ©Л╪Жгя ╢Кц╪©Кю╦╥н╫А ╩Г©К╣х╢ы. rsync
-╬к╟М╦╝аРю╩ ╧╕╩Гго╢б ╠Б╪ЗюШюн Ё╩©Кю╨ юл ╡ы╥╞╧л©║ фВгт╣г╬Н юж╢ы.
+%description -l ko.UTF-8
+RsyncК┼■ Л⌡░Й╡╘ М≤╦Л┼╓М┼╦ М▄▄Л²╪Л²└ К╖╓Л ╟ К╧╗К╕╛ К▐≥Й╦╟М≥■М∙≤К┼■К█╟ Л▀═К╒╟М∙═К╖▄М∙°
+Л∙▄ЙЁ═К╕╛Л╕≤Л²└ Л┌╛Л ╘М∙°К▀╓. RsyncК┼■ М▄▄Л²╪Л²≤ Л═└Л╡╢К╔╪ КЁ╢К┌╢К┼■ Й╡┐ К▄─Л▀═Л≈░ К└╓М┼╦Л⌡█Л²└
+М├╣М∙╢ М▄▄Л²╪Л²≤ К▀╓К╔╦ К╤─К╤└К╖▄Л²└ Л═└Л├║М∙≤Й╦╟ К∙▄К╛╦Л≈░ К╧═К╔╢К▀╓. RsyncК┼■ Й╟∙К═╔М∙° К╞╦К÷╛
+М■└К║°Л└╦Л┼╓ М≤╧Л²─ rcp Л╩╓К╘≤К⌠°К╔╪ М├╣М∙° К█■ Л ╟Л┬≤М∙° К▄─Л╡╢Л ╘Л°╪К║°Л█╗ Л┌╛Л ╘К░°К▀╓. rsync
+Л∙▄ЙЁ═К╕╛Л╕≤Л²└ К╛≤Л┌╛М∙≤К┼■ Й╦╟Л┬═Л═│Л²╦ К┌╢Л ╘Л²─ Л²╢ Й╬╦К÷╛К╞╦Л≈░ М▐╛М∙╗К░≤Л√╢ Л·┬К▀╓.
 
-%description -l pl
-Rsync jest zamiennikiem programu rcp z bardziej rozbudowan╠ skЁadni╠
-poleceЯ. Program ten u©ywa efektywnego algorytmu "rsync" w czasie
-komunikacji i transportu plikСw do systemu zdalnego. Dokumentacja
-techniczna nowego algorytmu zostaЁa rСwnie© doЁ╠czona do pakietu.
+%description -l pl.UTF-8
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowanд┘ skе┌adniд┘
+poleceе└. Program ten uе╪ywa efektywnego algorytmu "rsync" w czasie
+komunikacji i transportu plikцЁw do systemu zdalnego. Dokumentacja
+techniczna nowego algorytmu zostaе┌a rцЁwnieе╪ doе┌д┘czona do pakietu.
 
-%description -l pt_BR
-O rsync И um substituto mais rАpido e flexМvel para o rcp permitindo
-sincronizaГЦo de arquivos ou diretСrios via rede de forma rАpida e
-eficiente entre diferentes mАquinas transferindo somente as diferenГas
-entre estes diretСrios de forma compactada. Ele nЦo precisa que
-nenhuma das mАquinas tenha uma cСpia do que estА na outra.
+%description -l pt_BR.UTF-8
+O rsync ц╘ um substituto mais rц║pido e flexц╜vel para o rcp permitindo
+sincronizaц╖цёo de arquivos ou diretцЁrios via rede de forma rц║pida e
+eficiente entre diferentes mц║quinas transferindo somente as diferenц╖as
+entre estes diretцЁrios de forma compactada. Ele nцёo precisa que
+nenhuma das mц║quinas tenha uma cцЁpia do que estц║ na outra.
 
-Um relatСrio tИcnico descrevendo o algoritmo usado pelo rsync estА
-disponМvel neste pacote.
+Um relatцЁrio tц╘cnico descrevendo o algoritmo usado pelo rsync estц║
+disponц╜vel neste pacote.
 
-%description -l ru
-rsync - это более быстрая и гибкая альтернатива rcp, позволяющая
-быструю и эффективную по отношению к ресурсам сети синхронизацию
-файлов или каталогов на различных машинах путем передачи только
-различий между ними в компрессированном виде. При этом совершенно не
-обязательно, чтобы одна машина имела у себя копию того, что есть на
-другой машине.
+%description -l ru.UTF-8
+rsync - я█я┌п╬ п╠п╬п╩п╣п╣ п╠я▀я│я┌я─п╟я▐ п╦ пЁп╦п╠п╨п╟я▐ п╟п╩я▄я┌п╣я─п╫п╟я┌п╦п╡п╟ rcp, п©п╬п╥п╡п╬п╩я▐я▌я┴п╟я▐
+п╠я▀я│я┌я─я┐я▌ п╦ я█я└я└п╣п╨я┌п╦п╡п╫я┐я▌ п©п╬ п╬я┌п╫п╬я┬п╣п╫п╦я▌ п╨ я─п╣я│я┐я─я│п╟п╪ я│п╣я┌п╦ я│п╦п╫я┘я─п╬п╫п╦п╥п╟я├п╦я▌
+я└п╟п╧п╩п╬п╡ п╦п╩п╦ п╨п╟я┌п╟п╩п╬пЁп╬п╡ п╫п╟ я─п╟п╥п╩п╦я┤п╫я▀я┘ п╪п╟я┬п╦п╫п╟я┘ п©я┐я┌п╣п╪ п©п╣я─п╣п╢п╟я┤п╦ я┌п╬п╩я▄п╨п╬
+я─п╟п╥п╩п╦я┤п╦п╧ п╪п╣п╤п╢я┐ п╫п╦п╪п╦ п╡ п╨п╬п╪п©я─п╣я│я│п╦я─п╬п╡п╟п╫п╫п╬п╪ п╡п╦п╢п╣. п÷я─п╦ я█я┌п╬п╪ я│п╬п╡п╣я─я┬п╣п╫п╫п╬ п╫п╣
+п╬п╠я▐п╥п╟я┌п╣п╩я▄п╫п╬, я┤я┌п╬п╠я▀ п╬п╢п╫п╟ п╪п╟я┬п╦п╫п╟ п╦п╪п╣п╩п╟ я┐ я│п╣п╠я▐ п╨п╬п©п╦я▌ я┌п╬пЁп╬, я┤я┌п╬ п╣я│я┌я▄ п╫п╟
+п╢я─я┐пЁп╬п╧ п╪п╟я┬п╦п╫п╣.
 
-%description -l uk
-rsync - це швидша та гнучк╕ша альтернатива rcp, яка забезпечу╓ швидку
-та ефективну по в╕дношенню до ресурс╕в мереж╕ синхрон╕зац╕ю файл╕в чи
-каталог╕в на р╕зних машинах шляхом передач╕ лише в╕дм╕нностей м╕ж ними
-в компресованому вид╕. При цьому зовс╕м не обов'язково, щоб одна
-машина мала в себе коп╕ю того, що ╓ на ╕нш╕й машин╕.
+%description -l uk.UTF-8
+rsync - я├п╣ я┬п╡п╦п╢я┬п╟ я┌п╟ пЁп╫я┐я┤п╨я√я┬п╟ п╟п╩я▄я┌п╣я─п╫п╟я┌п╦п╡п╟ rcp, я▐п╨п╟ п╥п╟п╠п╣п╥п©п╣я┤я┐я■ я┬п╡п╦п╢п╨я┐
+я┌п╟ п╣я└п╣п╨я┌п╦п╡п╫я┐ п©п╬ п╡я√п╢п╫п╬я┬п╣п╫п╫я▌ п╢п╬ я─п╣я│я┐я─я│я√п╡ п╪п╣я─п╣п╤я√ я│п╦п╫я┘я─п╬п╫я√п╥п╟я├я√я▌ я└п╟п╧п╩я√п╡ я┤п╦
+п╨п╟я┌п╟п╩п╬пЁя√п╡ п╫п╟ я─я√п╥п╫п╦я┘ п╪п╟я┬п╦п╫п╟я┘ я┬п╩я▐я┘п╬п╪ п©п╣я─п╣п╢п╟я┤я√ п╩п╦я┬п╣ п╡я√п╢п╪я√п╫п╫п╬я│я┌п╣п╧ п╪я√п╤ п╫п╦п╪п╦
+п╡ п╨п╬п╪п©я─п╣я│п╬п╡п╟п╫п╬п╪я┐ п╡п╦п╢я√. п÷я─п╦ я├я▄п╬п╪я┐ п╥п╬п╡я│я√п╪ п╫п╣ п╬п╠п╬п╡'я▐п╥п╨п╬п╡п╬, я┴п╬п╠ п╬п╢п╫п╟
+п╪п╟я┬п╦п╫п╟ п╪п╟п╩п╟ п╡ я│п╣п╠п╣ п╨п╬п©я√я▌ я┌п╬пЁп╬, я┴п╬ я■ п╫п╟ я√п╫я┬я√п╧ п╪п╟я┬п╦п╫я√.
 
 %package -n rsyncd-inetd
 Summary:	Files necessary to run rsync in daemon mode
-Summary(pl):	Pliki niezbЙdne do uruchomienia rsynca w trybie serwera
+Summary(pl.UTF-8):   Pliki niezbд≥dne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
 Requires:	rc-inetd
@@ -118,15 +118,15 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package.
 
-%description -n rsyncd-inetd -l pl
-Rsync jest zamiennikiem programu rcp z bardziej rozbudowan╠ skЁadni╠
-poleceЯ. Program ten u©ywa efektywnego algorytmu "rsync" w czasie
-komunikacji i transportu plikСw do systemu zdalnego. Dokumentacja
-techniczna nowego algorytmu zostaЁa rСwnie© doЁ╠czona do pakietu.
+%description -n rsyncd-inetd -l pl.UTF-8
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowanд┘ skе┌adniд┘
+poleceе└. Program ten uе╪ywa efektywnego algorytmu "rsync" w czasie
+komunikacji i transportu plikцЁw do systemu zdalnego. Dokumentacja
+techniczna nowego algorytmu zostaе┌a rцЁwnieе╪ doе┌д┘czona do pakietu.
 
 %package -n rsyncd-standalone
 Summary:	Files necessary to run rsync in daemon mode
-Summary(pl):	Pliki niezbЙdne do uruchomienia rsynca w trybie serwera
+Summary(pl.UTF-8):   Pliki niezbд≥dne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
@@ -145,11 +145,11 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package.
 
-%description -n rsyncd-standalone -l pl
-Rsync jest zamiennikiem programu rcp z bardziej rozbudowan╠ skЁadni╠
-poleceЯ. Program ten u©ywa efektywnego algorytmu "rsync" w czasie
-komunikacji i transportu plikСw do systemu zdalnego. Dokumentacja
-techniczna nowego algorytmu zostaЁa rСwnie© doЁ╠czona do pakietu.
+%description -n rsyncd-standalone -l pl.UTF-8
+Rsync jest zamiennikiem programu rcp z bardziej rozbudowanд┘ skе┌adniд┘
+poleceе└. Program ten uе╪ywa efektywnego algorytmu "rsync" w czasie
+komunikacji i transportu plikцЁw do systemu zdalnego. Dokumentacja
+techniczna nowego algorytmu zostaе┌a rцЁwnieе╪ doе┌д┘czona do pakietu.
 
 %prep
 %setup -q
