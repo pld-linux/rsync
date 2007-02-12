@@ -1,5 +1,5 @@
 Summary:	Program for efficient remote updates of files
-Summary(pl):	Program efektywnego modyfikowania plików na zdalnym komputerze
+Summary(pl.UTF-8):   Program efektywnego modyfikowania plikÃ³w na zdalnym komputerze
 Name:		rsync
 Version:	2.5.0
 Release:	0
@@ -31,16 +31,16 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package.
 
-%description -l pl
-Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan±
-sk³adniê poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
-czasie komunikacji i transportu plików do systemu zdalnego.
-Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
+%description -l pl.UTF-8
+Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowanÄ…
+skÅ‚adniÄ™ poleceÅ„. Program ten uÅ¼ywa efektywnego algorytmu "rsync" w
+czasie komunikacji i transportu plikÃ³w do systemu zdalnego.
+Dokumentacja techniczna nowego algorytmu zostaÅ‚a rÃ³wnieÅ¼ doÅ‚Ä…czona do
 pakietu.
 
 %package -n rsyncd
 Summary:	Files necessary to run rsync in daemon mode
-Summary(pl):	Pliki niezbêdne do uruchomienia rsynca w trybie serwera
+Summary(pl.UTF-8):   Pliki niezbÄ™dne do uruchomienia rsynca w trybie serwera
 Group:		Daemons
 Group(de):	Server
 Group(pl):	Serwery
@@ -58,11 +58,11 @@ sets of files are present at one of the ends of the link beforehand.
 A technical report describing the rsync algorithm is included with
 this package.
 
-%description -n rsyncd -l pl
-Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowan±
-sk³adniê poleceñ. Program ten u¿ywa efektywnego algorytmu "rsync" w
-czasie komunikacji i transportu plików do systemu zdalnego.
-Dokumentacja techniczna nowego algorytmu zosta³a równie¿ do³±czona do
+%description -n rsyncd -l pl.UTF-8
+Rsync jest zamiennikiem programu rcp i jest bardziej rozbudowanÄ…
+skÅ‚adniÄ™ poleceÅ„. Program ten uÅ¼ywa efektywnego algorytmu "rsync" w
+czasie komunikacji i transportu plikÃ³w do systemu zdalnego.
+Dokumentacja techniczna nowego algorytmu zostaÅ‚a rÃ³wnieÅ¼ doÅ‚Ä…czona do
 pakietu.
 
 %prep
