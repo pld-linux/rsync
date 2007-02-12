@@ -7,14 +7,14 @@
 %undefine	with_tests
 %endif
 Summary:	Program for efficient remote updates of files
-Summary(es.UTF-8):   Programa para actualizar archivos remotos de forma eficiente
-Summary(ko.UTF-8):   네트워크를 통한 파일동기화를 위한 프로그램
-Summary(pl.UTF-8):   Program do wydajnego zdalnego uaktualniania plików
-Summary(pt_BR.UTF-8):   Programa para atualizar arquivos remotos de forma eficiente
-Summary(ru.UTF-8):   Программа для эффективного удаленного обновления файлов
-Summary(uk.UTF-8):   Програма для ефективного віддаленого оновлення файлів
-Summary(zh_CN.UTF-8):   [通讯]传输工具
-Summary(zh_TW.UTF-8):   [喙啪]$(B6G?i火(c(B
+Summary(es.UTF-8):	Programa para actualizar archivos remotos de forma eficiente
+Summary(ko.UTF-8):	네트워크를 통한 파일동기화를 위한 프로그램
+Summary(pl.UTF-8):	Program do wydajnego zdalnego uaktualniania plików
+Summary(pt_BR.UTF-8):	Programa para atualizar arquivos remotos de forma eficiente
+Summary(ru.UTF-8):	Программа для эффективного удаленного обновления файлов
+Summary(uk.UTF-8):	Програма для ефективного віддаленого оновлення файлів
+Summary(zh_CN.UTF-8):	[通讯]传输工具
+Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	2.6.9
 Release:	1
@@ -99,7 +99,7 @@ rsync - це швидша та гнучкіша альтернатива rcp, я
 
 %package -n rsyncd-inetd
 Summary:	Files necessary to run rsync in daemon mode
-Summary(pl.UTF-8):   Pliki niezbędne do uruchomienia rsynca w trybie serwera
+Summary(pl.UTF-8):	Pliki niezbędne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
 Requires:	%{name} = %{version}-%{release}
 Requires:	rc-inetd
@@ -126,7 +126,7 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 
 %package -n rsyncd-standalone
 Summary:	Files necessary to run rsync in daemon mode
-Summary(pl.UTF-8):   Pliki niezbędne do uruchomienia rsynca w trybie serwera
+Summary(pl.UTF-8):	Pliki niezbędne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{version}-%{release}
