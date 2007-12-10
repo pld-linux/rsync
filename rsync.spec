@@ -16,19 +16,18 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	2.6.9
-Release:	4
+Version:	3.0.0
+# don't rel 1 until final release
+Release:	0.1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	996d8d8831dbca17910094e56dcb5942
+Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}pre6.tar.gz
+# Source0-md5:	919313dfd1e00f97e33ae08b28896f9a
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
 Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
-Patch1:		%{name}-man.patch
-Patch2:		%{name}-CVE-2007-4091.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -153,12 +152,11 @@ komunikacji i transportu plików do systemu zdalnego. Dokumentacja
 techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
-%setup -q
-patch -s -p1 < patches/acls.diff || exit 1
-patch -s -p1 < patches/xattrs.diff || exit 1
+%setup -q -n %{name}-%{version}pre6
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+
+# drop in final 3.0.0
+touch configure.sh config.h.in
 
 %build
 cp -f /usr/share/automake/config.sub .
