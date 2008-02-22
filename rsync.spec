@@ -21,8 +21,8 @@ Version:	3.0.0
 Release:	0.1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}pre9.tar.gz
-# Source0-md5:	2d4e94e199911e36491d8b17851f1fe8
+Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}pre10.tar.gz
+# Source0-md5:	54bfda1a6d8a0c275920bca22fb0c68f
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
@@ -152,7 +152,7 @@ komunikacji i transportu plików do systemu zdalnego. Dokumentacja
 techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
-%setup -q -n %{name}-%{version}pre9
+%setup -q -n %{name}-%{version}pre10
 %patch0 -p1
 
 %build
