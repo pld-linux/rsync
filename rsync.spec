@@ -17,12 +17,11 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.0.0
-# don't rel 1 until final release
-Release:	0.1
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
-Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}pre10.tar.gz
-# Source0-md5:	54bfda1a6d8a0c275920bca22fb0c68f
+Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
+# Source0-md5:	2122d460b4119749c6e5993938a9b501
 Source1:	%{name}.inet
 Source2:	%{name}.init
 Source3:	%{name}.sysconfig
@@ -152,7 +151,7 @@ komunikacji i transportu plików do systemu zdalnego. Dokumentacja
 techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
-%setup -q -n %{name}-%{version}pre10
+%setup -q
 %patch0 -p1
 
 %build
