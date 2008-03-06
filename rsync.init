@@ -51,7 +51,7 @@ case "$1" in
 		msg_not_running rsyncd
 	fi
 	;;
-  restart|reload|force-restart|force-reload)
+  restart|force-restart|force-reload)
 	$0 stop
 	$0 start
 	exit $?
@@ -61,7 +61,7 @@ case "$1" in
 	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|force-restart|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|force-restart|force-reload|status}"
 	exit 3
 esac
 
