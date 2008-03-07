@@ -27,10 +27,7 @@ fi
 # Get service configuration
 [ -f /etc/sysconfig/rsyncd ] && . /etc/sysconfig/rsyncd
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
+start() {
 	# Start daemons.
 	if [ ! -f /var/lock/subsys/rsyncd ]; then
 		msg_starting rsyncd
@@ -40,8 +37,9 @@ case "$1" in
 	else
 		msg_already_running rsyncd
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	# Stop daemons.
 	if [ -f /var/lock/subsys/rsyncd ]; then
 		msg_stopping rsyncd
@@ -50,11 +48,20 @@ case "$1" in
 	else
 		msg_not_running rsyncd
 	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
 	;;
   restart|force-restart|force-reload)
-	$0 stop
-	$0 start
-	exit $?
+	stop
+	start
 	;;
   status)
 	status rsyncd rsync
