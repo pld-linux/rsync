@@ -17,15 +17,17 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.0.2
-Release:	2
+Release:	3
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
 # Source0-md5:	fd4c5d77d8cb7bb86ab209076fa214d9
-Source1:	%{name}.inet
-Source2:	%{name}.init
-Source3:	%{name}.sysconfig
-Source4:	%{name}d.logrotate
+Source1:	http://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
+# Source1-md5:	c076661c447ddc165f4ff427e7264a31
+Source2:	%{name}.inet
+Source3:	%{name}.init
+Source4:	%{name}.sysconfig
+Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
@@ -151,8 +153,12 @@ komunikacji i transportu plików do systemu zdalnego. Dokumentacja
 techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
-%setup -q
+%setup -q -b1
 %patch0 -p1
+
+# for compat with previous patched version
+patch -p1 -i patches/acls.diff || exit 1
+patch -p1 -i patches/xattrs.diff || exit 1
 
 %build
 cp -f /usr/share/automake/config.sub .
@@ -199,10 +205,10 @@ cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PASSWORD
 #RSYNC_PASSWORD=
 EOF
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
-install %{SOURCE4} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
