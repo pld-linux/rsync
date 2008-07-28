@@ -17,7 +17,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.0.3
-Release:	1
+Release:	2
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -29,6 +29,7 @@ Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
+Patch1:		%{name}-dparam.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -155,6 +156,7 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %prep
 %setup -q -b1
 %patch0 -p1
+%patch1 -p1
 
 # for compat with previous patched version
 patch -p1 -i patches/acls.diff || exit 1
