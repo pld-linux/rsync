@@ -191,7 +191,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,l
 :> $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.secrets
 
 cat << EOF > $RPM_BUILD_ROOT%{_sysconfdir}/rsyncd.conf
-log file = /var/log/rsyncd.log
+#log file = /var/log/rsyncd.log
 EOF
 
 cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/CVSIGNORE
