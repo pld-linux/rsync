@@ -16,14 +16,14 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.0.3
-Release:	2
+Version:	3.0.4
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	16d41aab9ece435198af222c5415a304
+# Source0-md5:	2b2d159c9bd1b5f8adfd8b13da3a1f3f
 Source1:	http://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
-# Source1-md5:	ff814658791187a5f32c1a145714db43
+# Source1-md5:	a7697d7002f7789faede7109b420b94c
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
