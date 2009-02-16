@@ -252,18 +252,17 @@ To use this patch, run these commands for a successful build:
  	rprintf(f, "%s  version %s  protocol version %d\n",
  		RSYNC_NAME, RSYNC_VERSION, PROTOCOL_VERSION);
  	rprintf(f, "Copyright (C) 1996-2006 by Andrew Tridgell, Wayne Davison, and others.\n");
-@@ -235,9 +248,9 @@ static void print_rsync_version(enum log
+@@ -253,8 +253,8 @@
+ 	rprintf(f, "Capabilities: %d-bit files, %ssocketpairs, %shard links, %ssymlinks,\n",
+ 		(int) (sizeof (OFF_T) * 8), got_socketpair, hardlinks, links);
+ 
+-	rprintf(f, "              batchfiles, %sinplace, %sIPv6, %sACLs, %sxattrs,\n",
+-		have_inplace, ipv6, acls, xattrs);
++	rprintf(f, "              batchfiles, %sinplace, %sIPv6, %sACLs, %sxattrs, %sSSL\n",
++		have_inplace, ipv6, acls, xattrs, ssl);
+ 
  	/* Note that this field may not have type ino_t.  It depends
  	 * on the complicated interaction between largefile feature
- 	 * macros. */
--	rprintf(f, "              %sinplace, %sIPv6, "
-+	rprintf(f, "              %sinplace, %sIPv6, %sSSL, "
- 		"%d-bit system inums, %d-bit internal inums\n",
--		have_inplace, ipv6,
-+		have_inplace, ipv6, ssl,
- 		(int) (sizeof dumstat->st_ino * 8),
- 		(int) (sizeof (int64) * 8));
- #ifdef MAINTAINER_MODE
 @@ -385,6 +398,13 @@ void usage(enum logcode F)
    rprintf(F," -4, --ipv4                  prefer IPv4\n");
    rprintf(F," -6, --ipv6                  prefer IPv6\n");
@@ -841,10 +840,10 @@ To use this patch, run these commands for a successful build:
  LIBOBJS
  ALLOCA
  OBJ_SAVE
-@@ -1258,6 +1259,7 @@ Optional Features:
-   --disable-largefile     omit support for large files
-   --disable-ipv6          don't even try to use IPv6
+@@ -1261,6 +1261,7 @@
    --disable-locale        turn off locale features
+   --enable-acl-support    Include ACL support (default=no)
+   --enable-xattr-support  Include extended attribute support (default=no)
 +  --enable-openssl        compile SSL support with OpenSSL.
  
  Optional Packages:
