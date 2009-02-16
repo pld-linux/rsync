@@ -17,7 +17,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	2.6.9
-Release:	4
+Release:	5
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -29,6 +29,7 @@ Source4:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-man.patch
 Patch2:		%{name}-CVE-2007-4091.patch
+Patch3:		%{name}-openssl-support.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -159,6 +160,7 @@ patch -s -p1 < patches/xattrs.diff || exit 1
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
@@ -168,6 +170,7 @@ cp -f /usr/share/automake/config.sub .
 	%{?with_rsh:--with-rsh=rsh} \
 	--enable-ipv6 \
 	--enable-acl-support \
+	--enable-openssl \
 	--enable-xattr-support \
 	--disable-debug \
 	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
