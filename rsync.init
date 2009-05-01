@@ -31,7 +31,7 @@ start() {
 	# Start daemons.
 	if [ ! -f /var/lock/subsys/rsyncd ]; then
 		msg_starting rsyncd
-		daemon rsync --daemon --dparam=pidfile=/var/run/rsync.pid ${RSYNC_OPTIONS}
+		daemon /usr/bin/rsync --daemon --dparam=pidfile=/var/run/rsync.pid ${RSYNC_OPTIONS}
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rsyncd
 	else
