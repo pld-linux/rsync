@@ -32,12 +32,12 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.5 rsync-3.0.0pre6/rsyncd.conf.5
  .IP "\fBread only\fP"
  The \(lqread only\(rq option determines whether clients
 @@ -408,7 +408,7 @@
- you may find that passwords longer than 8 characters don't work.
+ you may find that passwords longer than 8 characters don\(cq\&t work.
  .IP 
- There is no default for the \(lqsecrets file\(rq parameter, you must choose a name
+ There is no default for the \(dq\&secrets file\(dq\& parameter, you must choose a name
 -(such as \f(CW/etc/rsyncd.secrets\fP).  The file must normally not be readable
 +(such as \f(CW/etc/rsyncd/rsyncd.secrets\fP).  The file must normally not be readable
- by \(lqother\(rq; see \(lqstrict modes\(rq.
+ by \(dq\&other\(dq\&; see \(dq\&strict modes\(dq\&.
  .IP 
  .IP "\fBstrict modes\fP"
 @@ -733,12 +733,12 @@
