@@ -168,6 +168,7 @@ cp -f /usr/share/automake/config.sub .
 %{__autoheader}
 %{__autoconf}
 %configure \
+	LIBS="-lcrypto" \
 	%{?with_rsh:--with-rsh=rsh} \
 	--enable-ipv6 \
 	--enable-acl-support \
