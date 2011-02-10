@@ -46,3 +46,22 @@
  			} else {
  				io_error |= IOERR_GENERAL;
  				rsyserr(FERROR_XFER, errno,
+--- rsync-3.0.7/flist.c~	2011-02-10 18:51:29.000000000 +0200
++++ rsync-3.0.7/flist.c	2011-02-10 19:15:56.125220647 +0200
+@@ -59,6 +59,7 @@
+ extern int implied_dirs;
+ extern int file_extra_cnt;
+ extern int ignore_perishable;
++extern int ignore_vanished;
+ extern int non_perishable_cnt;
+ extern int prune_empty_dirs;
+ extern int copy_links;
+@@ -1127,7 +1127,7 @@
+ 					full_fname(thisname));
+ 			} else
+ #endif
+-			{
++			if (!ignore_vanished) {
+ 				enum logcode c = am_daemon && protocol_version < 28
+ 					       ? FERROR : FWARNING;
+ 				io_error |= IOERR_VANISHED;
