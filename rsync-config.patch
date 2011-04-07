@@ -1,16 +1,16 @@
-diff -ur rsync-3.0.0pre6.org/rsync.1 rsync-3.0.0pre6/rsync.1
---- rsync-3.0.0pre6.org/rsync.1	2007-11-28 10:00:29.000000000 +0100
-+++ rsync-3.0.0pre6/rsync.1	2007-12-10 22:18:49.896441464 +0100
-@@ -2398,7 +2398,7 @@
+diff -ur rsync-3.0.8.orig/rsync.1 rsync-3.0.8/rsync.1
+--- rsync-3.0.8.orig/rsync.1	2011-03-26 22:37:52.000000000 +0100
++++ rsync-3.0.8/rsync.1	2011-04-07 10:27:01.761502719 +0200
+@@ -2566,7 +2566,7 @@
  .IP "\fB\-\-config=FILE\fP"
  This specifies an alternate config file than
  the default.  This is only relevant when \fB\-\-daemon\fP is specified.
 -The default is /etc/rsyncd.conf unless the daemon is running over
 +The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
- a remote shell program and the remote user is not the super-user; in that case
+ a remote shell program and the remote user is not the super\-user; in that case
  the default is rsyncd.conf in the current directory (typically $HOME).
  .IP 
-@@ -3302,7 +3302,7 @@
+@@ -3474,7 +3474,7 @@
  .SH "FILES"
  
  .PP 
@@ -19,19 +19,61 @@ diff -ur rsync-3.0.0pre6.org/rsync.1 rsync-3.0.0pre6/rsync.1
  .PP 
  .SH "SEE ALSO"
  
-diff -ur rsync-3.0.0pre6.org/rsyncd.conf.5 rsync-3.0.0pre6/rsyncd.conf.5
---- rsync-3.0.0pre6.org/rsyncd.conf.5	2007-11-28 10:00:29.000000000 +0100
-+++ rsync-3.0.0pre6/rsyncd.conf.5	2007-12-10 22:19:26.808284001 +0100
-@@ -268,7 +268,7 @@
- support the \(lqmax connections\(rq option. The rsync daemon uses record
+diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
+--- rsync-3.0.8.orig/rsync.h	2011-02-21 20:32:51.000000000 +0100
++++ rsync-3.0.8/rsync.h	2011-04-07 10:21:07.794002236 +0200
+@@ -29,7 +29,7 @@
+ /* RSYNCD_SYSCONF is now set in config.h */
+ #define RSYNCD_USERCONF "rsyncd.conf"
+ 
+-#define DEFAULT_LOCK_FILE "/var/run/rsyncd.lock"
++#define DEFAULT_LOCK_FILE "/var/lock/rsyncd.lock"
+ #define URL_PREFIX "rsync://"
+ 
+ #define SYMLINK_PREFIX "/rsyncd-munged/"  /* This MUST have a trailing slash! */
+diff -ur rsync-3.0.8.orig/rsync.yo rsync-3.0.8/rsync.yo
+--- rsync-3.0.8.orig/rsync.yo	2011-03-26 22:34:18.000000000 +0100
++++ rsync-3.0.8/rsync.yo	2011-04-07 10:21:07.798002324 +0200
+@@ -2220,7 +2220,7 @@
+ If standard input is a socket then rsync will assume that it is being
+ run via inetd, otherwise it will detach from the current terminal and
+ become a background daemon.  The daemon will read the config file
+-(rsyncd.conf) on each connect made by a client and respond to
++(/etc/rsyncd/rsyncd.conf) on each connect made by a client and respond to
+ requests accordingly.  See the bf(rsyncd.conf)(5) man page for more
+ details.
+ 
+@@ -2238,7 +2238,7 @@
+ 
+ dit(bf(--config=FILE)) This specifies an alternate config file than
+ the default.  This is only relevant when bf(--daemon) is specified.
+-The default is /etc/rsyncd.conf unless the daemon is running over
++The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
+ a remote shell program and the remote user is not the super-user; in that case
+ the default is rsyncd.conf in the current directory (typically $HOME).
+ 
+@@ -2972,7 +2972,7 @@
+ 
+ manpagefiles()
+ 
+-/etc/rsyncd.conf or rsyncd.conf
++/etc/rsyncd/rsyncd.conf or rsyncd.conf
+ 
+ manpageseealso()
+ 
+diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
+--- rsync-3.0.8.orig/rsyncd.conf.5	2011-03-26 22:37:52.000000000 +0100
++++ rsync-3.0.8/rsyncd.conf.5	2011-04-07 10:21:07.789502107 +0200
+@@ -315,7 +315,7 @@
+ support the \(dq\&max connections\(dq\& parameter. The rsync daemon uses record
  locking on this file to ensure that the max connections limit is not
  exceeded for the modules sharing the lock file.
 -The default is \f(CW/var/run/rsyncd.lock\fP.
 +The default is \f(CW/var/lock/rsyncd.lock\fP.
  .IP 
  .IP "\fBread only\fP"
- The \(lqread only\(rq option determines whether clients
-@@ -408,7 +408,7 @@
+ This parameter determines whether clients
+@@ -460,7 +460,7 @@
  you may find that passwords longer than 8 characters don\(cq\&t work.
  .IP 
  There is no default for the \(dq\&secrets file\(dq\& parameter, you must choose a name
@@ -40,7 +82,7 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.5 rsync-3.0.0pre6/rsyncd.conf.5
  by \(dq\&other\(dq\&; see \(dq\&strict modes\(dq\&.
  .IP 
  .IP "\fBstrict modes\fP"
-@@ -733,12 +733,12 @@
+@@ -785,12 +785,12 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -55,7 +97,7 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.5 rsync-3.0.0pre6/rsyncd.conf.5
  .PP 
  .RS 
  \f(CWtridge:mypass\fP
-@@ -751,7 +751,7 @@
+@@ -803,7 +803,7 @@
  .SH "FILES"
  
  .PP 
@@ -64,9 +106,9 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.5 rsync-3.0.0pre6/rsyncd.conf.5
  .PP 
  .SH "SEE ALSO"
  
-diff -ur rsync-3.0.0pre6.org/rsyncd.conf.yo rsync-3.0.0pre6/rsyncd.conf.yo
---- rsync-3.0.0pre6.org/rsyncd.conf.yo	2007-11-28 10:00:37.000000000 +0100
-+++ rsync-3.0.0pre6/rsyncd.conf.yo	2007-12-10 22:15:49.037413489 +0100
+diff -ur rsync-3.0.8.orig/rsyncd.conf.yo rsync-3.0.8/rsyncd.conf.yo
+--- rsync-3.0.8.orig/rsyncd.conf.yo	2011-03-26 22:34:18.000000000 +0100
++++ rsync-3.0.8/rsyncd.conf.yo	2011-04-07 10:21:07.792002183 +0200
 @@ -66,7 +66,7 @@
  reread its config file.
  
@@ -75,17 +117,17 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.yo rsync-3.0.0pre6/rsyncd.conf.yo
 +it to reread the tt(/etc/rsyncd/rsyncd.conf) file. The file is re-read on each client
  connection.
  
- manpagesection(GLOBAL OPTIONS)
-@@ -122,7 +122,7 @@
+ manpagesection(GLOBAL PARAMETERS)
+@@ -125,7 +125,7 @@
  
- dit(bf(path)) The "path" parameter specifies the directory in the daemon's
+ dit(bf(path)) This parameter specifies the directory in the daemon's
  filesystem to make available in this module.  You must specify this parameter
 -for each module in tt(rsyncd.conf).
 +for each module in tt(/etc/rsyncd/rsyncd.conf).
  
  dit(bf(use chroot)) If "use chroot" is true, the rsync daemon will chroot
  to the "path" before starting the file transfer with the client.  This has
-@@ -360,7 +360,7 @@
+@@ -409,7 +409,7 @@
  you may find that passwords longer than 8 characters don't work.
  
  There is no default for the "secrets file" parameter, you must choose a name
@@ -93,8 +135,8 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.yo rsync-3.0.0pre6/rsyncd.conf.yo
 +(such as tt(/etc/rsyncd/rsyncd.secrets)).  The file must normally not be readable
  by "other"; see "strict modes".
  
- dit(bf(strict modes)) The "strict modes" parameter determines whether or not
-@@ -624,10 +624,10 @@
+ dit(bf(strict modes)) This parameter determines whether or not
+@@ -673,10 +673,10 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -107,45 +149,3 @@ diff -ur rsync-3.0.0pre6.org/rsyncd.conf.yo rsync-3.0.0pre6/rsyncd.conf.yo
  
  quote(
  tt(tridge:mypass)nl()
-diff -ur rsync-3.0.0pre6.org/rsync.h rsync-3.0.0pre6/rsync.h
---- rsync-3.0.0pre6.org/rsync.h	2007-11-27 16:34:59.000000000 +0100
-+++ rsync-3.0.0pre6/rsync.h	2007-12-10 22:15:49.064081486 +0100
-@@ -29,7 +29,7 @@
- /* RSYNCD_SYSCONF is now set in config.h */
- #define RSYNCD_USERCONF "rsyncd.conf"
- 
--#define DEFAULT_LOCK_FILE "/var/run/rsyncd.lock"
-+#define DEFAULT_LOCK_FILE "/var/lock/rsyncd.lock"
- #define URL_PREFIX "rsync://"
- 
- #define SYMLINK_PREFIX "/rsyncd-munged/"
-diff -ur rsync-3.0.0pre6.org/rsync.yo rsync-3.0.0pre6/rsync.yo
---- rsync-3.0.0pre6.org/rsync.yo	2007-11-28 10:00:37.000000000 +0100
-+++ rsync-3.0.0pre6/rsync.yo	2007-12-10 22:15:49.067414986 +0100
-@@ -2062,7 +2062,7 @@
- If standard input is a socket then rsync will assume that it is being
- run via inetd, otherwise it will detach from the current terminal and
- become a background daemon.  The daemon will read the config file
--(rsyncd.conf) on each connect made by a client and respond to
-+(/etc/rsyncd/rsyncd.conf) on each connect made by a client and respond to
- requests accordingly.  See the bf(rsyncd.conf)(5) man page for more
- details.
- 
-@@ -2080,7 +2080,7 @@
- 
- dit(bf(--config=FILE)) This specifies an alternate config file than
- the default.  This is only relevant when bf(--daemon) is specified.
--The default is /etc/rsyncd.conf unless the daemon is running over
-+The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
- a remote shell program and the remote user is not the super-user; in that case
- the default is rsyncd.conf in the current directory (typically $HOME).
- 
-@@ -2810,7 +2810,7 @@
- 
- manpagefiles()
- 
--/etc/rsyncd.conf or rsyncd.conf
-+/etc/rsyncd/rsyncd.conf or rsyncd.conf
- 
- manpageseealso()
- 
