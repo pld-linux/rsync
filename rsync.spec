@@ -252,8 +252,8 @@ fi
 %files -n rsyncd-inetd
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}
-%attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
-%attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rsyncd.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rsyncd.secrets
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
@@ -262,8 +262,8 @@ fi
 %files -n rsyncd-standalone
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}
-%attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.conf
-%attr(640,root,root) %config(noreplace) %{_sysconfdir}/rsyncd.secrets
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rsyncd.conf
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/rsyncd.secrets
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rsyncd
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
