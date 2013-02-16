@@ -39,6 +39,7 @@ BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.318
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_duplicate_files_terminate_build	0
 %define		_sysconfdir	/etc/rsyncd
 
 %description
