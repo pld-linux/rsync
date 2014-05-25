@@ -16,20 +16,20 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.0.9
-Release:	3
+Version:	3.1.0
+Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	5ee72266fe2c1822333c407e1761b92b
+# Source0-md5:	3be148772a33224771a8d4d2a028b132
 Source1:	http://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
-# Source1-md5:	992677c7f1ac2884d9469b3a0eff594a
+# Source1-md5:	a6f46f342017644e4747c1c083feefac
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
-Patch1:		%{name}-dparam.patch
+Patch1:		%{name}-openssl-read_line_old.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -157,12 +157,14 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %prep
 %setup -q -b1
 %patch0 -p1
-%patch1 -p1
 
 # for compat with previous patched version
 patch -p1 -i patches/acls.diff || exit 1
 patch -p1 -i patches/xattrs.diff || exit 1
 patch -p1 < patches/openssl-support.diff || exit 1
+
+# fix call to read_line_old in clientserver.c (from openssl-support.patch)
+%patch1 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
