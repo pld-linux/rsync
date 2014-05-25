@@ -74,14 +74,14 @@ diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
  .IP "\fBread only\fP"
  This parameter determines whether clients
 @@ -460,7 +460,7 @@
- you may find that passwords longer than 8 characters don\(cq\&t work.
+ passwords.
  .IP 
  There is no default for the \(dq\&secrets file\(dq\& parameter, you must choose a name
 -(such as \f(CW/etc/rsyncd.secrets\fP).  The file must normally not be readable
 +(such as \f(CW/etc/rsyncd/rsyncd.secrets\fP).  The file must normally not be readable
- by \(dq\&other\(dq\&; see \(dq\&strict modes\(dq\&.
+ by \(dq\&other\(dq\&; see \(dq\&strict modes\(dq\&.  If the file is not found or is rejected, no
+ logins for a \(dq\&user auth\(dq\& module will be possible.
  .IP 
- .IP "\fBstrict modes\fP"
 @@ -785,12 +785,12 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
@@ -128,14 +128,14 @@ diff -ur rsync-3.0.8.orig/rsyncd.conf.yo rsync-3.0.8/rsyncd.conf.yo
  dit(bf(use chroot)) If "use chroot" is true, the rsync daemon will chroot
  to the "path" before starting the file transfer with the client.  This has
 @@ -409,7 +409,7 @@
- you may find that passwords longer than 8 characters don't work.
+ passwords.
  
  There is no default for the "secrets file" parameter, you must choose a name
 -(such as tt(/etc/rsyncd.secrets)).  The file must normally not be readable
 +(such as tt(/etc/rsyncd/rsyncd.secrets)).  The file must normally not be readable
- by "other"; see "strict modes".
+ by "other"; see "strict modes".  If the file is not found or is rejected, no
+ logins for a "user auth" module will be possible.
  
- dit(bf(strict modes)) This parameter determines whether or not
 @@ -673,10 +673,10 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
