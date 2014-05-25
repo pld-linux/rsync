@@ -30,6 +30,7 @@ Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-openssl-read_line_old.patch
+Patch2:		%{name}-dos.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.52
@@ -165,6 +166,9 @@ patch -p1 < patches/openssl-support.diff || exit 1
 
 # fix call to read_line_old in clientserver.c (from openssl-support.patch)
 %patch1 -p1
+
+# CVE-2014-2855
+%patch2 -p1
 
 %build
 cp -f /usr/share/automake/config.sub .
