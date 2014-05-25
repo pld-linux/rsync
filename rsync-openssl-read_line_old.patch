@@ -1,0 +1,13 @@
+diff --git a/rsync-3.1.0/clientserver.c~ b/rsync-3.1.0/clientserver.c
+index 051dbfa..e10f5ea 100644
+--- rsync-3.1.0/clientserver.c~
++++ rsync-3.1.0/clientserver.c
+@@ -296,7 +296,7 @@ int start_inband_exchange(int f_in, int f_out, const char *user, int argc, char
+ 	if (use_ssl) {
+ 		io_printf(f_out, "#starttls\n");
+ 		while (1) {
+-			if (!read_line_old(f_in, line, sizeof line)) {
++			if (!read_line_old(f_in, line, sizeof line, 0)) {
+ 				rprintf(FERROR, "rsync: did not receive reply to #starttls\n");
+ 				return -1;
+ 			}
