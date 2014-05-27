@@ -33,7 +33,7 @@ Patch1:		%{name}-openssl-read_line_old.patch
 Patch2:		%{name}-dos.patch
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
-BuildRequires:	autoconf >= 2.52
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	openssl-devel
 BuildRequires:	popt-devel
@@ -252,9 +252,12 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc README NEWS OLDNEWS TODO
-%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/*
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/CVSIGNORE
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PASSWORD
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PROXY
+%config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_RSH
+%attr(755,root,root) %{_bindir}/rsync
+%{_mandir}/man1/rsync.1*
 
 %files -n rsyncd-inetd
 %defattr(644,root,root,755)
@@ -264,7 +267,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/rc-inetd/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
-%{_mandir}/man5/*
+%{_mandir}/man5/rsyncd.conf.5*
 
 %files -n rsyncd-standalone
 %defattr(644,root,root,755)
@@ -275,4 +278,4 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %attr(754,root,root) /etc/rc.d/init.d/rsyncd
-%{_mandir}/man5/*
+%{_mandir}/man5/rsyncd.conf.5*
