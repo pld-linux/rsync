@@ -21,9 +21,9 @@ Release:	1
 License:	GPL
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	0d946ab52311789581dd6f844128a614
+# Source0-md5:	43bd6676f0b404326eee2d63be3cdcfe
 Source1:	http://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
-# Source1-md5:	fdfbceacad34dfe86932d7265b715b96
+# Source1-md5:	72de3e3528c1a1940b226e456393f26d
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
