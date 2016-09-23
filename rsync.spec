@@ -17,7 +17,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.1.2
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
@@ -240,7 +240,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS OLDNEWS TODO
+%doc README NEWS OLDNEWS TODO support
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/CVSIGNORE
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PASSWORD
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PROXY
