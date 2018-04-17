@@ -1,4 +1,6 @@
-# TODO: 3.1.3 rsyncd segfaults very early in server rsync:// mode (both inetd and standalone)
+# TODO:
+#   3.1.3 rsyncd segfaults very early in server rsync:// mode (both inetd and standalone)
+#   rsync[27223]: segfault at 7468 ip 00007f4281c56e81 sp 00007ffc29186160 error 4 in libc-2.27.so[7f4281bd3000+1b4000]
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
