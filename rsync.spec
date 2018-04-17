@@ -20,7 +20,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.1.2
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
@@ -106,7 +106,7 @@ rsync - це швидша та гнучкіша альтернатива rcp, я
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl.UTF-8):	Pliki niezbędne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd
 Provides:	rsyncd
 Obsoletes:	rsyncd
@@ -134,7 +134,7 @@ Summary:	Files necessary to run rsync in daemon mode
 Summary(pl.UTF-8):	Pliki niezbędne do uruchomienia rsynca w trybie serwera
 Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	rsyncd
 Obsoletes:	rsyncd
 Obsoletes:	rsyncd-inetd
