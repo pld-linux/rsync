@@ -20,7 +20,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.1.2
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
@@ -33,6 +33,8 @@ Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
+Patch1:		https://tobi.oetiker.ch/patches/rsync-3.1.2-1-fadvise.patch
+# Patch1-md5:	b055468e7cbc5d829aa943f07916d458
 URL:		http://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.59
