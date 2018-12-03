@@ -4,6 +4,7 @@
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
+%bcond_with	fadvise	# apply fadvise patch
 %bcond_with	tests	# perform "make test"
 #
 %ifarch alpha
@@ -19,15 +20,15 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.1.2
-Release:	6
+Version:	3.1.3
+Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
-Source0:	http://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	0f758d7e000c0f7f7d3792610fad70cb
-Source1:	http://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
-# Source1-md5:	f412602a3cba0b872adfaed905a0aa28
+Source0:	https://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
+# Source0-md5:	1581a588fde9d89f6bc6201e8129afaf
+Source1:	https://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
+# Source1-md5:	753fc37ffc277571c69135e8bc5fae9d
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
@@ -35,7 +36,7 @@ Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		https://tobi.oetiker.ch/patches/rsync-3.1.2-1-fadvise.patch
 # Patch1-md5:	b055468e7cbc5d829aa943f07916d458
-URL:		http://rsync.samba.org/
+URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -161,7 +162,7 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %prep
 %setup -q -b1
 %patch0 -p1
-%patch1 -p1
+%{?with_fadvise:%patch1 -p1}
 
 # for compat with previous patched version
 patch -p1 -i patches/acls.diff || exit 1
