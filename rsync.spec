@@ -36,6 +36,7 @@ Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		https://tobi.oetiker.ch/patches/rsync-3.1.2-1-fadvise.patch
 # Patch1-md5:	b055468e7cbc5d829aa943f07916d458
+Patch2:		rsync-noatime.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.59
@@ -163,6 +164,7 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %setup -q -b1
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
+%patch2 -p1
 
 # for compat with previous patched version
 patch -p1 -i patches/acls.diff || exit 1
