@@ -1,17 +1,16 @@
-diff -ru rsync-3.1.2.orig/checksum.c rsync-3.1.2/checksum.c
---- rsync-3.1.2.orig/checksum.c	2015-08-08 22:47:03.000000000 +0300
-+++ rsync-3.1.2/checksum.c	2016-10-24 15:38:28.002415712 +0300
-@@ -24,6 +24,9 @@
- extern int checksum_seed;
- extern int protocol_version;
+--- rsync-3.1.3/checksum.c~	2018-01-15 05:55:07.000000000 +0200
++++ rsync-3.1.3/checksum.c	2018-12-04 00:27:15.382240696 +0200
+@@ -26,6 +26,10 @@
  extern int proper_seed_order;
+ extern char *checksum_choice;
+ 
 +#ifdef WITH_DROP_CACHE
 +#define close(fd) fadv_close(fd)
 +#endif
- 
- /*
-   a simple 32 bit checksum that can be upadted from either end
-diff -ru rsync-3.1.2.orig/cleanup.c rsync-3.1.2/cleanup.c
++
+ #define CSUM_NONE 0
+ #define CSUM_MD4_ARCHAIC 1
+ #define CSUM_MD4_BUSTED 2
 --- rsync-3.1.2.orig/cleanup.c	2015-08-08 22:47:03.000000000 +0300
 +++ rsync-3.1.2/cleanup.c	2016-10-24 15:38:28.002415712 +0300
 @@ -53,7 +53,11 @@
@@ -228,13 +227,12 @@ diff -ru rsync-3.1.2.orig/receiver.c rsync-3.1.2/receiver.c
  static struct bitbag *delayed_bits = NULL;
  static int phase = 0, redoing = 0;
  static flist_ndx_list batch_redo_list;
-diff -ru rsync-3.1.2.orig/rsync.1 rsync-3.1.2/rsync.1
---- rsync-3.1.2.orig/rsync.1	2015-12-21 22:22:41.000000000 +0200
-+++ rsync-3.1.2/rsync.1	2016-10-24 15:38:28.010415712 +0300
+--- rsync-3.1.3/rsync.1~	2018-12-04 00:26:25.000000000 +0200
++++ rsync-3.1.3/rsync.1	2018-12-04 00:27:43.557037661 +0200
 @@ -453,6 +453,7 @@
       \-\-super                 receiver attempts super\-user activities
       \-\-fake\-super            store/recover privileged attrs using xattrs
-  \-S, \-\-sparse                handle sparse files efficiently
+  \-S, \-\-sparse                turn sequences of nulls into sparse blocks
 +     \-\-drop\-cache            drop cache continuosly using fadvise
       \-\-preallocate           allocate dest files before writing
   \-n, \-\-dry\-run               perform a trial run with no changes made

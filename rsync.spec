@@ -4,7 +4,7 @@
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
-%bcond_with	fadvise	# apply fadvise patch
+%bcond_without	fadvise	# apply fadvise patch
 %bcond_with	tests	# perform "make test"
 #
 %ifarch alpha
