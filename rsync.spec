@@ -27,16 +27,15 @@ License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
 # Source0-md5:	1581a588fde9d89f6bc6201e8129afaf
-Source1:	https://rsync.samba.org/ftp/rsync/rsync-patches-%{version}.tar.gz
+Source1:	https://rsync.samba.org/ftp/rsync/%{name}-patches-%{version}.tar.gz
 # Source1-md5:	753fc37ffc277571c69135e8bc5fae9d
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
-Patch1:		https://tobi.oetiker.ch/patches/rsync-3.1.2-1-fadvise.patch
-# Patch1-md5:	b055468e7cbc5d829aa943f07916d458
-Patch2:		rsync-noatime.patch
+Patch1:		%{name}-fadvise.patch
+Patch2:		%{name}-noatime.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.59
@@ -216,10 +215,10 @@ cat << 'EOF' > $RPM_BUILD_ROOT/etc/env.d/RSYNC_PASSWORD
 #RSYNC_PASSWORD=
 EOF
 
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
-install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
-install %{SOURCE5} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
+install -p %{SOURCE3} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
+cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
+cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
+cp -p %{SOURCE5} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
 
 %clean
 rm -rf $RPM_BUILD_ROOT
