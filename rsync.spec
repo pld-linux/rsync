@@ -21,7 +21,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.1.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
