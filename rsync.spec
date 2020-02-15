@@ -21,7 +21,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.1.3
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
@@ -37,6 +37,10 @@ Patch100:	%{name}-fixes.patch
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
 Patch2:		%{name}-noatime.patch
+Patch3:		CVE-2016-9840.patch
+Patch4:		CVE-2016-9841.patch
+Patch5:		CVE-2016-9842.patch
+Patch6:		CVE-2016-9843.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.59
@@ -166,6 +170,10 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 # for compat with previous patched version
 patch -p1 -i patches/acls.diff || exit 1
