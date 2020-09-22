@@ -1,24 +1,3 @@
-diff -ur rsync-3.0.8.orig/rsync.1 rsync-3.0.8/rsync.1
---- rsync-3.0.8.orig/rsync.1	2011-03-26 22:37:52.000000000 +0100
-+++ rsync-3.0.8/rsync.1	2011-04-07 10:27:01.761502719 +0200
-@@ -2566,7 +2566,7 @@
- .IP "\fB\-\-config=FILE\fP"
- This specifies an alternate config file than
- the default.  This is only relevant when \fB\-\-daemon\fP is specified.
--The default is /etc/rsyncd.conf unless the daemon is running over
-+The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
- a remote shell program and the remote user is not the super\-user; in that case
- the default is rsyncd.conf in the current directory (typically $HOME).
- .IP 
-@@ -3474,7 +3474,7 @@
- .SH "FILES"
- 
- .PP 
--/etc/rsyncd.conf or rsyncd.conf
-+/etc/rsyncd/rsyncd.conf or rsyncd.conf
- .PP 
- .SH "SEE ALSO"
- 
 diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
 --- rsync-3.0.8.orig/rsync.h	2011-02-21 20:32:51.000000000 +0100
 +++ rsync-3.0.8/rsync.h	2011-04-07 10:21:07.794002236 +0200
@@ -31,121 +10,47 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
  #define URL_PREFIX "rsync://"
  
  #define SYMLINK_PREFIX "/rsyncd-munged/"  /* This MUST have a trailing slash! */
-diff -ur rsync-3.0.8.orig/rsync.yo rsync-3.0.8/rsync.yo
---- rsync-3.0.8.orig/rsync.yo	2011-03-26 22:34:18.000000000 +0100
-+++ rsync-3.0.8/rsync.yo	2011-04-07 10:21:07.798002324 +0200
-@@ -2220,7 +2220,7 @@
- If standard input is a socket then rsync will assume that it is being
- run via inetd, otherwise it will detach from the current terminal and
- become a background daemon.  The daemon will read the config file
--(rsyncd.conf) on each connect made by a client and respond to
-+(/etc/rsyncd/rsyncd.conf) on each connect made by a client and respond to
- requests accordingly.  See the bf(rsyncd.conf)(5) man page for more
- details.
- 
-@@ -2238,7 +2238,7 @@
- 
- dit(bf(--config=FILE)) This specifies an alternate config file than
- the default.  This is only relevant when bf(--daemon) is specified.
--The default is /etc/rsyncd.conf unless the daemon is running over
-+The default is /etc/rsyncd/rsyncd.conf unless the daemon is running over
- a remote shell program and the remote user is not the super-user; in that case
- the default is rsyncd.conf in the current directory (typically $HOME).
- 
-@@ -2972,7 +2972,7 @@
- 
- manpagefiles()
- 
--/etc/rsyncd.conf or rsyncd.conf
-+/etc/rsyncd/rsyncd.conf or rsyncd.conf
- 
- manpageseealso()
- 
 diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
 --- rsync-3.0.8.orig/rsyncd.conf.5	2011-03-26 22:37:52.000000000 +0100
 +++ rsync-3.0.8/rsyncd.conf.5	2011-04-07 10:21:07.789502107 +0200
-@@ -315,7 +315,7 @@
- support the \(dq\&max connections\(dq\& parameter. The rsync daemon uses record
- locking on this file to ensure that the max connections limit is not
- exceeded for the modules sharing the lock file.
--The default is \f(CW/var/run/rsyncd.lock\fP.
-+The default is \f(CW/var/lock/rsyncd.lock\fP.
- .IP 
- .IP "\fBread only\fP"
- This parameter determines whether clients
-@@ -460,7 +460,7 @@
+@@ -632,7 +632,7 @@ require that you specify a group passwor
  passwords.
- .IP 
- There is no default for the \(dq\&secrets file\(dq\& parameter, you must choose a name
--(such as \f(CW/etc/rsyncd.secrets\fP).  The file must normally not be readable
-+(such as \f(CW/etc/rsyncd/rsyncd.secrets\fP).  The file must normally not be readable
- by \(dq\&other\(dq\&; see \(dq\&strict modes\(dq\&.  If the file is not found or is rejected, no
- logins for a \(dq\&user auth\(dq\& module will be possible.
- .IP 
-@@ -785,12 +785,12 @@
+ .IP
+ There is no default for the "secrets file" parameter, you must choose a
+-name (such as \fB/etc/rsyncd.secrets\fP).  The file must normally not be
++name (such as \fB/etc/rsyncd/rsyncd.secrets\fP).  The file must normally not be
+ readable by "other"; see "strict modes".  If the file is not found or is
+ rejected, no logins for a "user auth" module will be possible.
+ .IP "\fBstrict\ modes\fP"
+@@ -1092,7 +1092,7 @@ that can be included into multiple modul
+ global values that will affect connections (such as \fBmotd\ file\fP), or globals
+ that will affect other include files.
+ .P
+-For example, this is a useful /etc/rsyncd.conf file:
++For example, this is a useful /etc/rsyncd/rsyncd.conf file:
+ .RS 4
+ .P
+ .nf
+@@ -1219,11 +1219,11 @@ pid file = /var/run/rsyncd.pid
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
 -        secrets file = /etc/rsyncd.secrets
 +        secrets file = /etc/rsyncd/rsyncd.secrets
- 
- .fi 
- 
- .PP 
+ .fi
+ .RE
+ .P
 -The /etc/rsyncd.secrets file would look something like this:
 +The /etc/rsyncd/rsyncd.secrets file would look something like this:
- .PP 
- .RS 
- \f(CWtridge:mypass\fP
-@@ -803,7 +803,7 @@
+ .RS 4
+ .P
+ .nf
+@@ -1234,7 +1234,7 @@ susan:herpass
+ .P
  .SH "FILES"
- 
- .PP 
+ .P
 -/etc/rsyncd.conf or rsyncd.conf
 +/etc/rsyncd/rsyncd.conf or rsyncd.conf
- .PP 
+ .P
  .SH "SEE ALSO"
- 
-diff -ur rsync-3.0.8.orig/rsyncd.conf.yo rsync-3.0.8/rsyncd.conf.yo
---- rsync-3.0.8.orig/rsyncd.conf.yo	2011-03-26 22:34:18.000000000 +0100
-+++ rsync-3.0.8/rsyncd.conf.yo	2011-04-07 10:21:07.792002183 +0200
-@@ -66,7 +66,7 @@
- reread its config file.
- 
- Note that you should bf(not) send the rsync daemon a HUP signal to force
--it to reread the tt(rsyncd.conf) file. The file is re-read on each client
-+it to reread the tt(/etc/rsyncd/rsyncd.conf) file. The file is re-read on each client
- connection.
- 
- manpagesection(GLOBAL PARAMETERS)
-@@ -125,7 +125,7 @@
- 
- dit(bf(path)) This parameter specifies the directory in the daemon's
- filesystem to make available in this module.  You must specify this parameter
--for each module in tt(rsyncd.conf).
-+for each module in tt(/etc/rsyncd/rsyncd.conf).
- 
- dit(bf(use chroot)) If "use chroot" is true, the rsync daemon will chroot
- to the "path" before starting the file transfer with the client.  This has
-@@ -409,7 +409,7 @@
- passwords.
- 
- There is no default for the "secrets file" parameter, you must choose a name
--(such as tt(/etc/rsyncd.secrets)).  The file must normally not be readable
-+(such as tt(/etc/rsyncd/rsyncd.secrets)).  The file must normally not be readable
- by "other"; see "strict modes".  If the file is not found or is rejected, no
- logins for a "user auth" module will be possible.
- 
-@@ -673,10 +673,10 @@
-         path = /data/cvs
-         comment = CVS repository (requires authentication)
-         auth users = tridge, susan
--        secrets file = /etc/rsyncd.secrets
-+        secrets file = /etc/rsyncd/rsyncd.secrets
- )
- 
--The /etc/rsyncd.secrets file would look something like this:
-+The /etc/rsyncd/rsyncd.secrets file would look something like this:
- 
- quote(
- tt(tridge:mypass)nl()
+ .P

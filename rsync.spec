@@ -4,7 +4,8 @@
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
-%bcond_without	fadvise	# apply fadvise patch
+%bcond_with	fadvise	# apply fadvise patch
+%bcond_with	noatime	# apply noatime patch
 %bcond_with	tests	# perform "make test"
 #
 %ifarch alpha
@@ -20,33 +21,29 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.1.3
-Release:	4
+Version:	3.2.3
+Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	1581a588fde9d89f6bc6201e8129afaf
+# Source0-md5:	209f8326f5137d8817a6276d9577a2f1
 Source1:	https://rsync.samba.org/ftp/rsync/%{name}-patches-%{version}.tar.gz
-# Source1-md5:	753fc37ffc277571c69135e8bc5fae9d
+# Source1-md5:	884c872b55c7431f4c4e8d8bf182fafa
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
-Patch100:	%{name}-fixes.patch
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
 Patch2:		%{name}-noatime.patch
-Patch3:		CVE-2016-9840.patch
-Patch4:		CVE-2016-9841.patch
-Patch5:		CVE-2016-9842.patch
-Patch6:		CVE-2016-9843.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.318
+BuildRequires:	xxHash-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_duplicate_files_terminate_build	0
@@ -166,18 +163,11 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
 %setup -q -b1
-%patch100 -p1
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
+%{?with_noatime:%patch2 -p1}
 
-# for compat with previous patched version
-patch -p1 -i patches/acls.diff || exit 1
-patch -p1 -i patches/xattrs.diff || exit 1
+sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
 %build
 cp -f /usr/share/automake/config.sub .
@@ -259,7 +249,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README NEWS OLDNEWS TODO support
+%doc README.md NEWS.md TODO support
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/CVSIGNORE
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PASSWORD
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PROXY

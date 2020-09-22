@@ -92,3 +92,56 @@ index c46a8b4..6620563 100644
  
  	return open(pathname, flags | O_BINARY, mode);
  }
+Index: rsync/tls.c
+===================================================================
+--- rsync.orig/tls.c
++++ rsync/tls.c
+@@ -53,6 +53,7 @@ int preserve_perms = 0;
+ int preserve_executability = 0;
+ int preallocate_files = 0;
+ int inplace = 0;
++int noatime = 0;
+ 
+ #ifdef SUPPORT_XATTRS
+ 
+Index: rsync/t_unsafe.c
+===================================================================
+--- rsync.orig/t_unsafe.c
++++ rsync/t_unsafe.c
+@@ -33,6 +33,10 @@ int preserve_perms = 0;
+ int preserve_executability = 0;
+ short info_levels[COUNT_INFO], debug_levels[COUNT_DEBUG];
+ 
++/* This is to make syscall.o shut up. */
++int noatime = 0;
++
++
+ int
+ main(int argc, char **argv)
+ {
+Index: rsync/wildtest.c
+===================================================================
+--- rsync.orig/wildtest.c
++++ rsync/wildtest.c
+@@ -32,6 +32,9 @@ int fnmatch_errors = 0;
+ 
+ int wildmatch_errors = 0;
+ 
++/* This is to make syscall.o shut up. */
++int noatime = 0;
++
+ typedef char bool;
+ 
+ int output_iterations = 0;
+Index: rsync/trimslash.c
+===================================================================
+--- rsync.orig/trimslash.c
++++ rsync/trimslash.c
+@@ -30,6 +30,7 @@ int preserve_perms = 0;
+ int preserve_executability = 0;
+ int preallocate_files = 0;
+ int inplace = 0;
++int noatime = 0;
+ 
+ int
+ main(int argc, char **argv)
