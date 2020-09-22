@@ -43,7 +43,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	popt-devel
 BuildRequires:	rpmbuild(macros) >= 1.318
-BuildRequires:	xxHash-devel
+BuildRequires:	xxHash-devel >= 0.8.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_duplicate_files_terminate_build	0
