@@ -5,7 +5,6 @@
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
 %bcond_with	fadvise	# apply fadvise patch
-%bcond_with	noatime	# apply noatime patch
 %bcond_with	tests	# perform "make test"
 #
 %ifarch alpha
@@ -36,14 +35,19 @@ Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
-Patch2:		%{name}-noatime.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
+BuildRequires:	libstdc++-devel
+BuildRequires:	lz4-devel
+BuildRequires:	openssl-devel
 BuildRequires:	popt-devel
+BuildRequires:	python3 >= 1:3
+BuildRequires:	python3-commonmark
 BuildRequires:	rpmbuild(macros) >= 1.318
 BuildRequires:	xxHash-devel >= 0.8.0
+BuildRequires:	zstd-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_duplicate_files_terminate_build	0
@@ -165,7 +169,6 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %setup -q -b1
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
-%{?with_noatime:%patch2 -p1}
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
@@ -175,11 +178,11 @@ cp -f /usr/share/automake/config.sub .
 %{__autoconf}
 %configure \
 	LIBS="-lcrypto" \
-	%{?with_rsh:--with-rsh=rsh} \
-	--enable-ipv6 \
 	--enable-acl-support \
-	--enable-xattr-support \
 	--disable-debug \
+	--enable-ipv6 \
+	--enable-xattr-support \
+	%{?with_rsh:--with-rsh=rsh} \
 	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
 %{__make} proto
 %{__make}
@@ -255,7 +258,9 @@ fi
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_PROXY
 %config(noreplace,missingok) %verify(not md5 mtime size) /etc/env.d/RSYNC_RSH
 %attr(755,root,root) %{_bindir}/rsync
+%attr(755,root,root) %{_bindir}/rsync-ssl
 %{_mandir}/man1/rsync.1*
+%{_mandir}/man1/rsync-ssl.1*
 
 %files -n rsyncd-inetd
 %defattr(644,root,root,755)

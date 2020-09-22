@@ -10,10 +10,58 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
  #define URL_PREFIX "rsync://"
  
  #define SYMLINK_PREFIX "/rsyncd-munged/"  /* This MUST have a trailing slash! */
-diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
---- rsync-3.0.8.orig/rsyncd.conf.5	2011-03-26 22:37:52.000000000 +0100
-+++ rsync-3.0.8/rsyncd.conf.5	2011-04-07 10:21:07.789502107 +0200
-@@ -632,7 +632,7 @@ require that you specify a group passwor
+--- rsync-3.2.3/rsync.1.orig	2020-08-07 05:57:26.000000000 +0200
++++ rsync-3.2.3/rsync.1	2020-08-16 14:32:06.591094708 +0200
+@@ -3423,7 +3423,7 @@
+ version of this option (above) for some extra details.
+ .IP "\fB\-\-config=FILE\fP"
+ This specifies an alternate config file than the default.  This is only
+-relevant when \fB\-\-daemon\fP is specified.  The default is /etc/rsyncd.conf
++relevant when \fB\-\-daemon\fP is specified.  The default is /etc/rsyncd/rsyncd.conf
+ unless the daemon is running over a remote shell program and the remote
+ user is not the super-user; in that case the default is rsyncd.conf in the
+ current directory (typically $HOME).
+@@ -4260,7 +4260,7 @@
+ .P
+ .SH "FILES"
+ .P
+-/etc/rsyncd.conf or rsyncd.conf
++/etc/rsyncd/rsyncd.conf or rsyncd.conf
+ .P
+ .SH "SEE ALSO"
+ .P
+--- rsync-3.2.3/rsync.1.md.orig	2020-07-28 00:56:48.000000000 +0200
++++ rsync-3.2.3/rsync.1.md	2020-08-16 14:33:28.887315538 +0200
+@@ -3380,7 +3380,7 @@
+ 0.  `--config=FILE`
+ 
+     This specifies an alternate config file than the default.  This is only
+-    relevant when `--daemon` is specified.  The default is /etc/rsyncd.conf
++    relevant when `--daemon` is specified.  The default is /etc/rsyncd/rsyncd.conf
+     unless the daemon is running over a remote shell program and the remote
+     user is not the super-user; in that case the default is rsyncd.conf in the
+     current directory (typically $HOME).
+@@ -4117,7 +4117,7 @@
+ 
+ # FILES
+ 
+-/etc/rsyncd.conf or rsyncd.conf
++/etc/rsyncd/rsyncd.conf or rsyncd.conf
+ 
+ # SEE ALSO
+ 
+--- rsync-3.2.3/rsyncd.conf.5.orig	2020-08-07 05:57:26.000000000 +0200
++++ rsync-3.2.3/rsyncd.conf.5	2020-08-16 18:54:27.322486513 +0200
+@@ -393,7 +393,7 @@
+ This parameter specifies the file to use to support the "max connections"
+ parameter. The rsync daemon uses record locking on this file to ensure that
+ the max connections limit is not exceeded for the modules sharing the lock
+-file.  The default is \fB/var/run/rsyncd.lock\fP.
++file.  The default is \fB/var/lock/rsyncd.lock\fP.
+ .IP "\fBread\ only\fP"
+ This parameter determines whether clients will be able to upload files or
+ not. If "read only" is true then any attempted uploads will fail. If
+@@ -632,7 +632,7 @@
  passwords.
  .IP
  There is no default for the "secrets file" parameter, you must choose a
@@ -22,7 +70,7 @@ diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
  readable by "other"; see "strict modes".  If the file is not found or is
  rejected, no logins for a "user auth" module will be possible.
  .IP "\fBstrict\ modes\fP"
-@@ -1092,7 +1092,7 @@ that can be included into multiple modul
+@@ -1092,7 +1092,7 @@
  global values that will affect connections (such as \fBmotd\ file\fP), or globals
  that will affect other include files.
  .P
@@ -31,7 +79,25 @@ diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
  .RS 4
  .P
  .nf
-@@ -1219,11 +1219,11 @@ pid file = /var/run/rsyncd.pid
+@@ -1100,13 +1100,13 @@
+ log file = /var/log/rsync.log
+ pid file = /var/lock/rsync.lock
+ 
+-&merge /etc/rsyncd.d
+-&include /etc/rsyncd.d
++&merge /etc/rsyncd/rsyncd.d
++&include /etc/rsyncd/rsyncd.d
+ .fi
+ .RE
+ .P
+-This would merge any \fB/etc/rsyncd.d/*.inc\fP files (for global values that should
+-stay in effect), and then include any \fB/etc/rsyncd.d/*.conf\fP files (defining
++This would merge any \fB/etc/rsyncd/rsyncd.d/*.inc\fP files (for global values that should
++stay in effect), and then include any \fB/etc/rsyncd/rsyncd.d/*.conf\fP files (defining
+ modules without any global-value cross-talk).
+ .P
+ .SH "AUTHENTICATION STRENGTH"
+@@ -1219,11 +1219,11 @@
          path = /data/cvs
          comment = CVS repository (requires authentication)
          auth users = tridge, susan
@@ -45,7 +111,7 @@ diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
  .RS 4
  .P
  .nf
-@@ -1234,7 +1234,7 @@ susan:herpass
+@@ -1234,7 +1234,7 @@
  .P
  .SH "FILES"
  .P
@@ -54,3 +120,67 @@ diff -ur rsync-3.0.8.orig/rsyncd.conf.5 rsync-3.0.8/rsyncd.conf.5
  .P
  .SH "SEE ALSO"
  .P
+--- rsync-3.2.3/rsyncd.conf.5.md.orig	2020-08-16 14:34:12.567078905 +0200
++++ rsync-3.2.3/rsyncd.conf.5.md	2020-08-16 18:53:50.806017673 +0200
+@@ -417,7 +417,7 @@
+     This parameter specifies the file to use to support the "max connections"
+     parameter. The rsync daemon uses record locking on this file to ensure that
+     the max connections limit is not exceeded for the modules sharing the lock
+-    file.  The default is `/var/run/rsyncd.lock`.
++    file.  The default is `/var/lock/rsyncd.lock`.
+ 
+ 0.  `read only`
+ 
+@@ -680,7 +680,7 @@
+     passwords.
+ 
+     There is no default for the "secrets file" parameter, you must choose a
+-    name (such as `/etc/rsyncd.secrets`).  The file must normally not be
++    name (such as `/etc/rsyncd/rsyncd.secrets`).  The file must normally not be
+     readable by "other"; see "strict modes".  If the file is not found or is
+     rejected, no logins for a "user auth" module will be possible.
+ 
+@@ -1075,17 +1075,17 @@
+ global values that will affect connections (such as `motd file`), or globals
+ that will affect other include files.
+ 
+-For example, this is a useful /etc/rsyncd.conf file:
++For example, this is a useful /etc/rsyncd/rsyncd.conf file:
+ 
+ >     port = 873
+ >     log file = /var/log/rsync.log
+ >     pid file = /var/lock/rsync.lock
+ >
+->     &merge /etc/rsyncd.d
+->     &include /etc/rsyncd.d
++>     &merge /etc/rsyncd/rsyncd.d
++>     &include /etc/rsyncd/rsyncd.d
+ 
+-This would merge any `/etc/rsyncd.d/*.inc` files (for global values that should
+-stay in effect), and then include any `/etc/rsyncd.d/*.conf` files (defining
++This would merge any `/etc/rsyncd/rsyncd.d/*.inc` files (for global values that should
++stay in effect), and then include any `/etc/rsyncd/rsyncd.d/*.conf` files (defining
+ modules without any global-value cross-talk).
+ 
+ # AUTHENTICATION STRENGTH
+@@ -1189,17 +1189,17 @@
+ >         path = /data/cvs
+ >         comment = CVS repository (requires authentication)
+ >         auth users = tridge, susan
+->         secrets file = /etc/rsyncd.secrets
++>         secrets file = /etc/rsyncd/rsyncd.secrets
+ > ```
+ 
+-The /etc/rsyncd.secrets file would look something like this:
++The /etc/rsyncd/rsyncd.secrets file would look something like this:
+ 
+ >     tridge:mypass
+ >     susan:herpass
+ 
+ # FILES
+ 
+-/etc/rsyncd.conf or rsyncd.conf
++/etc/rsyncd/rsyncd.conf or rsyncd.conf
+ 
+ # SEE ALSO
+ 
