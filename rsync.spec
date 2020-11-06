@@ -21,7 +21,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.2.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
@@ -35,6 +35,7 @@ Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
+Patch2:		lchmod.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
@@ -169,6 +170,7 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %setup -q -b1
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
+%patch2 -p1
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
