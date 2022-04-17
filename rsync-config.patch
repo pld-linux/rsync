@@ -13,14 +13,14 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
 --- rsync-3.2.3/rsync.1.orig	2020-08-07 05:57:26.000000000 +0200
 +++ rsync-3.2.3/rsync.1	2020-08-16 14:32:06.591094708 +0200
 @@ -3423,7 +3423,7 @@
- version of this option (above) for some extra details.
  .IP "\fB\-\-config=FILE\fP"
  This specifies an alternate config file than the default.  This is only
--relevant when \fB\-\-daemon\fP is specified.  The default is /etc/rsyncd.conf
-+relevant when \fB\-\-daemon\fP is specified.  The default is /etc/rsyncd/rsyncd.conf
- unless the daemon is running over a remote shell program and the remote
- user is not the super-user; in that case the default is rsyncd.conf in the
- current directory (typically $HOME).
+ relevant when \fB\-\-daemon\fP is specified.  The default is
+-/etc/rsyncd.conf unless the daemon is running over a remote shell program
++/etc/rsyncd/rsyncd.conf unless the daemon is running over a remote shell program
+ and the remote user is not the super-user; in that case the default is
+ rsyncd.conf in the current directory (typically $HOME).
+ .IP "\fB\-\-dparam=OVERRIDE\fP, \fB\-M\fP"
 @@ -4260,7 +4260,7 @@
  .P
  .SH "FILES"
@@ -33,22 +33,22 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
 --- rsync-3.2.3/rsync.1.md.orig	2020-07-28 00:56:48.000000000 +0200
 +++ rsync-3.2.3/rsync.1.md	2020-08-16 14:33:28.887315538 +0200
 @@ -3380,7 +3380,7 @@
- 0.  `--config=FILE`
  
      This specifies an alternate config file than the default.  This is only
--    relevant when `--daemon` is specified.  The default is /etc/rsyncd.conf
-+    relevant when `--daemon` is specified.  The default is /etc/rsyncd/rsyncd.conf
-     unless the daemon is running over a remote shell program and the remote
-     user is not the super-user; in that case the default is rsyncd.conf in the
-     current directory (typically $HOME).
+     relevant when [`--daemon`](#dopt) is specified.  The default is
+-    /etc/rsyncd.conf unless the daemon is running over a remote shell program
++    /etc/rsyncd/rsyncd.conf unless the daemon is running over a remote shell program
+     and the remote user is not the super-user; in that case the default is
+     rsyncd.conf in the current directory (typically $HOME).
+ 
 @@ -4117,7 +4117,7 @@
  
- # FILES
+ ## FILES
  
 -/etc/rsyncd.conf or rsyncd.conf
 +/etc/rsyncd/rsyncd.conf or rsyncd.conf
  
- # SEE ALSO
+ ## SEE ALSO
  
 --- rsync-3.2.3/rsyncd.conf.5.orig	2020-08-07 05:57:26.000000000 +0200
 +++ rsync-3.2.3/rsyncd.conf.5	2020-08-16 18:54:27.322486513 +0200
@@ -68,7 +68,7 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
 -name (such as \fB/etc/rsyncd.secrets\fP).  The file must normally not be
 +name (such as \fB/etc/rsyncd/rsyncd.secrets\fP).  The file must normally not be
  readable by "other"; see "strict modes".  If the file is not found or is
- rejected, no logins for a "user auth" module will be possible.
+ rejected, no logins for an "auth users" module will be possible.
  .IP "\fBstrict\ modes\fP"
 @@ -1092,7 +1092,7 @@
  global values that will affect connections (such as \fBmotd\ file\fP), or globals
@@ -123,7 +123,7 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
 --- rsync-3.2.3/rsyncd.conf.5.md.orig	2020-08-16 14:34:12.567078905 +0200
 +++ rsync-3.2.3/rsyncd.conf.5.md	2020-08-16 18:53:50.806017673 +0200
 @@ -417,7 +417,7 @@
-     This parameter specifies the file to use to support the "max connections"
+     This parameter specifies the file to use to support the "[max connections](#)"
      parameter. The rsync daemon uses record locking on this file to ensure that
      the max connections limit is not exceeded for the modules sharing the lock
 -    file.  The default is `/var/run/rsyncd.lock`.
@@ -137,8 +137,8 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
      There is no default for the "secrets file" parameter, you must choose a
 -    name (such as `/etc/rsyncd.secrets`).  The file must normally not be
 +    name (such as `/etc/rsyncd/rsyncd.secrets`).  The file must normally not be
-     readable by "other"; see "strict modes".  If the file is not found or is
-     rejected, no logins for a "user auth" module will be possible.
+     readable by "other"; see "[strict modes](#)".  If the file is not found or is
+     rejected, no logins for an "[auth users](#)" module will be possible.
  
 @@ -1075,17 +1075,17 @@
  global values that will affect connections (such as `motd file`), or globals
@@ -162,7 +162,7 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
 +stay in effect), and then include any `/etc/rsyncd/rsyncd.d/*.conf` files (defining
  modules without any global-value cross-talk).
  
- # AUTHENTICATION STRENGTH
+ ## AUTHENTICATION STRENGTH
 @@ -1189,17 +1189,17 @@
  >         path = /data/cvs
  >         comment = CVS repository (requires authentication)
@@ -177,10 +177,10 @@ diff -ur rsync-3.0.8.orig/rsync.h rsync-3.0.8/rsync.h
  >     tridge:mypass
  >     susan:herpass
  
- # FILES
+ ## FILES
  
 -/etc/rsyncd.conf or rsyncd.conf
 +/etc/rsyncd/rsyncd.conf or rsyncd.conf
  
- # SEE ALSO
+ ## SEE ALSO
  

@@ -17,22 +17,21 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.2.3
-Release:	4
+Version:	3.2.4
+Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	209f8326f5137d8817a6276d9577a2f1
+# Source0-md5:	26f1c64259fbd2ed7a59b28d2787ecf2
 Source1:	https://rsync.samba.org/ftp/rsync/%{name}-patches-%{version}.tar.gz
-# Source1-md5:	884c872b55c7431f4c4e8d8bf182fafa
+# Source1-md5:	2ed038a3d7dbb1e755fd9a8bda7262b2
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
-Patch2:		lchmod.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
@@ -45,6 +44,7 @@ BuildRequires:	python3 >= 1:3
 BuildRequires:	python3-commonmark
 BuildRequires:	rpmbuild(macros) >= 1.318
 BuildRequires:	xxHash-devel >= 0.8.0
+BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel
 %if %{with tests}
 BuildRequires:	fakeroot >= 1.26
@@ -170,7 +170,6 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %setup -q -b1
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
-%patch2 -p1
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
@@ -184,6 +183,7 @@ cp -f /usr/share/automake/config.sub .
 	--disable-debug \
 	--enable-ipv6 \
 	--enable-xattr-support \
+	--with-included-zlib=no \
 	%{?with_rsh:--with-rsh=rsh} \
 	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
 %{__make} proto
