@@ -1,0 +1,10 @@
+--- rsync-3.2.7/Makefile.in~	2022-10-02 20:26:44.000000000 +0200
++++ rsync-3.2.7/Makefile.in	2022-10-26 12:00:10.779320246 +0200
+@@ -218,7 +218,6 @@ configure.sh config.h.in: configure.ac a
+ 	    else \
+ 		echo 'You may need to run:'; \
+ 		echo '  make reconfigure'; \
+-		exit 1; \
+ 	    fi \
+ 	fi
+ 

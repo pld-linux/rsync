@@ -17,21 +17,22 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.2.6
-Release:	2
+Version:	3.2.7
+Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://rsync.samba.org/ftp/rsync/%{name}-%{version}.tar.gz
-# Source0-md5:	4221fa80ffa59f46df7c18f61cc7e3e0
+# Source0-md5:	f216f350ef56b9ba61bc313cb6ec2ed6
 Source1:	https://rsync.samba.org/ftp/rsync/%{name}-patches-%{version}.tar.gz
-# Source1-md5:	d18af52990bd03602f594151faa8eed3
+# Source1-md5:	b41a6fa5bdfc55e7d569cd0aba9f501b
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
+Patch2:         rsync-norandomfailure.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
@@ -170,11 +171,15 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %setup -q -b1
 %patch0 -p1
 %{?with_fadvise:%patch1 -p1}
+%patch2 -p1
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
+rm -f *.old
+
 %build
 cp -f /usr/share/automake/config.sub .
+%{__aclocal} -I m4
 %{__autoheader}
 %{__autoconf}
 %configure \
