@@ -6,9 +6,22 @@
 # description:	rsync daemon
 # processname:	rsync
 #
-# pidfile:	/var/run/rsyncd.pid
 
-# Source function library.
+# Get service config
+[ -f /etc/sysconfig/rsyncd ] && . /etc/sysconfig/rsyncd
+
+[ -n "$2" ] && DAEMONS="$2"
+
+# no daemons. exit silently
+if [ -z "$DAEMONS" ]; then
+   	case "$1" in
+	start|stop|restart|reload|force-reload)
+		exit 0
+		;;
+	esac
+fi
+
+# Source function library
 . /etc/rc.d/init.d/functions
 
 # Source networking configuration.
@@ -24,30 +37,66 @@ else
 	exit 0
 fi
 
-# Get service configuration
-[ -f /etc/sysconfig/rsyncd ] && . /etc/sysconfig/rsyncd
+# check if the daemon $1 is up
+daemonup() {
+	local daemon="$1"
+	local pidfile=/var/run/rsyncd/$daemon.pid
+	local pid=$(cat $pidfile 2>/dev/null)
+	kill -0 $pid 2>/dev/null
+	return $?
+}
+
+# check if all the configured daemons are up
+daemonsup() {
+        local daemon
+        ret=0
+        for daemon in $DAEMONS; do
+                daemonup $daemon && continue
+                ret=1
+        done
+        return $ret
+}
 
 start() {
-	# Start daemons.
-	if [ ! -f /var/lock/subsys/rsyncd ]; then
-		msg_starting rsyncd
-		daemon /usr/bin/rsync --daemon --dparam=pidfile=/var/run/rsync.pid ${RSYNC_OPTIONS}
-		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rsyncd
-	else
-		msg_already_running rsyncd
-	fi
+	msg_starting "rsyncd"; started
+	for daemon in $DAEMONS; do
+		config="/etc/rsyncd/$daemon.conf"
+		if [ ! -f "$config" ]; then
+			nls "Invalid daemon \`%s': missing config: %s" $daemon "$config"
+			fail
+			RET=1
+		else
+			daemonup $daemon && continue
+			show "Starting Rsync daemon %s" "$daemon"; busy
+			daemon /usr/bin/rsync --daemon --config=$config --dparam=pidfile=/var/run/rsyncd/$daemon.pid ${RSYNC_OPTIONS}
+			RET=$?
+		fi
+		[ $RETVAL -eq 0 ] && RETVAL=$RET
+	done
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/rsyncd
 }
 
 stop() {
-	# Stop daemons.
-	if [ -f /var/lock/subsys/rsyncd ]; then
-		msg_stopping rsyncd
-		killproc rsync
-		rm -f /var/lock/subsys/rsyncd >/dev/null 2>&1
-	else
-		msg_not_running rsyncd
-	fi
+	msg_stopping "rsyncd"; started
+	for daemon in $DAEMONS; do
+		pidfile=/var/run/rsyncd/$daemon.pid
+		[ -f "$pidfile" ] || continue
+		pid=`cat "$pidfile"`
+		show "Stopping Rsync daemon %s" "$daemon"; busy
+		killproc --pidfile rsyncd/$daemon.pid || err=1
+	done
+	rm -f /var/lock/subsys/rsyncd >/dev/null 2>&1
+}
+
+reload() {
+	msg_reloading "rsyncd"; started
+	for daemon in $DAEMONS; do
+		pidfile=/var/run/rsyncd/$daemon.pid
+		[ -f "$pidfile" ] || continue
+		show "Reloading Rsync daemon %s" "$daemon"
+		killproc --pidfile rsyncd/$daemon.pid rsyncd -HUP
+		[ $? -ne 0 -a $RETVAL -eq 0 ] && RETVAL=7
+	done
 }
 
 condrestart() {
@@ -60,17 +109,41 @@ condrestart() {
 	fi
 }
 
+status() {
+	nls "Configured daemons:"
+   	echo " $DAEMONS"
+	nls "Currently active daemons:"
+	for pidfile in /var/run/rsyncd/*.pid; do
+		[ -f "$pidfile" ] || continue
+		daemon=${pidfile#/var/run/rsyncd/}
+		daemon=${daemon%.pid}
+		daemonup $daemon && echo -n " $daemon($(cat $pidfile))"
+	done
+	echo ""
+	nm_rsyncd_pid=$(ps -o pid= -C nm-rsyncd-service | xargs)
+	if [ "$nm_rsyncd_pid" ]; then
+		nls "NM ($nm_rsyncd_pid) managed rsyncd sessions"
+		ps -o pid,user,command --ppid=$nm_rsyncd_pid
+	fi
+	daemonsup
+	RETVAL=$?
+}
+
 RETVAL=0
 # See how we were called.
 case "$1" in
   start)
-  	start
+	start
 	;;
   stop)
-  	stop
+	stop
+	;;
+  reload)
+	reload
 	;;
   restart)
 	stop
+	sleep 1
 	start
 	;;
   try-restart)
@@ -80,12 +153,12 @@ case "$1" in
 	condrestart 7
 	;;
   status)
-	status rsyncd rsync
-	exit $?
+	status
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|try-restart|force-reload|status}"
+	msg_usage "$0 {start|stop|restart|try-restart|reload|force-reload|status}"
 	exit 3
+	;;
 esac
 
 exit $RETVAL

@@ -1,4 +1,4 @@
-/var/log/rsyncd.log {
+/var/log/rsyncd*.log {
 	create 640 root logs
 	delaycompress
 }

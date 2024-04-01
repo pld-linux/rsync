@@ -198,7 +198,7 @@ cp -f /usr/share/automake/config.sub .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d,env.d},/var/log}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d,env.d},/var/{log,run/rsyncd}}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -288,4 +288,5 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %attr(754,root,root) /etc/rc.d/init.d/rsyncd
+%dir /var/run/rsyncd
 %{_mandir}/man5/rsyncd.conf.5*

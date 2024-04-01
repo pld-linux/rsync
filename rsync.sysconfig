@@ -8,3 +8,7 @@ SERVICE_RUN_NICE_LEVEL="+5"
 # -4	- use only IPv4 address
 # -6	- use only IPv6 address
 #RSYNC_OPTIONS="-4"
+
+# Daemons to set up
+# For each daemon name, there should be config file in /etc/rsyncd
+DAEMONS="rsyncd"
