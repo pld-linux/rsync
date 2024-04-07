@@ -179,7 +179,6 @@ sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 rm -f *.old
 
 %build
-cp -f /usr/share/automake/config.sub .
 %{__aclocal} -I m4
 %{__autoheader}
 %{__autoconf}
