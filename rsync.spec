@@ -121,7 +121,7 @@ Group:		Networking/Daemons
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd
 Provides:	rsyncd
-Obsoletes:	rsyncd
+Obsoletes:	rsyncd < 2.5.6
 Obsoletes:	rsyncd-standalone
 
 %description -n rsyncd-inetd
@@ -148,7 +148,7 @@ Group:		Networking/Daemons
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	rsyncd
-Obsoletes:	rsyncd
+Obsoletes:	rsyncd < 2.5.6
 Obsoletes:	rsyncd-inetd
 
 %description -n rsyncd-standalone
