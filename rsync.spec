@@ -30,6 +30,7 @@ Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
+Source6:	%{name}.tmpfiles
 Patch0:		%{name}-config.patch
 Patch1:		%{name}-fadvise.patch
 Patch2:         rsync-norandomfailure.patch
@@ -198,7 +199,8 @@ cp -f /usr/share/automake/config.sub .
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d,env.d},/var/{log,run/rsyncd}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},/etc/{sysconfig/rc-inetd,rc.d/init.d,logrotate.d,env.d},/var/{log,run/rsyncd}} \
+	$RPM_BUILD_ROOT%{systemdtmpfilesdir}
 
 %{__make} install \
 	prefix=$RPM_BUILD_ROOT%{_prefix} \
@@ -229,6 +231,7 @@ install -p %{SOURCE3} $RPM_BUILD_ROOT/etc/rc.d/init.d/rsyncd
 cp -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/rc-inetd/rsyncd
 cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/rsyncd
 cp -p %{SOURCE5} $RPM_BUILD_ROOT/etc/logrotate.d/rsyncd
+cp -p %{SOURCE6} $RPM_BUILD_ROOT%{systemdtmpfilesdir}/rsyncd.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -288,5 +291,6 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/logrotate.d/rsyncd
 %attr(640,root,root) %ghost /var/log/rsyncd.log
 %attr(754,root,root) /etc/rc.d/init.d/rsyncd
+%{systemdtmpfilesdir}/rsyncd.conf
 %dir /var/run/rsyncd
 %{_mandir}/man5/rsyncd.conf.5*
