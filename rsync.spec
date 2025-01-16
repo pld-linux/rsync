@@ -122,7 +122,7 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	rc-inetd
 Provides:	rsyncd
 Obsoletes:	rsyncd < 2.5.6
-Obsoletes:	rsyncd-standalone
+Obsoletes:	rsyncd-standalone <= %{epoch}:%{version}-%{release}
 
 %description -n rsyncd-inetd
 rsync is a replacement for rcp that has many more features.
@@ -149,7 +149,7 @@ Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	rsyncd
 Obsoletes:	rsyncd < 2.5.6
-Obsoletes:	rsyncd-inetd
+Obsoletes:	rsyncd-inetd <= %{epoch}:%{version}-%{release}
 
 %description -n rsyncd-standalone
 rsync is a replacement for rcp that has many more features.
@@ -170,9 +170,9 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
 %setup -q -b1
-%patch0 -p1
-%{?with_fadvise:%patch1 -p1}
-%patch2 -p1
+%patch -P0 -p1
+%{?with_fadvise:%patch -P1 -p1}
+%patch -P2 -p1
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
