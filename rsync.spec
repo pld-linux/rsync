@@ -17,15 +17,13 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.4.1
+Version:	3.4.2
 Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://download.samba.org/pub/rsync/src/%{name}-%{version}.tar.gz
-# Source0-md5:	04ce67866db04fd7a1cde0b78168406e
-Source1:	https://download.samba.org/pub/rsync/%{name}-patches-%{version}.tar.gz
-# Source1-md5:	cd0e33668013a7bdf36486b262921ab8
+# Source0-md5:	352650b73e30cc0ba54707ae72bdac43
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
@@ -169,7 +167,7 @@ komunikacji i transportu plików do systemu zdalnego. Dokumentacja
 techniczna nowego algorytmu została również dołączona do pakietu.
 
 %prep
-%setup -q -b1
+%setup -q
 %patch -P0 -p1
 %{?with_fadvise:%patch -P1 -p1}
 %patch -P2 -p1
