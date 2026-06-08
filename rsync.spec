@@ -17,13 +17,13 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.4.3
+Version:	3.4.4
 Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://download.samba.org/pub/rsync/src/%{name}-%{version}.tar.gz
-# Source0-md5:	1c53fa0fd42ba4700ba6fa96a0b5bbb6
+# Source0-md5:	7357ebabdfc2802a280ee79b94c97cd2
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
@@ -36,7 +36,9 @@ URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
+BuildRequires:	glibc-headers >= 6:2.32
 BuildRequires:	libstdc++-devel
+BuildRequires:	linux-libc-headers >= 7:5.6
 BuildRequires:	lz4-devel
 BuildRequires:	openssl-devel
 BuildRequires:	popt-devel
