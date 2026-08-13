@@ -4,7 +4,6 @@
 #
 # Conditional build:
 %bcond_with	rsh	# set remote shell command to rsh instead of ssh (old behaviour)
-%bcond_with	fadvise	# apply fadvise patch
 %bcond_without	tests	# perform "make test"
 #
 Summary:	Program for efficient remote updates of files
@@ -17,21 +16,20 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.4.4
+Version:	3.5.0
 Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://download.samba.org/pub/rsync/src/%{name}-%{version}.tar.gz
-# Source0-md5:	7357ebabdfc2802a280ee79b94c97cd2
+# Source0-md5:	418db7651d1acf55364b0834234dbbfb
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
 Source5:	%{name}d.logrotate
 Source6:	%{name}.tmpfiles
 Patch0:		%{name}-config.patch
-Patch1:		%{name}-fadvise.patch
-Patch2:         rsync-norandomfailure.patch
+Patch1:         rsync-norandomfailure.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
@@ -171,8 +169,7 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %prep
 %setup -q
 %patch -P0 -p1
-%{?with_fadvise:%patch -P1 -p1}
-%patch -P2 -p1
+%patch -P1 -p1
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
 
