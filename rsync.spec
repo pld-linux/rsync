@@ -16,13 +16,13 @@ Summary(uk.UTF-8):	Програма для ефективного віддале
 Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
-Version:	3.5.0
+Version:	3.5.1
 Release:	1
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	https://download.samba.org/pub/rsync/src/%{name}-%{version}.tar.gz
-# Source0-md5:	418db7651d1acf55364b0834234dbbfb
+# Source0-md5:	9b996a86c297a1e9cef0f92725dc825e
 Source2:	%{name}.inet
 Source3:	%{name}.init
 Source4:	%{name}.sysconfig
@@ -35,6 +35,7 @@ BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake
 BuildRequires:	glibc-headers >= 6:2.32
+BuildRequires:	libidn2-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	linux-libc-headers >= 7:5.6
 BuildRequires:	lz4-devel
@@ -182,6 +183,7 @@ rm -f *.old
 %configure \
 	LIBS="-lcrypto" \
 	--enable-acl-support \
+	--enable-idn \
 	--disable-debug \
 	--enable-ipv6 \
 	--enable-xattr-support \
