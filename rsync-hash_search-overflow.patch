@@ -1,0 +1,17 @@
+Bound aligned_i in hash_search(): a malicious peer with tiny blength/count makes it
+overflow past INT32_MAX on --inplace >2 GiB files -> negative s->sums[] index.
+https://github.com/RsyncProject/rsync/commit/9dc0ff638c
+
+diff --git a/match.c b/match.c
+index 4fa3b8599..62029208d 100644
+--- a/match.c
++++ b/match.c
+@@ -277,7 +277,7 @@ static void hash_search(int f,struct sum_struct *s,
+ 			 * the adjacent want_i optimization. */
+ 			if (updating_basis_file) {
+ 				/* All the generator's chunks start at blength boundaries. */
+-				while (aligned_offset < offset) {
++				while (aligned_offset < offset && aligned_i < s->count) {
+ 					aligned_offset += s->blength;
+ 					aligned_i++;
+ 				}
