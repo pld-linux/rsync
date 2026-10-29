@@ -17,7 +17,7 @@ Summary(zh_CN.UTF-8):	[通讯]传输工具
 Summary(zh_TW.UTF-8):	[喙啪]$(B6G?i火(c(B
 Name:		rsync
 Version:	3.5.1
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL v3+
 Group:		Networking/Utilities
@@ -31,6 +31,7 @@ Source6:	%{name}.tmpfiles
 Patch0:		%{name}-config.patch
 Patch1:         rsync-norandomfailure.patch
 Patch2:		%{name}-hash_search-overflow.patch
+Patch3:		%{name}-rrsync-receiver-file-arg.patch
 URL:		https://rsync.samba.org/
 BuildRequires:	acl-devel
 BuildRequires:	autoconf >= 2.69
@@ -114,6 +115,26 @@ rsync - це швидша та гнучкіша альтернатива rcp, я
 в компресованому виді. При цьому зовсім не обов'язково, щоб одна
 машина мала в себе копію того, що є на іншій машині.
 
+%package rrsync
+Summary:	Restricted rsync for ssh forced-command logins
+Summary(pl.UTF-8):	Ograniczony rsync dla logowań ssh z wymuszonym poleceniem
+Group:		Networking/Utilities
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	python3-modules
+BuildArch:	noarch
+
+%description rrsync
+rrsync is a script to be used as a forced command (command=) in
+~/.ssh/authorized_keys. It restricts rsync transfers done with a given
+key to a single directory and can additionally forbid reading, writing
+or deleting files.
+
+%description rrsync -l pl.UTF-8
+rrsync to skrypt do użycia jako wymuszone polecenie (command=) w
+~/.ssh/authorized_keys. Ogranicza transfery rsync wykonywane danym
+kluczem do jednego katalogu i może dodatkowo zabronić odczytu, zapisu
+lub usuwania plików.
+
 %package -n rsyncd-inetd
 Summary:	Files necessary to run rsync in daemon mode
 Summary(pl.UTF-8):	Pliki niezbędne do uruchomienia rsynca w trybie serwera
@@ -173,8 +194,10 @@ techniczna nowego algorytmu została również dołączona do pakietu.
 %patch -P0 -p1
 %patch -P1 -p1
 %patch -P2 -p1
+%patch -P3 -p1
 
 sed -i -e 's|#!/usr/bin/env bash|#!/bin/bash|' rsync-ssl
+%{__sed} -i -e '1s,/usr/bin/env python3,%{__python3},' support/rrsync
 
 rm -f *.old
 
@@ -190,6 +213,7 @@ rm -f *.old
 	--enable-ipv6 \
 	--enable-xattr-support \
 	--with-included-zlib=no \
+	--with-rrsync \
 	%{?with_rsh:--with-rsh=rsh} \
 	--with-rsyncd-conf=%{_sysconfdir}/rsyncd.conf
 %{__make} proto
@@ -271,6 +295,11 @@ fi
 %attr(755,root,root) %{_bindir}/rsync-ssl
 %{_mandir}/man1/rsync.1*
 %{_mandir}/man1/rsync-ssl.1*
+
+%files rrsync
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/rrsync
+%{_mandir}/man1/rrsync.1*
 
 %files -n rsyncd-inetd
 %defattr(644,root,root,755)
